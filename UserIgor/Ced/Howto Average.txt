@@ -1,0 +1,28 @@
+How to make a moving average with alignment. 
+
+Select a file and open it.
+Click on any datasection to view it.
+
+Set the evaluation cursors and the peak direction for channel 0 and for channel 1.
+You might try 'autoset cursors' ( once for each channel) for this purpose .
+
+If fitting is not desired then switch it off by unchecking all Fit check boxes.
+
+
+Set Average Align to 'R5'  (RiseTime50%) in channel 0.
+Set MovAv to the desired number of data sections to be added for 1 result trace.
+
+Check Draw selection.
+Select RT50 and Peak in channel 0
+Select Peak in channel 1
+
+Check Table selection.
+Select DS, RT50_Y and Peak in channel 0
+Select Peak in channel 1
+
+Select some data sections by a 'Left Mouse Control Click' on data section  or 
+select all  data sections by a 'Left Mouse Click' on column header (Frm or Sw).
+
+Do  'Analysis'  *AND*  'Averaging'  by  'Right mouse AltGr Shift click' on any data section.
+The accompanying analysis is mandatory as in this step the required Alignment time is computed.
+

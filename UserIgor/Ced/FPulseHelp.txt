@@ -1,0 +1,73 @@
+MINI HELP  FOR  ACQUISITION
+
+HOW  TO  MAKE  AN ONLINE ANALYSIS  WITH  P over N
+Load a script
+
+You may temporarily reduce it to only 1 frame so that defining regions will be easier.
+
+Set up a display configuration suitable for defining evaluation regions
+	In the 'Acquisition windows' panel choose 'PoNx', 'Result' , 'Current' 	and also 'Dacx', 'Result' , 'Current'.
+	The Dac window and the PoN window should appear.
+	Start the script once so that data are drawn in the acquisition window(s).
+
+	Increase the Y scaling of the Dac data so that the stimulus is clearly visible
+		Click into the Dac window
+		Turn 'Disp acq windows'  -> 'Trace / Window Controlbar'    on 
+		The Listbox which pops up should display 'Dacx RC'
+		Turn autoscaling 'AS'  off
+		Select a suitable Y zoom factor  'yZm'
+		If required shift the trace with the slider on the right hand side
+
+	Move the Dac trace into the PoN window	
+		Click into the Dac window
+		Press 'Copy' in the Dac window
+		Press 'Ins' in the PoN window
+		The Dac trace should appear in the PoN window
+		You may want to turn 'Disp acq windows'  -> 'Trace / Window Controlbar'  off again.
+		
+	Adjust the window position and size to your liking. 
+	
+	If you want to view additional data you can prepare the display in a likewise manner.
+	You should do this in the beginning or else the just changed display configuration willbe lost!
+	Once you are satisfied don't forget to save the display configuration 'Save disp cfg'
+	
+Open the Online analysis panel.
+	    'OLA analysis'
+
+Define the regions
+	Define Base, Peak and other regions by dragging a rectangle in the acquisition window
+	which contains the PoNxRC_  trace.
+	A 'Marquee' rectangle appears.
+	Define the type of the region by right clicking in the marquee rectangle.
+	As there is more than 1 trace in the window you are required to specify on which data the
+	evaluation is to be done. 
+	Select the PoNxRC_ trace.
+	Notice that the options in the 'Online Analysis panel' are getting filled as regions are defined.  
+
+Modify the analysis options:
+	'Online analysis panel'  :   select peak direction, decay fit function etc.
+
+To view the online analysis results:
+	'Online Analysis panel'    'Add Window'	( perhaps multiple times )
+	Move the windows to your preferred position.
+
+Select which data you want to view in which window
+	Turn on any checkbox in the 'Display results in window' checkbox array.
+
+Perhaps it is now necessary to edit the script and revert to the actually desired number of frames.
+	The analysis will take place once per frame, not once per sweep.  
+
+Start the acquisition.
+	The result file having the extension 'ola' will be written in the 'Data' directory, usually 'Epc\Data' 
+
+If the data don't show up immediately click again twice the checkbox 'Display results in window'.  
+
+If the measured peak as indicated by the cross is not at the expected location then make sure 
+that the peak direction is set appropriately and that the interval over which the peak amplitude 
+is averaged is not too wide. You can set this interval in the input field 'average peak over ms' .  
+
+To remove a region : Click the checkbox 'Regions'  off
+To remove the analysis window with the highest number: Click the button 'Delete wnd'
+To remove all analysis data from all analysis window : Click the button 'Clear all'
+
+

@@ -1,0 +1,238 @@
+Data Sections Listbox
+
+		Color coding
+		Averaged : green,   Tbl analysed and Fit OK : blue,   Tbl analysed but Fit failed : red 	
+		Averaged and Tbl analysed and Fit OK : cyan,   Averaged and Tbl analysed but Fit failed : yellow 	
+		Selection : same color as above but lighter
+		Active/current selection: light pink, black numbers, and a leading ' * '
+
+
+	Commands acting on a data section column
+		Invert selection in column					left mouse            					(on col title)					
+		Clear selection in column 					left mouse      				Shift 	(on col title)	
+		Reset average in column 					left mouse   			Ctrl		Shift 	(on col title)
+		Reset column completely (mainly for Debug) left mouse   			Alt Gr	Shift 	(on col title)
+
+	Commands acting on the active current data unit										cell color mix		trace color mix
+		Display									arrow	 							+ white			black
+		Display									left mouse
+		Average  act								right mouse        						+ green
+		Analysis act								right mouse	  		Ctrl     			+ blue
+		Analysis act + Average act				right mouse / arrow 	Alt Gr			+ blue + green
+		Remove	Average act						left mouse    			Alt     			- green
+		Invert selection of data unit					arrow	 			Ctrl				+ - white
+		Invert selection of data section or data unit	left mouse	 		Ctrl				+ - white
+		Invert up to data section					arrow	  			Ctrl		Shift	? + white	
+		Invert up to data section					left mouse			Ctrl		Shift	?	
+		Set selection of data unit to selected		arrow	  					Shift	
+		Set selection of data unit to selected		left mouse  					Shift	
+
+	Commands acting on all selected data units
+		Average  all								right mouse        	   			Shift 		
+		Analysis all								right mouse	  		Ctrl     	Shift 		
+		Analysis all	Average all					right mouse / arrow	Alt Gr	Shift 		
+******************	
+		Construct a movie						left mouse			Alt Gr	Shift
+******************	
+
+	Unused
+		Unused									left mouse			Alt Gr			
+******************	
+******************	
+		Do not use	bad 							left mouse			Alt		Shift		
+
+	Additional states
+		Viewed but not analysed														medium grey
+		Analysed but fit failed															- blue + red
+		
+It is possible to move any control panel out of the 'grabbing range'. 
+A narrow margin of the panel will be visible but it can no longer be accessed and can not 
+be moved back onto the screen. The cure is to first minimize the panel 
+(using the checkbox xxx), then then to close it forcefully by clicking the panel close 
+button 5 times in fast succession, and finally to open it using the checkbox again.
+
+To select a file for analysis:
+Buttons  'Current acq' , 'Select file' , '< prev file'  and  'Next file >'
+
+To make an average:
+Right mouse click in the data sections listbox.
+Related controls:
+'Disp Average' , Erase Avg' , 'save avg'
+The average is automatically saved when a new file is opened for analysis.
+The file name for the average file is automatic. 
+It consists of the analysis file name to which  # <index of average> _ch <index of ch> .avg
+is added. 
+The <index of average> is 0,1,2,3,4,5,6,7,8,9,a,b,c,....x,y,z so a maximum 
+of 36 different averages can be averaged for each analysis file.
+The automatic file name without channel index and without .avg is displayed in the panel.
+The  <index of ch> is 0,1,2,3,4,5,6,7. It is *not* the true channel number.
+The number of traces contained in the current average is displayed in the panel.
+
+
+Print and file selection:
+
+To add a result to the table and to the file: 
+CTRL left mouse click into panel 'Print: Selected results' . Cell will become blue.
+
+To add a result to the textbox in the graph window:
+ALT   left mouse click into panel 'Print: Selected results' . Cell will become green.
+
+To add a result to the textbox in the graph window and to table and file: 
+ALT GR	left mouse click into panel 'Print: Selected results' . Cell will become cyan.
+		left mouse click into panel 'Print: Selected results' . Cell will become cyan.
+
+To remove a result from the textbox in the graph window and from table and file: 
+SHIFT  left mouse click into panel 'Print: Selected results' .  Cell will become gray (=unselected) again.
+
+
+
+Draw selection:
+
+To display evaluated points in the graph window:
+CTRL	left mouse click  into panel 'Draw: Selected results' . Cell will become blue. 
+		left mouse click  into panel 'Draw: Selected results' . Cell will become blue. 
+
+To reset the display of an evaluated point in the graph window:
+SHIFT  left mouse click  into panel 'Draw: Selected results' . Cell will become gray (=unselected) again. 
+
+
+Not yet...
+To select a parameter as an X axis ( e.g. Data section 'DS'  or  Time since first frame 'Since1DS' ) 
+when extracting columns from the multi-dimensional result wave into single XY waves.
+todo..??.. SHIFT CTRL left mouse click into panel 'Print: Selected results' . Cell will become....
+ 
+
+
+-------------------------------------------------------------------------------------------------------------
+How to make a moving average with alignment. 
+
+Select a file and open it.
+Click on any datasection to view it.
+
+Set the evaluation cursors and the peak direction for channel 0 and for channel 1.
+You might try 'autoset cursors' ( once for each channel) for this purpose .
+
+If fitting is not desired then switch it off by unchecking all Fit check boxes.
+
+Set Average Align to 'R5'  (RiseTime50%) in channel 0.
+Set MovAv to the desired number of data sections to be added for 1 result trace.
+
+Check Draw selection.
+Select RT50 and Peak in channel 0
+Select Peak in channel 1
+
+Check Table selection.
+Select DS, RT50_Y and Peak in channel 0
+Select Peak in channel 1
+
+Select some data sections by a 'Left Mouse Control Click' on data section  or 
+select all  data sections by a 'Left Mouse Click' on column header (Frm or Sw).
+
+Do  'Analysis'  *AND*  'Averaging'  by  'Right mouse AltGr Shift click' on any data section.
+The accompanying analysis is mandatory as in this step the required Alignment time is computed.
+-------------------------------------------------------------------------------------------------------------
+How to average a result table column
+	Right Click on the column header of any result table column
+	Select from the context menu
+	The averaged value is printed in the history
+	Nans are excluded from averaging (normal)  or can be set to 0
+-------------------------------------------------------------------------------------------------------------
+How to make 1 average over all selected data units (in contrast to a moving average)
+	Right Click on the column header of the appropriate Data Sections listbox column
+	Select from the context menu
+
+
+-------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------
+How to make a data movie
+	Open a xxx.dat file
+		If you want to use the data movie as an inset in a cell movie then now
+		shrink the data window size to the desired size.
+		It is still possible to adjust the size later when combining the the 2 movies in QuickTime 
+		but doing so may result in a severe loss of quality.
+	
+060821******************	
+	View any data section to erase the empty textbox frame
+		Click on any data section in the 'Data sections' panel (usually in thr 'Frm' column)
+		The data trace will appear in the evaluation window
+		Double click on the empty textbox frame
+		In the 'Modify annotation' control panel 'Frame', set the foreground color to white and press 'Change'
+
+	Erase the cursors
+		Double-click on an empty space in the evaluation window
+		The 'Modify trace appearance' control panel will pop up.
+		In the trace listbox select all cursor traces (these are the traces starting with 'wc_' )
+		Set the color to white and press 'Do It'
+******************	
+
+	Select the channel in the main evaluation panel
+		Select the desired channel tab in the main evaluation panel (if there is more than 1 channel)
+		Uncheck the  'Autoscl Y'  checkbox
+		Set  'Y top'  and  'Y bot'   controls to the desired  Y range
+	Select the channel in the  'Movies'  panel
+		Open the 'Movies' panel and set the channel 
+******************	
+	Possibly set the duration of the base interval
+		In the  'Movies'  panel set the duration of the base interval if the base value is to be subtracted
+		Leave the value  0  or set the value to  0  if no base value is to be subtracted 
+******************	
+
+	Select the data units to be included in the movie.
+******************	
+		If the entire experiment is to be included then select all data units by 'left mouse' click 
+******************	
+		on the header of the appropriate column of the data sections listbox (usually 'Frm')
+		You may have to clear this column first by 'Alt Gr  Shift  left mouse' click on the header
+	Construct the movie
+		This is done by 'Alt Gr  Shift  left mouse' click on any data section of the column
+		The acquisition window will display the selected data units (=traces) giving an impression
+		of how the movie will look like.
+	View the movie
+		Open the  'Movies' panel, select the channel and press 'Movies Play'
+		A movie window will appear.
+		You can view the movie (or parts of it) by pressing either the panels 'Start' and 'Stop' buttons 
+		or by using the control bar at the bottom of the movie window.
+		
+Notes and limitations:		
+	-	You may open multiple instances of a movie for viewing, but when constructing a movie 
+		no movie must be open for viewing. 
+		All movies open for viewing in Igor will automatically be closed when a new movie is constructed.
+		But you also have to make sure that the movie is not open outside of FPulse, 
+		e.g. close the movie(s) which you may have viewed with the QuickTime player.
+	-	You can only construct one movie at a time. If you want a movie for more than 1 acquisition 
+		channel you have to run the 'MakeMovie' procedure multiple times. 
+	-	Igor requires a picture rate between 1 and 60 pictures per second 
+	-	Although it is possible to make a movie from Blocks or Sweeps it is usually best to 
+		construct it from Frames. 
+	-	Adjust the frame duration in your script to 18 ... 1000 ms (best is 40 ms ~ 25 pictures / s)
+	-	Avoid  P over N  as this will lead to unsatisfactory movies
+	-	Avoid  Blanks in the script as they will make time scales inconsistent	 	
+	-	Constructing a movie is a time consuming process. Processing 1 movie picture typically takes
+		200 ms so the movie construction may typically take 10 times as long as the final movie will last.
+
+
+	Insert the data movie	into the cell movie
+		The following instructions are taken from	
+			http://helpqt.apple.com/qthelpwr3/english/quicktimehelp/pgs2/qtFmSet4.htm
+
+			With QuickTime Pro, you can place multiple video tracks in the same window 
+			to play movies side by side or to create a picture-within-a-picture effect.
+
+			To present multiple movies in the same frame:
+
+				1. In QuickTime Player, choose Edit > Select All to select the entire contents of the first [data] movie.
+				2. Choose Edit > Copy
+				3. Open the second [cell] movie.
+				4. Move the playhead to the point at which you want the first [data] movie to begin playing 
+					(usually the beginning or end of the original movie), and choose Edit > "Add to Movie."
+				5. Choose Window > Show Movie Properties, select the new video track, and click Visual Settings.
+				6. Use the Current Size and Layer controls to set the new video to a desired size, location 
+					and layer (layers with lower numbers are farther forward, or more "on top").
+					For example, for a picture-within-a-picture effect, with the added [data] movie inside 
+					the original [cell] movie, make the new movie smaller and assign it a lower layer number.
+					Usually it is better not to adjust the size here but earlier in the data movie creation phase.
+				7. Close the Visual Settings panel.
+				8. Save the movie.
+
+
+

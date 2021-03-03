@@ -1,0 +1,13 @@
+PULSE
+Protocol:    Name = "Demo300Frm"
+Adc:         Chan = 0; SmpInt = 80; TGChan=5
+Adc:         Chan = 2; SmpInt = 80; TGChan=6
+Dac:         Chan = 0; Name=DacStim0 ; Gain=1
+
+Frames:      N    =30
+Sweeps:      N    = 1//2         
+  Segment:	Dac =  0, 40   
+  Segment:	Dac =  0, 40; Amp =5000,,-10 
+  Segment:	Dac =  0, 20; Amp=500   
+  EndSweep
+ EndFrame

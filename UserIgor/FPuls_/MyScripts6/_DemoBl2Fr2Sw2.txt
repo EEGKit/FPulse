@@ -1,0 +1,27 @@
+FPULSE6
+SmpIntDac 	= 100						
+
+Adc = 0,			Gain = 1, RGB = (0:65535:0), 
+Dac = 0, 	Name = PipStim, Pon, Gain = 2, Units=	mV	
+
+Block=Pre, Laps=1, Frames  = 2
+Loops=2
+    dur = 100, nostore,newds;	
+    dur = 100;				dac=PipStim, 
+    dur = 100;  			dac=PipStim, amp=40, deltaa = -15;
+    dur =  100, nostore;	dac=PipStim
+    dur =   50 , newds;		dac=PipStim
+    dur =   50;  			dac=PipStim, amp=50, deltaa = 10;
+    dur =   50 ; 			dac=PipStim
+    dur =   50, nostore;		dac=PipStim
+EndLoops
+dur =  300, nostore;	dac=PipStim
+
+Block=Block2
+dur=200, newds, nostore;	dac= PipStim, amp=-10
+Loops=3
+    dur =    100;			dac= PipStim, amp=40
+    dur =    100;			dac= PipStim, amp=20
+EndLoops 
+
+    dur =  200, nostore				// if this is 'nostore' then the last block1 frame display is cleard

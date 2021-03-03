@@ -1,0 +1,18 @@
+// C:UserIgor:Scripts:IVK.txt   18.10.02
+
+// Syntax:  [ Dig =  Ch, Dur, Del, DDur, DDel ]
+// Syntax: Segment/Blank..  :	Dac =  Ch, Dur, A/R,Del ;  Amp	= 	Amp, Scl, DAmp, DDur
+
+PULSE
+Protocol:    Name = "LockIn"
+Adc:         Chan = 0; SmpInt = 100; TGChan=2; RGB=(50000,0,0); Units =pA // TGChan=5 //Intervall in us
+Adc:         Chan = 1; SmpInt = 100; Gain = 0.1; RGB=(50000,0,0); Units =mV// TGChan=5
+Adc:         Chan = 3; SmpInt = 100; Gain = 0.1; RGB=(50000,0,0); Units =mV// TGChan=5
+Dac:         Chan = 0; SmpInt = 100; Gain = 1;
+
+Frames:      N = 1
+Sweeps:      N = 100
+Segment:     Dac =  0, 1000;Amp=0,1,0;Dig=0,0.2,5000;
+//Blank:     Dac = 0,200;
+EndSweep
+EndFrame

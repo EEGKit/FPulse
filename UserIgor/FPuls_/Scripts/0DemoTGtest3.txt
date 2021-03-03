@@ -1,0 +1,16 @@
+PULSE	
+Protocol:	Name	= "DemoTGtest3"
+Dac:		Chan = 0;	SmpInt =1000;  	Gain=1
+Adc:		Chan = 0;	SmpInt =1000;  	TGMCChan=1_700B_SN_0106200	//1						// 1 : simple spec
+//Adc:		Chan = 3;	SmpInt =1000
+Adc:		Chan = 2;	SmpInt =1000;  	TGMCChan=2_700A_Port_1_AxoBus_0	// extended spec
+//Adc:		Chan = 1;	SmpInt =1000;	TGMCChan=2_700B_SN_106200		// extended spec
+
+
+Frames:	N	=20
+Sweeps:	N	= 1         
+Ramp:	Dac	= 0, 2000;	Amp	=    -3800,1,400 // time 1108.800ms allows SI 14,15,16,18,20,21,22,24,25
+Ramp:	Dac	= 0, 2000;	Amp	=    0
+EndSweep
+EndFrame 
+

@@ -1,0 +1,27 @@
+// C:UserIgor:Scripts:IVCC.txt   18.10.02
+
+// Syntax:  [ Dig =  Ch, Dur, Del, DDur, DDel ]
+// Syntax: Segment/Blank..  :	Dac =  Ch, Dur, A/R,Del ;  Amp = Amp, Scl, DAmp, DDur	
+
+// trakt stimulation, recording of postsynaptic conductance, VC 
+
+PULSE	
+Protocol:	Name	= "trakt"
+Adc:		Chan = 0;		SmpInt = 50; TGMCChan=1; RGB=(50000,0,0); Units =mV
+Dac:		Chan = 0;		SmpInt = 50; Gain = 10; RGB=(0,50000,0); Units =pA   // postsynaptic cell
+
+Frames:	N	= 40
+Sweeps:	N	= 1         
+Segment:	Dac = 0, 50;
+Segment:	Dac = 0, 4;	Amp = 0;            Dig=  0, 1.5, -1     // in mV -10,1,-2 default
+Segment:	Dac = 0, 300;	Amp = 0
+Segment:	Dac = 0, 25; 	Amp =10
+Segment:	Dac = 0, 20; 	Amp = 0
+EndLoop
+Segment: Dac = 0, 100
+EndSweep
+Blank:	Dac = 0, 1000			  // IFI
+
+EndFrame 
+
+//V-clamp: 100 mV/V, das ergibt bei einer gain = 10 und Amplitude von 10, einen Spannungssprung von 10 mV.

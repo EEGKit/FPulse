@@ -1,0 +1,14 @@
+FPULSE6
+SmpIntDac 	= 100						
+
+Adc = 1,			Gain = 1, RGB = (0:65535:0), 
+Dac = 0, 	Name = PipStim2, 	Gain = 2, Units=	mV	
+
+Block=Pre, Laps=2, Frames  = 2
+    dur =   50, nostore
+    dur = 150 ;		dac=PipStim2, 
+    dur = 100;  		dac=PipStim2, amp=40, deltaa = -30;
+    dur =   50, nostore;dac=PipStim2
+    dur =   50; 		dac=PipStim2, amp=60, deltaa = 20;
+    dur =  100, nostore;dac=PipStim2
+

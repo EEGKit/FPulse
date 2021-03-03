@@ -1,0 +1,36 @@
+PULSE
+Protocol:    Name = "Demo3SimilarBlocks"
+
+Adc:         Chan = 0;  SmpInt = 100
+Dac:         Chan = 0;  SmpInt = 100; Gain=10	
+
+Frames: N=1
+Sweeps: N = 4
+  Blank:		Dac =  0,	10;			Amp = 480; 		Dig = 0,8,5,-2,-2 / 1,6,1
+  Loop: N = 2
+     Segment:	Dac =  0,	4;			Amp = -50; 		Dig = 0,4,0
+     VarSegm:Dac =  0,	6;			Amp = 300			
+  EndLoop
+  Ramp:      	Dac =  0, 	10; 			Amp = 150;            		
+  Blank:		Dac =  0,	10;			Amp = 150 				
+EndSweep
+EndFrame
+
+Blank:	Dac=0, 125;
+
+Frames: N=3
+Sweeps: N = 2
+  Segment:	Dac= 0, 		5;			Amp = 150				
+  Blank:		Dac= 0,		20; 			Amp = 200,1,-20 				
+  Segment:	Dac= 0, 		5;			Amp = 150				
+EndSweep
+EndFrame
+
+Frames: N=2
+Sweeps: N = 2
+  Segment:	Dac= 0, 		1;			Amp = 15				
+  Segment:	Dac= 0, 		28;			Amp = 150				
+  Segment:	Dac= 0, 		1;			Amp = 25				
+EndSweep
+EndFrame
+

@@ -1,0 +1,27 @@
+// This script has been automatically converted to the  FPuls4  syntax,   but you may have to make some manual conversions.
+// You WILL have to manually convert multiple Dacs,   frame lists (e.g. 10 | 10 | 15) ,   
+// 'Sweeps' without P over N,    Ramps .
+
+// C:UserIgor:Scripts:Synaptics.txt   18.10.02
+// Syntax:  [ Dig =   Ch,   Dur,   Del,   DDur,   DDel ]
+// Syntax: Segment/Blank..  :	Dac =   Ch,   Dur,   A/R,  Del ;      Amp	 =  	Amp,   Scl,   DAmp,   DDur
+// pairing experiment for induction of LTP,   trakt in gcl or pp (100 Hz,   10 APs),   induction of a burst of single spikes in postsynaptic interneuron
+FPULS4
+SmpIntDac = 50
+
+// The Protocol line is ignored,   the script name is used instead. You may want to rename the file. 
+// Protocol:Name = "pairingburstofAPsinpostsynneuron"
+Adc = 0,  TGMCChan = 1,  RGB = (50000:0:0),  Units = pA// post
+Dac = 0,  Gain = 0.5,  RGB = (50000:0:0),  Units = mV// post IClamp
+Dig = 1
+
+
+Block = MyBlock,  Laps = 1,  Frames = 3
+      Dur = 50,  NewDs,  ;    Dac = 0;    
+  Loops = 3//number of spikes in the train in the trakt stimulation
+      Dur = 20,  NewDs,  ;    Dac = 0;    //inter pulse interval,   now 33,  3 Hz		;    
+      Dur = 10;    Dac = 0,  Amp = 2000,  scl = 1,  deltaA = 0,  ;    Dig = 1,  digdur = 10,  digdel = -1,  
+  EndLoops
+      Dur = 60;    Dac = 0;    // store.  time between end of train
+      Dur = 800,  nostore;    // discard. time between end of train
+

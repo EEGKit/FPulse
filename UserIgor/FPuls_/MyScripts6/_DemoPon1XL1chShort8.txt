@@ -1,0 +1,19 @@
+FPULSE6
+SmpIntDac	=1000// was 500			
+
+Adc = 0,			//TGChan = 5
+dac = 0, name = PipStim,  gain=.5, Pon
+
+Block=Pre, Laps=1, Frames  = 1
+   dur = 1000,  nostore;
+
+      dur = 1000,  newds;	dac=0, 	amp= 1000
+      dur =  1000;			dac=0 ,	amp= 800
+
+   DUR = 2000,  nostore;
+
+   dur = 1000,  newds;		dac=0, 	amp=600
+   dur =  1000;			dac=0,   amp=400	
+
+   dur = 3000,  nostore;
+ 

@@ -1,0 +1,26 @@
+// DemoEval.txt  25.01.03
+// PULSE standard test file for online analysis
+
+// Syntax:  [ Dig =  Ch, Dur, Del, DDur, DDel ]
+// Syntax: Segment/Blank..  :	Dac =  Ch, Dur, A/R,Del ;  Amp	= 	Amp, Scl, DAmp, DDur
+// Syntax: Stimwave		:	Dac =  Ch, Dur, A/R,Del ;  Wave	=	wave file name, Scl
+// Syntax: Expo			:	Dac =  Ch, Dur, A/R,Del ;  AmpTau	=	Amp1, TauRise1, TauDecay1, deltaT1, Scl1 / Amp2, TauRise2, TauDecay2, deltaT2, Scl2 / ...
+
+PULSE	
+Protocol:	Name	= "DemoEval0"
+Adc:		Chan = 0; SmpInt = 100           
+Dac:		Chan = 0; SmpInt = 100; Gain=10; Name=DacStim0
+PoN:		Src = 0
+
+Frames:    N = 2
+Sweeps:   N = 4	//; PoN=1  	         
+  Blank:		Dac = 0,	50;	
+  Segment:	Dac = 0,	50;	
+  Segment:	Dac = 0,	 5;		Amp = -20
+  Segment:	Dac = 0,	 15;		Amp = 200,,-40
+  Segment:	Dac = 0,	 25;		Amp = 100,,-20
+  Segment:	Dac = 0,	 35;		Amp = 50,,-10
+  Segment:	Dac = 0,	 100;		Amp = 0
+EndSweep
+EndFrame
+ 

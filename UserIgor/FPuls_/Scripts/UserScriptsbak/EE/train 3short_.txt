@@ -1,0 +1,81 @@
+// This script has been automatically converted to the  FPuls4  syntax,   but you may have to make some manual conversions.
+// You WILL have to manually convert multiple Dacs,   frame lists (e.g. 10 | 10 | 15) ,   
+// 'Sweeps' without P over N,    Ramps .
+
+// C:UserIgor:Scripts: train 3.txt   09.05.07	(manu)
+// Syntax:  [ Dig =   Ch,   Dur,   Del,   DDur,   DDel ]
+// Syntax: Segment/Blank... :	Dac =   Ch,   Dur,   A/R,  Del ;      Amp	 =  	Amp,   Scl,   DAmp,   DDur
+// paired recordings pre =  CC;     post =  VC;     stim train =  10 x 2 ms at 250 ms - 10 x 2 ms at 100 ms  - 10 x 2 ms at 50 ms - 10 x 2 ms at 20 ms - 10 x 2 ms at 10 ms (20s intervals)
+// Adc is controlled by AxoClamp telegraph
+FPULS4
+SmpIntDac = 100
+
+// The Protocol line is ignored,   the script name is used instead. You may want to rename the file. 
+// Protocol:Name = "train3"
+Adc = 0,  TGChan = 5,  RGB = (55000:0:0),  Units = mV// pre,   sampling frequency =  10 kHz
+Adc = 7,  TGChan = 6,  RGB = (0:55000:0),  Units = pA// post,   sampling frequency =  10 kHz
+Dac = 0,  Gain = 0.5,  RGB = (0:0:55000),  Units = mV// test Rin pre,   sampling frequency =  10 kHz
+Dig = 0
+Dig = 1
+Dig = 2
+
+
+Block = MyBlock,  Laps = 1,  Frames = 1// Length of of the 5 Frames =  1min 40s (10x5Frames =  16min 40s)
+      Dur = 100,  NewDs,  ;    Dac = 0;    Dig = 0,  digdur = 1,  digdel = 1// length of baseline 	and trigger on digout0 for the oscilloscope,  ;    
+  Loops = 5// nbr of stim in the train
+      Dur = 20  ;    Dac = 0,  Amp = 0;    Dig = 1,  digdur = 1// length of each sweep in the train triggered by digout1 for the stim generator,  ;    
+      Dur = 130;    Dac = 0;    // inter-stim interval in the train 
+  EndLoops
+      Dur = 200;    Dac = 0;    
+      Dur = 25;    Dac = 0,  Amp = -1000;    Dig = 2,  digdur = 1// Dac =  test Rin pre ,  ;     Dig =  test Rs post (10 mV voltage pulse)
+      Dur = 25;    Dac = 0;    
+      Dur = 50,  nostore;    // blank after frame
+
+
+Block = MyBlock2,  Laps = 1,  Frames = 1
+      Dur = 100,  NewDs,  ;    Dac = 0;    Dig = 0,  digdur = 1,  digdel = 1// length of baseline 	and trigger on digout0 for the oscilloscope,  ;    
+  Loops = 4// nbr of stim in the train
+      Dur = 2,  NewDs,  ;    Dac = 0,  Amp = 0;    Dig = 1,  digdur = 1// length of each sweep in the train triggered by digout1 for the stim generator,  ;    
+      Dur = 48;    Dac = 0;    // inter-stim interval in the train 
+  EndLoops
+      Dur = 200;    Dac = 0;    
+      Dur = 25;    Dac = 0,  Amp = -800;    Dig = 2,  digdur = 1// Dac =  test Rin pre ,  ;     Dig =  test Rs post (10 mV voltage pulse)
+      Dur = 25;    Dac = 0;    
+      Dur = 50,  nostore;    // blank after frame
+
+
+Block = MyBlock3,  Laps = 1,  Frames = 1
+      Dur = 100 ;    Dac = 0;    Dig = 0,  digdur = 1,  digdel = 1// length of baseline 	and trigger on digout0 for the oscilloscope,  ;    
+  Loops = 3// nbr of stim in the train
+      Dur = 2,  NewDs,  ;    Dac = 0,  Amp = 0;    Dig = 1,  digdur = 1// length of each sweep in the train triggered by digout1 for the stim generator,  ;    
+      Dur = 48;    Dac = 0;    // inter-stim interval in the train 
+  EndLoops
+      Dur = 100;    Dac = 0;    
+      Dur = 25;    Dac = 0,  Amp = -600;    Dig = 2,  digdur = 1// Dac =  test Rin pre ,  ;     Dig =  test Rs post (10 mV voltage pulse)
+      Dur = 25;    Dac = 0;    
+      Dur = 250,  nostore;    // blank after frame
+
+
+Block = MyBlock4,  Laps = 1,  Frames = 1
+      Dur = 100,  NewDs,  ;    Dac = 0;    Dig = 0,  digdur = 1,  digdel = 1// length of baseline 	and trigger on digout0 for the oscilloscope,  ;    
+  Loops = 3// nbr of stim in the train
+      Dur = 2,    ;    Dac = 0,  Amp = 0;    Dig = 1,  digdur = 1// length of each sweep in the train triggered by digout1 for the stim generator,  ;    
+      Dur = 18;    Dac = 0;    // inter-stim interval in the train 
+  EndLoops
+      Dur = 300;    Dac = 0;    
+      Dur = 25;    Dac = 0,  Amp = -500;    Dig = 2,  digdur = 1// Dac =  test Rin pre ,  ;     Dig =  test Rs post (10 mV voltage pulse)
+      Dur = 25;    Dac = 0;    
+      Dur = 350,  nostore;    // blank after frame
+
+
+Block = MyBlock,  Laps = 1,  Frames = 1
+      Dur = 100,  NewDs,  ;    Dac = 0;    Dig = 0,  digdur = 1,  digdel = 1// length of baseline 	and trigger on digout0 for the oscilloscope,  ;    
+  Loops = 3// nbr of stim in the train
+      Dur = 2,  NewDs,  ;    Dac = 0,  Amp = 0;    Dig = 1,  digdur = 1// length of each sweep in the train triggered by digout1 for the stim generator,  ;    
+      Dur = 8;    Dac = 0;    // inter-stim interval in the train 
+  EndLoops
+      Dur = 200;    Dac = 0;    
+      Dur = 25;    Dac = 0,  Amp = -400;    Dig = 2,  digdur = 1// Dac =  test Rin pre ,  ;     Dig =  test Rs post (10 mV voltage pulse)
+      Dur = 25;    Dac = 0;    
+      Dur = 550,  nostore;    // blank after frame
+

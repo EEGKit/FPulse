@@ -1,0 +1,24 @@
+// C:UserIgor:Scripts:IN_Firing.txt   
+// 31.5.04 PJ and Yeka 
+
+// Syntax:  [ Dig =  Ch, Dur, Del, DDur, DDel ]
+// Syntax: Segment/Blank..  :	Dac =  Ch, Dur, A/R,Del ;  Amp	= 	Amp, Scl, DAmp, DDur
+
+// CC paradigm to apply current pulses of stepwise increasing amplitude for f-I curve
+// uses 700A telegraph
+
+PULSE
+Protocol:    Name = "IN-Firing"
+Adc:         Chan = 0;   SmpInt = 100; TGMCChan=1; RGB=(55000,0,0); Units = mV  // pre
+Dac:         Chan = 2;   SmpInt = 100; Gain = 0.5; 	RGB=(0,0,55000);     Units = pA // pre
+
+Frames:      N    =  12
+  Sweeps:	N    =  1;    	PoN = 0        
+    Segment:   Dac = 2, 100;			Dig = 0,1,1	// 100 ms for the baseline and a 1ms oscilloscope trigger on digout 0
+    Segment:	Dac = 2, 800; Amp =  -200, 1, 100
+    Segment:	Dac = 2, 100 
+    Blank:	Dac = 2, 3000 
+  EndSweep
+EndFrame
+
+

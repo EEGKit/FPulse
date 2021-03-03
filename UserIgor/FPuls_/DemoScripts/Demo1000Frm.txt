@@ -1,0 +1,17 @@
+// C:UserIgor:Ced:Demo1000Frm.txt   07.11.02
+
+// Purpose:	Measure and check where the (long) time is spent loading the script
+//			Takes about 1 minute to load ( 2GHz )
+
+PULSE
+Protocol:    Name = "Demo1000Frm"
+Adc:         Chan = 0; SmpInt = 100
+Dac:         Chan = 0; Name=DacStim0; Gain=1
+//PoN:         Src = 0
+
+Frames:      N    =1000
+Sweeps:      N    = 1//2         
+  Segment:	Dac =  0, 50   
+  Segment:	Dac =  0, 50; Amp =1000,,-1 
+  EndSweep
+EndFrame 

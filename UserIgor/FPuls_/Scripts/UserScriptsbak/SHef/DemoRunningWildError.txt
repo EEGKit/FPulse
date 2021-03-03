@@ -1,0 +1,13 @@
+PULSE
+Protocol:    Name = "DemoRunningWildError"
+Adc:  Chan = 0;   SmpInt = 1000;Gain=1
+Dac:  Chan = 0;   SmpInt = 1000; Gain = 0.5;  Units = pA      
+
+Frames:      N    =  1
+ Sweeps:      N    =  2
+  Segment:   Dac	= 0, 50;    Amp = 2000; 
+  Segment:   Dac	= 0, 100;                    
+ EndSweep
+EndFrame
+ 
+

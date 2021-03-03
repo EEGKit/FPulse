@@ -1,0 +1,11 @@
+PULSE	
+Protocol:	Name	= "IVCC"
+Adc:		Chan = 0;		SmpInt = 25;  TGChan=5; RGB=(50000,0,0); Units =mV
+Dac:		Chan = 0;		SmpInt = 25; Gain =0.5; RGB=(0,50000,0); Units =mV// postsynaptic cell
+
+Frames:	N	=  4
+  Sweeps:	N	= 1         
+      Segment:	Dac	= 0, 200	
+      Segment:	Dac = 0, 200;	Amp	=1500;    
+  EndSweep
+EndFrame 

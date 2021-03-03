@@ -1,0 +1,26 @@
+// C:UserIgor:Scripts:IN_GC_10Hz.txt   22.12.03	for S.Hefft
+
+// Syntax:  [ Dig =  Ch, Dur, Del, DDur, DDel ]
+// Syntax: Segment/Blank..  :	Dac =  Ch, Dur, A/R,Del ;  Amp	= 	Amp, Scl, DAmp, DDur
+
+// paired recordings synaptic experiments
+// Adc is controlled by AxoClamp telegraph
+
+PULSE
+Protocol:    Name = "IN-GC_10Hz"
+Adc:         Chan = 0;   SmpInt = 100; Gain= 1; RGB=(55000,0,0); Units = mV  // pre
+Adc:         Chan = 7;   SmpInt = 100; TGChan=6; RGB=(0,55000,0); Units = pA   // post
+Adc:         Chan =3;   SmpInt = 100; Gain= 1; RGB=(55000,0,0); Units = mV  // pre
+Adc:         Chan = 4;   SmpInt = 100; Gain= 1; RGB=(55000,0,0); Units = mV  // pre
+Dac:         Chan = 0;   SmpInt = 100; Gain =0.5; 	RGB=(0,0,55000); 	Units = mV // pre
+
+Frames:      N    =  1
+  Sweeps:	N    =  1;    	PoN = 0        
+   Segment:   Dac = 0, 400;				Dig = 0,1,1	// 100 ms for the baseline and a     Segment:	Dac = 0, 1400; Amp=2000 
+    Segment:	Dac = 0, 100	;	Amp = 0; Dig = 2,1
+    Segment:    Dac = 0, 202;         Amp =  2500
+  EndSweep
+EndFrame
+
+Blank:	Dac = 0, 5870 
+

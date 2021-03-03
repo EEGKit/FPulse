@@ -1,0 +1,13 @@
+PULSE	
+Protocol:	Name	= "Speed50u44k"
+Dac:		Chan = 0;		SmpInt =50
+Adc:		Chan = 0;		SmpInt =50
+
+
+Frames:	N	=1
+Sweeps:	N	= 1         
+Ramp:	Dac	= 0, 1100;	Amp	=    4000
+Ramp:	Dac	= 0, 1100;	Amp	=    0
+EndSweep
+EndFrame 
+

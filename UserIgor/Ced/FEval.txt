@@ -1,0 +1,3 @@
+It is possible to move any control panel out of the 'grabbing range'. A narrow margin of the panel will be visible but it can no longer be accessed and can not be moved back onto the screen. The cure is to first minimize the panel (using the checkbox xxx), then then to close it forcefully by clicking the panel close button 5 times in fast succession, and finally to open it using the checkbox again.
+
+Use AltGr (magenta)  or  Alt (red) for the results to be printed in the textbox in the graph. 

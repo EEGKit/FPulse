@@ -1,0 +1,62 @@
+// C:UserIgor:Scripts:AP136.txt   16.02.05	for S.Hefft
+
+// Syntax:  [ Dig =  Ch, Dur, Del, DDur, DDel ]
+// Syntax: Segment/Blank..  :	Dac =  Ch, Dur, A/R,Del ;  Amp	= 	Amp, Scl, DAmp, DDur
+
+// paired recordings synaptic experiments
+// Adc is controlled by AxoClamp telegraph
+
+PULSE
+Protocol:    Name = "AP136"
+Adc:         Chan = 0;   SmpInt = 50; TGChan=5; RGB=(55000,0,0); Units = mV  // pre
+Adc:         Chan = 7;   SmpInt = 50; TGChan=6; RGB=(0,55000,0); Units = pA   // post
+Dac:         Chan = 0;   SmpInt = 50; Gain = 0.5; 	RGB=(0,0,55000); 	Units = mV // pre
+
+
+Frames:      N    =  1
+  Sweeps:	N    =  1;    	PoN = 0        
+      Segment:   Dac 	= 0, 50;		   	Dig = 0,1,1	// 100 ms for the baseline
+	Loop:	N=6
+  	    Segment:   Dac	= 0, 2;	Amp = 2000
+      	    Segment:   Dac	= 0, 18;	
+  	EndLoop
+    Segment:	Dac = 0, 1000 
+    Segment:    Dac = 0, 2;         Amp =  2500; Dig = 1, 20, -50 // RS Pulse of 20ms duration 50ms before single AP
+    Segment:	Dac = 0, 200 
+  EndSweep
+EndFrame
+
+Blank:	Dac = 0, 1000 
+
+Frames:      N    =  1
+  Sweeps:	N    =  1;    	PoN = 0        
+      Segment:   Dac 	= 0, 50;		   	Dig = 0,1,1	// 100 ms for the baseline
+      Segment:   Dac 	= 0, 60	// 3 loops a 20ms + 60ms so that all sweeps have same length
+   	Loop:	N = 3
+  	    Segment:   Dac	= 0, 2;	Amp = 2000
+      	    Segment:   Dac	= 0, 18;	
+  	EndLoop
+    Segment:	Dac = 0, 1000 
+    Segment:    Dac = 0, 2;         Amp =  2500
+    Segment:	Dac = 0, 200 
+  EndSweep
+EndFrame
+
+Blank:	Dac = 0, 1000 
+
+Frames:      N    =  1
+  Sweeps:	N    =  1;    	PoN = 0        
+      Segment:   Dac 	= 0, 50;		   	Dig = 0,1,1	// 100 ms for the baseline
+     Segment:   Dac 	= 0, 100		// 1 loop a 20ms + 100ms  so that all sweeps have same length
+ 	Loop:	N = 1
+  	    Segment:   Dac	= 0, 2;	Amp = 2000
+      	    Segment:   Dac	= 0, 18;	
+  	EndLoop
+    Segment:	Dac = 0, 1000 
+    Segment:    Dac = 0, 2;         Amp =  2500
+    Segment:	Dac = 0, 200 
+  EndSweep
+EndFrame
+
+Blank:	Dac = 0, 1000 
+

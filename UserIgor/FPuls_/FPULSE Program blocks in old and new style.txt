@@ -1,0 +1,27 @@
+
+FPULSE Program blocks in old and new style   080725
+
+
+			FPULSE				FPULSE6
+
+
+Script syntax						minor changes
+
+
+Script possibilities	sweeps					
+							free nostores
+							laps
+							free data sections
+							multiple PoverN sections in each block
+
+
+Script processing	slow				appr. 40% faster
+			with waves: wIO...		faster, with lists: lllstIO
+
+
+Stimulus display					improved
+
+
+Acquisition display					improved
+
+

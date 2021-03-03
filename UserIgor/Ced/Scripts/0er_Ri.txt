@@ -1,0 +1,16 @@
+// Determination of Input resistance, Series resistance and Tau --> Voltage clamp 
+
+PULSE	
+Protocol:	Name	= "Ri"
+Adc:		Chan = 4;		SmpInt = 25; TGChan=5; Name = Adc_in; RGB=(50000,0,0); Units =pA
+//Adc:		Chan = 6;		SmpInt = 25; TGChan=7;Name = Adc1; RGB=(50000,0,0); Units =pA
+Dac:		Chan = 0;		SmpInt = 25; Gain = 50; Name = Stim0 ;RGB=(0,50000,0); Units =pA
+
+Frames:	N	= 30
+Sweeps:	N	= 1         
+Segment:	Dac	= 0, 20	
+Segment:	Dac = 0, 100;	Amp	= 10,1,0;            Dig = 0, 1.5, -1     
+Segment:	Dac	= 0, 100;	Amp	=  0
+EndSweep
+Blank:	Dac	= 0, 1000			  
+EndFrame 

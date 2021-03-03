@@ -1,0 +1,15 @@
+PULSE	
+Protocol:	Name	= "A50ms"
+//PoN:		Src = 3;		
+Dac:		Chan = 0;		SmpInt = 200000; Gain=.5; Units=mv; Name=Da0//; Src=0
+Adc:		Chan = 0;		SmpInt = 200000;	Name=A0; Gain=1//; TGChan=6
+Adc:		Chan = 1;		SmpInt = 200000;	Name=RS; Gain=1023//; TGChan=6
+
+Frames:	N	=2////11// 1 prot x 6 frames  WORKS,   6 prot x 1 frame FAILS   031006
+Sweeps:	N	=2;//PoN=1         
+Ramp:	Dac	= 0, 1000;	Amp	=    -5200,1,400 
+Ramp:	Dac	= 0, 1000;	Amp	=    0
+EndSweep
+Blank:	Dac=0, 2000
+EndFrame 
+Blank:	Dac=0, 1000

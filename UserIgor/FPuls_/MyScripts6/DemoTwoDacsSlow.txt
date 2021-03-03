@@ -1,0 +1,36 @@
+// C:UserIgor:Scripts:DemoTwoDacsSlow  (from Synaptics-MC.txt)   24.06.03
+
+// Syntax:  [ Dig =  Ch, Dur, Del, DDur, DDel ]
+// Syntax: Segment/Blank..  :	Dac =  Ch, Dur, A/R,Del ;  Amp	= 	Amp, Scl, DAmp, DDur
+
+// paired recordings synaptic experiments
+// Adc is controlled by MultiClamp instead of AxoClamp telegraph
+
+// connect dac 0 and 1 to oscilloscope , 2 s/div
+
+PULSE
+Protocol:    Name = "DemoTwoDacsSlow"
+Adc:         Chan = 0;   SmpInt = 23;// TGMCChan=1; RGB=(0,50000,0); Units = mV  // pre
+Adc:         Chan = 7;   SmpInt = 23;// TGMCChan=2; RGB=(50000,0,0); Units = pA   // post
+Dac:         Chan = 0;   SmpInt = 23; Gain = 0.5; RGB=(0,50000,0); Units = pA       // pre
+Dac:         Chan = 1;   SmpInt = 23; Gain = 50; RGB=(50000,0,0); Units = mV      // post
+
+Frames:      N    =  1
+Sweeps:      N    =  2;    	PoN = 0        
+  Segment:   Dac	= 0, 200;				// 030625 There must be a delay (minimum is 3 smp ints) before first digout pulse
+  Segment:   Dac	= 0, 400;				                                Dig = 1, 200, 0;                          // Dig1 for picospritzer
+  Segment:   Dac	= 0, 1000;	                      	Amp = 2000; 	Dig = 2, 400, 0 / 0, 400, 400, 1000,1000;     // Dig2 for stimulus isolator, Dig0 for scope 
+////   Segment:  			Dac	= 1, 1000, R, -500;	Amp = 0; 		
+  Segment:   Dac	= 0, 1000;	 	                                              
+  Segment:   Dac	= 0, 400;	                       	
+  Segment:   				Dac	= 1, 400, R, -4000;	Amp = 100;                                                 // test pulse for RS control 
+  Segment:   Dac	= 0, 1000;	 	   
+
+// DAC1 timing is relative to previous segment 
+  Blank:       Dac	= 0, 1000; Amp=800			// ISI
+  EndSweep
+ Blank:       Dac	= 0, 5000; Amp=500			// IFI
+EndFrame
+ Blank:       Dac	= 0, 5000; Amp=200			// IBI
+ 
+

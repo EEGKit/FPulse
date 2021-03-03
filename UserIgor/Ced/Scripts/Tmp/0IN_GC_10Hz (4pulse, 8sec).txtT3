@@ -1,0 +1,29 @@
+// C:UserIgor:Scripts:IN_GC_10Hz.txt   22.12.03	for S.Hefft
+
+// Syntax:  [ Dig =  Ch, Dur, Del, DDur, DDel ]
+// Syntax: Segment/Blank..  :	Dac =  Ch, Dur, A/R,Del ;  Amp	= 	Amp, Scl, DAmp, DDur
+
+// paired recordings synaptic experiments
+// 050128	Igor crashes when setting 1000 protocols, starting, stopping after ~3 protocols, and then restarting....
+
+PULSE
+Protocol:    Name = "IN-GC_10Hz"
+Adc:         Chan = 0;   SmpInt = 100;Gain=1// TGChan=5
+Adc:         Chan = 7;   SmpInt = 100; TGChan=6
+//Adc:         Chan = 7;   SmpInt = 100; Gain=6
+Adc:         Chan = 5;   SmpInt = 100;Gain=1;// TGChan=6
+Adc:         Chan = 4;   SmpInt = 100;Gain=1;// TGChan=6
+Dac:         Chan = 0;   SmpInt = 100; Gain =0.5
+
+Frames:      N    =  1
+  Sweeps:	N    =  1
+   Segment:   Dac = 0, 400;		Dig = 0,1,1	// 100 ms for the baseline and a 1ms oscilloscope trigger on digout 0
+     Segment:   Dac	= 0, 400;	Amp =1000;	Dig = 1,1	
+    Segment:	Dac = 0, 1000 
+//    Segment:	Dac = 0, 302	;	Amp = 2500;	Dig = 2,1	
+    Segment:	Dac = 0, 302	;	Amp = 2500;	Dig = 2,1	
+  EndSweep
+EndFrame
+
+Blank:	Dac = 0, 5870 
+

@@ -1,0 +1,261 @@
+//
+// UFP_CedWinCustom.RC : XOP-specific resources for CED1401 on Windows
+
+//	This file is compiled by the resource compiler and creates 
+//   XOP-specific	resources that IGOR looks for in an XOP module.
+
+// Defines XOP-specific symbols.
+#include "C:\Program files\wavemetrics\IGORXOPS\XOPSUPPORT\XOPResources.h"	
+#include "C:\Program files\wavemetrics\IGORXOPS\XOPSUPPORT\IgorXOP.h"	  // NT_I16
+//#include "C:\Programme\wavemetrics\IGORXOPS\XOPSUPPORT\XOPResources.h"	
+//#include "C:\Programme\wavemetrics\IGORXOPS\XOPSUPPORT\IgorXOP.h"	  // NT_I16
+
+// Custom error messages
+// those above 100 are copied from USE1401.h. The original numbers ranging from..
+// -500  to  -611 are converted to a range suitable for IGOR ( see XOPEntry() in XopMain.c )
+//   same order as the list of #defines in UFP_CedError.H
+1100 STR#				
+BEGIN    
+   //   1 
+	"UFP_Ced-XOP requires Igor 2.0 or later. \0",	  
+	"UFP_Ced-XOP was called to execute an unknown function.\0",
+	"Input string is non-existent. \0",
+	"Wave does not exist \0",
+	"Coefficient wave must be single or double precision floating point \0",
+	"m must be ² l; m and l must be within -1 to 1 \0",
+	"The logfit XFUNC requires a math coprocessor \0",
+	"The plgndr XFUNC requires a math coprocessor \0",
+	"Input number must not be negative \0",
+	"Is not 2 byte integer wave \0",
+	"Is not 4 byte float wave \0",
+	"Is not text wave \0",
+	"Waves have different lengths \0",
+	"Out of memory.....           \0",
+	"Is neither 2 byte integer wave nor 4 byte float wave \0",
+
+   //  16 
+											 "?\0", "?\0", "?\0", "?\0",
+   "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0",
+   "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0",
+   "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0",
+   "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0",
+   "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0",
+   "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0",
+   "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0",
+   "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0",
+   // 100  Start of CED errors
+   "1401 is there but switched off (-500) \0",
+   "1401 is not connected  (-501) \0",
+   "If 1401 is present, it is ill (-502) \0",
+   "Interface card is missing  (-503) \0",
+   "1401 failed to come ready  (-504) \0",
+   "Interface has bad switches (-505) \0",
+   "1401+ did not come ready (-506) \0",
+   "Could not grab the interrupt vector (-507) \0",
+   "1401 is already in use (-508) \0",
+   "Could not get DMA channel (-509) \0",
+   //  110  
+   "The handle provided was bad (-510) \0",
+   "The 1401 number provided was bad (-511) \0",
+   "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", 
+   // 120 
+   "No such function (-520) \0",
+   "No such sub function (-521) \0",
+   "No room in output buffer (-522) \0",
+   "No input in buffer (-523) \0",
+   "String is longer than buffer (-524) \0",
+   "Failed to lock memory (-525) \0",
+   "Failed to unlock memory (-526) \0",
+   "Area is already set up (-527) \0",
+   "Area is not set up (-528) \0",
+   "Illegal area number (-529) \0",
+   // 130 
+   "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0",
+   // 140 
+   "Command file not found (-540) \0",
+   "Error readind command file (-541) \0",
+   "Unknown command (-542) \0",
+   "Not enough host space to load (-543) \0",
+   "Could not lock resource or command (-544) \0",
+   "CLOAD command failed (-545) \0",
+   "?\0", "?\0", "?\0", "?\0",
+   // 150 
+   "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0",
+   // 160 
+   "tohost/1401 failed  (-560 ) \0",
+   "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0",
+   // 170 
+   "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0",
+   // 180 
+   "Not 386 enhanced mode  (-580) \0",
+   "No device driver  (-581) \0",
+   "Device driver is too old  (-582) \0",
+   "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0",
+   // 190 
+   "Timeout occurred  (-590) \0",
+   "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0",
+   // 200 
+   "The buffer for GetString is too small (-600) \0",
+   "There is already a callback  (-601) \0",
+   "Bad parameter to dereg callback (-602) \0",
+   "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0",
+   // 210 
+   "Failed talking to driver (-610) \0",
+   "Needed  memory and could not get it (-611) \0",
+   // End of CED errors
+
+	0,								// end of string resource.
+END
+
+
+// no menu item 
+
+
+// XOPI - Describes general XOP properties to IGOR. 
+1100 XOPI					  
+BEGIN
+	XOP_VERSION,			  // Version number of host XOP system.
+	DEV_SYS_CODE,			  // Code for development system used to make XOP
+	0,							  // True if XOP requires hierarchical menus
+	1,							  // True if XOP requires math coprocessor
+	0							  // True if XOP requires MMU
+END
+
+
+// Describes OPERATIONS that the XOP adds to IGOR
+// SAME ORDER IN 'sfunc[]'  AND HERE IN UFP_CedWinCustom.RC
+
+1100 XOPF	
+BEGIN
+
+	"UFP_CedCloseAndOpen\0",			// Function name    
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+      NT_FP64,					  		// Returns CED handle
+		   NT_FP64,					  	// Par1: OLD Ced handle (valid or invalid)
+		   0,						  
+
+	"UFP_CedClose\0",					// Function name    
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+      NT_FP64,					  		// Return value type.
+		   NT_FP64,					  	// Par1: Ced handle
+		   0,							
+	
+	"UFP_CedState\0",					// Function name    
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+      NT_FP64,						  	// Return value type.
+		   NT_FP64,					  	// Par1: Ced handle
+		   0,							
+
+	"UFP_CedStateOf1401\0",				// Function name    
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+      NT_FP64,						  	// Return value type.
+		   NT_FP64,					  	// Par1: Ced handle
+		   0,							
+
+	"UFP_CedKillIO\0",					// Function name    
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+      NT_FP64,						  	// Return value type.
+		   NT_FP64,					  	// Par1: Ced handle
+		   0,						  		
+
+	"UFP_CedReset\0",					// Function name    
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+      NT_FP64,						  	// Return value type.
+		   NT_FP64,					  	// Par1: Ced handle
+		   0,						  	
+
+	"UFP_CedDriverType\0",				// Function name    
+	F_UTIL | F_EXTERNAL,				// Function category,
+      NT_FP64,							// Return value type.
+		   0,							
+
+	"UFP_CedTypeOf\0",					// Function name    
+	F_UTIL | F_EXTERNAL,				// Function category,
+      NT_FP64,							// Return value type.
+		   NT_FP64,					  	// Par1: Ced handle
+		   0,							
+
+	"UFP_CedGetMemSize\0",				// Function name    
+	F_UTIL | F_EXTERNAL,				// Function category,
+      NT_FP64,							// Return value type.
+		   NT_FP64,					  	// Par1: Ced handle
+		   0,						
+
+	"UFP_CedLdErrOut\0",				// Function name    
+	F_UTIL | F_EXTERNAL,				// Function category,
+      NT_FP64,							// Return value type.
+		   NT_FP64,					  	// Par1: Ced handle
+		   NT_FP64,					  	// Par2: ErrShow
+		   HSTRING_TYPE,				// Par3: string handle path 
+		   HSTRING_TYPE,				// Par4: string handle commands
+		   0,							
+
+	"UFP_CedGetErrorString\0",			// Function name    
+	F_UTIL | F_EXTERNAL,				// Function category,
+      HSTRING_TYPE,						// Return value type = string
+		   NT_FP64,					  	// Par1: negative error code (-500...-611)
+		   0,							  
+
+	"UFP_CedSendString\0",				// Function name    
+	F_UTIL | F_EXTERNAL,				// Function category,
+      NT_FP64,							// Return value type.
+		   NT_FP64,					  	// Par1: Ced handle
+		   HSTRING_TYPE,				// Par2: string handle 
+		   0,							
+
+	"UFP_CedGetResponse\0",				// Function name    
+	F_UTIL | F_EXTERNAL,			    // Function category,
+      NT_FP64,						    // Return value type.
+		   NT_FP64,					  	// Par1: Ced handle
+		   HSTRING_TYPE,			    // Par2: command string handle 
+		   HSTRING_TYPE,			    // Par3: text string handle 
+		   NT_FP64,					  	// Par4: ErrMode
+		   0,							   
+
+	"UFP_CedGetResponseTwoIntAsStr\0",	// Function name    
+	F_UTIL | F_EXTERNAL,				// Function category,
+      HSTRING_TYPE,						// Return value type = string
+		   NT_FP64,					  	// Par1: Ced handle
+		   HSTRING_TYPE,				// Par2: string handle 
+		   0,							  
+
+	"UFP_CedLastErrCode\0",				// Function name    
+	F_UTIL | F_EXTERNAL,				// Function category,
+      NT_FP64,							// Return value type.
+		   NT_FP64,					  	// Par1: Ced handle
+		   HSTRING_TYPE,				// Par2: text string handle 
+		   0,							  
+
+	"UFP_CedWorkingSet\0",				// Function name    
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+      NT_FP64,							// Return value type.
+		   NT_FP64,						// 1.par: min. Kb
+		   NT_FP64,						// 2.par: max. Kb
+		   NT_FP64,						// 3.par: PrintMode	int
+		   0,							 
+
+	"UFP_CedSetTransferArea\0",			// Function name    
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+      NT_FP64,							// Return value type.
+		   NT_FP64,					  	// Par1: Ced handle
+		   NT_FP64,						// 1.par: nr 
+		   NT_FP64,						// 2.par: pts
+		   NT_I16 | WAVE_TYPE,			// 3.par: wRaw short integer wave 
+		   NT_FP64,						// 4.par: PrintMode	int
+		   0,							
+	
+	"UFP_CedUnSetTransferArea\0",		// Function name    
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+      NT_FP64,							// Return value type.
+		   NT_FP64,					  	// Par1: Ced handle
+		   NT_FP64,						// 1.par: nr 
+           NT_I16 | WAVE_TYPE,			// 2.par: wRaw short integer wave 
+	       NT_FP64,						// 3.par: PrintMode	int
+		   0,							   
+	
+
+	// More function descriptions can appear here.
+	
+	0,										// end  of function resource.
+END
+

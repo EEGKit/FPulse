@@ -1,0 +1,13 @@
+PULSE	
+Protocol:	Name	= "ErrDigoutFrame"
+Dac:		Chan = 0;	SmpInt = 1000
+Adc:		Chan = 0;	SmpInt = 1000
+
+Frames:		N	= 3
+  Sweeps:	N	= 1         
+    Blank:	Dac	= 0	,40;	Amp =  	9999;
+    Segment:	Dac	= 0	, 2;	Amp =  	9999;
+//  Segment:	Dac	= 0	,42;	Amp =  -9999; Dig =  0, 40 / 1, 400 | |  0, 0  |  1, 0 		//  error in code ???
+    Segment:	Dac	= 0	,42;	Amp =  -9999; Dig =  0, 40, 0, 0, 0 / 1, 40, 0, 0, 84 / 2, 40, 0, 0, 168  //| |  0, 0 //  ignores channel number
+  EndSweep
+EndFrame 

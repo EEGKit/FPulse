@@ -1,0 +1,24 @@
+// Purpose:	Test file for Mathematica ReadCfs: read more than 64kb / section ( 3*40000pts + 2*80000pts)
+PULSE	
+Protocol:	Name	= "3x40k2x80k"
+Dac:		Chan = 0;		SmpInt = 25; Gain=1
+Adc:		Chan = 1;		SmpInt = 25; Gain=1
+Adc:		Chan = 0;		SmpInt = 25; Gain=1
+
+Frames:	N	= 3
+Sweeps:	N	= 1        
+Segment:	Dac	= 0, 1;		Amp	=    2000
+Ramp:		Dac	= 0, 499;	Amp	=   -4000,1,1000 
+Ramp:		Dac	= 0, 500;	Amp	=    2000
+EndSweep
+EndFrame 
+
+Blank:	Dac=0, 1000; Amp=2000
+
+Frames:	N	= 2
+Sweeps:	N	= 1        
+Segment:	Dac	= 0, 1;		Amp	=   2000
+Ramp:		Dac	= 0, 999;	Amp	=   4000,1,-1000 
+Ramp:		Dac	= 0, 1000;	Amp	=   2000
+EndSweep
+EndFrame 

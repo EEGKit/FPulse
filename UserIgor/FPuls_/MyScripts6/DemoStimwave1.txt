@@ -1,0 +1,18 @@
+// Purpose:	Test for Stimwave
+PULSE	
+Protocol:	Name	= "Stimwave1"
+Dac:		Chan = 0;		SmpInt = 50; Gain=1
+Adc:		Chan = 1;		SmpInt = 50; Gain=1
+Adc:		Chan = 0;		SmpInt = 50; Gain=1
+
+Frames:	N	=1//2//4//2
+Sweeps:	N	=1//3 ; PoN=1        
+Blank:		Dac=0, 5
+Segment:	Dac	= 0, 5;		Amp	=   100 ; Dig=0,1
+StimWave:	Dac = 0, 10;		Wave	= 	SinWave2.ibw
+//StimWave:	Dac = 0, 10;		Wave	= 	AP1_100pts.ibw,1,86, 1
+//StimWave:	Dac = 0, 10;		Wave	= 	Adc0_040519_144442.ibw,1,86, 1
+Blank:		Dac=0, 1
+EndSweep
+Blank:	Dac=0, 10
+EndFrame 

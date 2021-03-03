@@ -1,0 +1,33 @@
+// C:UserIgor:Scripts:Recovery_50Hz.txt   22.12.03	for S.Hefft
+
+// Syntax:  [ Dig =  Ch, Dur, Del, DDur, DDel ]
+// Syntax: Segment/Blank..  :	Dac =  Ch, Dur, A/R,Del ;  Amp	= 	Amp, Scl, DAmp, DDur
+
+// paired recordings synaptic experiments
+// Adc is controlled by AxoClamp telegraph
+
+PULSE
+Protocol:    Name = "Recovery_50Hz"
+Adc:         Chan = 0;   SmpInt = 25; TGChan=5; RGB=(55000,0,0); Units = mV  // pre
+Adc:         Chan = 7;   SmpInt = 25; TGChan=6; RGB=(0,55000,0); Units = pA   // post
+Dac:         Chan = 0;   SmpInt = 25; Gain = 50; 	RGB=(0,0,55000); 	Units = mV // pre
+
+Frames:      N    =  1
+  Sweeps:	N    =  1;    	PoN = 0        
+   Segment:   Dac = 0, 10;				Dig = 0,1,1	// 10 ms for the baseline and a 1ms oscilloscope trigger on digout 0
+   Segment:   Dac = 0, 200;			Dig = 1,2	//
+    Loop:		N	= 10							// 10  pulses...
+      Segment:   Dac	= 0, 2;	Amp = 0; Dig = 1,2	// ..of 2 ms from the digital output 1..
+      Segment:   Dac	= 0, 18;						// ..with a repetition rate of  50Hz
+    EndLoop
+    Segment:	Dac = 0,   100;			Dig = 1,2,98	 // Recovery
+    Segment:	Dac = 0,   100;			Dig = 1,2,98	 //
+    Segment:	Dac = 0,   300;			Dig = 1,2,298 //
+    Segment:	Dac = 0,   500;			Dig = 1,2,498 //
+    Segment:	Dac = 0, 1000;			Dig = 1,2, 998//
+    Segment:	Dac = 0,   200 
+    Segment:	Dac = 0,    20;		Amp = 5 		// Test pulse for measuring series resistance
+    Segment:	Dac = 0,    50 
+    Blank:	Dac = 0, 27320						// total time is 30 seconds 
+  EndSweep
+EndFrame

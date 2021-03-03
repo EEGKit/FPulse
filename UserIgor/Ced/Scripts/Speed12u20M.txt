@@ -1,0 +1,13 @@
+PULSE	
+Protocol:	Name	= "Speed12u20M"
+Dac:		Chan = 0;		SmpInt =20
+Adc:		Chan = 0;		SmpInt =20
+
+
+Frames:	N	=1
+Sweeps:	N	= 1         
+Ramp:	Dac	= 0,120000;	Amp	=    4000
+Ramp:	Dac	= 0, 120000;	Amp	=    0
+EndSweep
+EndFrame 
+

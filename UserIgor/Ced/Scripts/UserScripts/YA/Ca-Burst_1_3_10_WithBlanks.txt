@@ -1,0 +1,49 @@
+// C:UserIgor:Scripts:Ca2+ Burst.txt   
+// 26.04.06 PJ and Yeka 
+
+// Syntax:  [ Dig =  Ch, Dur, Del, DDur, DDel ]
+// Syntax: Segment/Blank..  :	Dac =  Ch, Dur, A/R,Del ;  Amp	= 	Amp, Scl, DAmp, DDur
+
+// CC paradigm to apply current pulses of stepwise increasing amplitude for f-I curve
+// uses 700A telegraph
+
+PULSE
+Protocol:    Name = "Ca2+pulse"
+Adc:         Chan = 0;   SmpInt = 100; TGMCChan=1; RGB=(55000,0,0); Units = mV  // pre
+Dac:         Chan = 2;   SmpInt = 100; Gain = 0.5; 	RGB=(0,0,55000);     Units = pA // pre
+
+Frames:      N    =  1
+  Sweeps:	N    =  1
+    Segment:   Dac = 2,100;			Dig = 0,1,95	// 100 ms for the baseline and a 1ms oscilloscope trigger on digout 0  appearing 5 ms before the pulse
+     Loop:	     N = 1						       	// 10  pulses...
+      Segment:   Dac   = 2, 2;  Amp = 3000;     
+      Segment:   Dac	= 2, 8;	Amp = 0				// ..with a repetition rate of  100Hz
+    EndLoop
+     Blank:	Dac = 2, 300 
+  EndSweep
+EndFrame
+    
+Frames:      N    =  1
+  Sweeps:	N    =  1
+    Segment:   Dac = 2,100;			Dig = 0,1,95	// 100 ms for the baseline and a 1ms oscilloscope trigger on digout 0  appearing 5 ms before the pulse
+     Loop:	     N = 3						       	// 10  pulses...
+      Segment:   Dac   = 2, 2;  Amp = 3000;     
+      Segment:   Dac	= 2, 8;	Amp = 0				// ..with a repetition rate of 100Hz
+    EndLoop
+    Blank:	Dac = 2, 300 
+  EndSweep
+EndFrame
+    
+
+Frames:      N    =  1
+  Sweeps:	N    =  1
+    Segment:   Dac = 2,100;			Dig = 0,1,95	// 100 ms for the baseline and a 1ms oscilloscope trigger on digout 0  appearing 5 ms before the pulse
+    Loop:	     N = 10						       	// 10  pulses...
+      Segment:   Dac   = 2, 2;  Amp = 3000;     
+      Segment:   Dac	= 2, 8;	Amp = 0				// ..with a repetition rate of  100Hz
+    EndLoop
+    Blank:	Dac = 2, 300 
+  EndSweep
+EndFrame
+    
+

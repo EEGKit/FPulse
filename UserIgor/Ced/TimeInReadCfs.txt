@@ -1,0 +1,16 @@
+ MarkPerfTestTime 100	// ReadCfs: begin
+ MarkPerfTestTime 121	// ReadCfs: CFSInitializeReadFile GetMissing Begin loop
+ MarkPerfTestTime 122	// ReadCfs: CFSInitializeReadFile GetMissing GetDSChan
+ MarkPerfTestTime 123	// ReadCfs: CFSInitializeReadFile GetMissing CfsVal8x
+ MarkPerfTestTime 127	// ReadCfs: CFSInitializeReadFile GetMissing GetDSChan
+ MarkPerfTestTime 128	// ReadCfs: CFSInitializeReadFile GetMissing CfsVal6x
+ MarkPerfTestTime 180	// ReadCfs: CFSInitializeReadFile end ch loop
+ MarkPerfTestTime 230	// ReadCfs: CFSHeaderOverview Begin NotInsideLoop
+ MarkPerfTestTime 270	// ReadCfs: CFSHeaderOverview End NotInsideLoop
+ MarkPerfTestTime 300	// ReadCfs: CFSReadSections
+ MarkPerfTestTime 320	// ReadCfs: CFSReadSections GetDSChan Read
+ MarkPerfTestTime 321	// ReadCfs: CFSReadSections make wCfsSmall
+ MarkPerfTestTime 326	// ReadCfs: CFSReadSections wCfsBig=
+ MarkPerfTestTime 400	// ReadCfs: CFSDisplayAllChans
+ MarkPerfTestTime 430	// ReadCfs: CFSDisplayAllChans CFSDisplayDetail
+ MarkPerfTestTime 600	// ReadCfs: end

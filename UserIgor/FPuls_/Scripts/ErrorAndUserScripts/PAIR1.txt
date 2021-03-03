@@ -1,0 +1,20 @@
+// PAIR1.Txt      18.10.02    reproducible error
+// Syntax:  [ Dig =  Ch, Dur, Del, DDur, DDel ]
+
+PULSE
+Protocol:    Name = "synaptics"
+Adc:         Chan = 0;   SmpInt = 25; Gain=1//TGChan=1; RGB=(0,50000,0); Units = mV   // pre
+Adc:         Chan = 2;   SmpInt = 25; Gain=1//TGChan=3; RGB=(50000,0,0); Units = pA   // post 
+Dac:         Chan = 0;   SmpInt = 25; Gain = 0.5; RGB=(50000,0,0); Units = mV    
+
+
+Frames:      	N    =  30
+ Sweeps:      	N    = 1         
+  Segment:   Dac	= 0, 40				
+  Segment:   Dac	= 0, 2;	        Amp =1600; 	   	Dig = 0, 1.5, -1 
+  Segment:   Dac	= 0, 260;	 	   
+ EndSweep
+
+  Blank:       Dac	= 0, 5000			// IFI
+EndFrame
+ 

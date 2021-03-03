@@ -1,0 +1,26 @@
+// 060109 Latency RiseSlp
+						elseif ( nLatOp == kLAT_RSLP )
+							Val	= EvT( sFolders, ch, rg, kE_RISSLP )
+// 060109 Latency RiseSlp
+constant		kLAT_OFF=0,  kLAT_MANUAL=1,  kLAT_BR=2,  kLAT_RT5=3,  kLAT_RSLP=4,  kLAT_PK=5,  kLAT_DT5=6
+strconstant	klstLATC = "off;ma;BR;R5;SL;Pk;D5;"
+
+
+
+
+
+		 printf "\t\tSetEvent( %s , TrigMode:%2d )  '%s' \r",  sFolder, bMode, sBuf  
+		// 051208  HWE3E4 Trigger	
+		sBuf		= "EVENT,D,4;" 	// 'D'isable external events 2   [ 2^2  = 4 ] , but  allow external trigger on events 3 and  4
+		 printf "\t\tSetEvent( %s , TrigMode:%2d )  '%s' \r",  sFolder, bMode, sBuf  
+		code		+= CEDSendStringCheckErrors( sBuf , 0 )//1 ) 
+
+
+
+
+
+	variable	ySizeMax	= GetIgorAppPixelY() -  kY_MISSING_PIXEL_BOT - kY_MISSING_PIXEL_TOP - 85  // -85 leaves some space for the history window
+// 051110c  060104 One-section-listbox
+//	variable	ySizeNeed	= SctCnt * kLB_CELLY
+	variable	ySizeNeed	= max( 2, SctCnt ) * kLB_CELLY			// the listbox can be created with 0 or 1 rows, but the minimum height (required for y scrollbar) is the height of a listbox with 2 rows		
+	variable	ySize		= min( ySizeNeed , ySizeMax ) 

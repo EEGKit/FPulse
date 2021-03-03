@@ -1,0 +1,289 @@
+//
+// UFe1_UtilsWinCustom.RC : XOP-specific resources for CED1401 on Windows
+
+//	This file is compiled by the resource compiler and creates 
+//   XOP-specific	resources that IGOR looks for in an XOP module.
+
+// Defines XOP-specific symbols.
+#include "C:\Program files\wavemetrics\IGORXOPS\XOPSUPPORT\XOPResources.h"	
+#include "C:\Program files\wavemetrics\IGORXOPS\XOPSUPPORT\IgorXOP.h"	  // NT_I16
+
+// Custom error messages
+// those above 100 are copied from USE1401.h. The original numbers ranging from..
+// -500  to  -611 are converted to a range suitable for IGOR ( see XOPEntry() in XopMain.c )
+//   same order as the list of #defines in UFe1_UtilsError.H
+1100 STR#				
+BEGIN    
+   //   1 
+	"UFe1_Utils-XOP requires Igor 2.0 or later. \0",	  
+	"UFe1_Utils-XOP was called to execute an unknown function.\0",
+	"Input string is non-existent. \0",
+	"Wave does not exist \0",
+	"Coefficient wave must be single or double precision floating point \0",
+	"m must be ² l; m and l must be within -1 to 1 \0",
+	"The logfit XFUNC requires a math coprocessor \0",
+	"The plgndr XFUNC requires a math coprocessor \0",
+	"Input number must not be negative \0",
+	"Is not 2 byte integer wave \0",
+	"Is not 4 byte float wave \0",
+	"Is not text wave \0",
+	"Waves have different lengths \0",
+	"Out of memory.....           \0",
+	"Is neither 2 byte integer wave nor 4 byte float wave \0",
+
+   //  16 
+
+	0,								// end of string resource.
+END
+
+
+// no menu item 
+
+
+// XOPI - Describes general XOP properties to IGOR. 
+1100 XOPI					  
+BEGIN
+	XOP_VERSION,			  // Version number of host XOP system.
+	DEV_SYS_CODE,			  // Code for development system used to make XOP
+	0,							  // True if XOP requires hierarchical menus
+	1,							  // True if XOP requires math coprocessor
+	0							  // True if XOP requires MMU
+END
+
+
+// Describes OPERATIONS that the XOP adds to IGOR
+// SAME ORDER IN 'sfunc[]'  AND HERE IN UFe1_UtilsWinCustom.RC
+
+1100 XOPF	
+BEGIN
+
+// 070223
+/*
+	"UFe1_UtilGetSystemDirectory\0",	// Function name 
+ 	F_UTIL | F_EXTERNAL,			 	// Function category,
+			HSTRING_TYPE,				// Returns string like 'C:WinNt:System32'
+		   0,								// end of parameters
+*/
+	"UFe1_UtilConvolveDA\0",			// Function name    
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     NT_FP64,							// Return value type.
+   	   NT_FP32 | WAVE_TYPE,				// 1.par: wBigWave Igor DA or AD wave
+         NT_I16  | WAVE_TYPE,			// 2.par: wRaw short integer wave 
+	      NT_FP64,					   // 3.par: nTrueADorDA channels
+		   NT_FP64,					   // 4.par: begPt
+		   NT_FP64,					   // 5.par: endPt
+		   NT_FP64,					   // 6.par: PtsPerChunk
+		   NT_FP64,					   // 7.par: ofs
+		   NT_FP64,					   // 8.par: yscl
+		   NT_FP64,					   // 9.par: SmpF
+		   NT_FP64,					   // 10.par: nPnts
+		   NT_FP64,					   // 11.par: begTape
+		   0,							   // end of parameters
+	
+	"UFe1_UtilConvolveAD\0",				// Function name    
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     NT_FP64,							// Return value type.
+   	   NT_FP32 | WAVE_TYPE,		// 1.par: wBigWave Igor DA or AD wave
+         NT_I16  | WAVE_TYPE,		// 2.par: wRaw short integer wave 
+	      NT_FP64,					   // 3.par: nTrueADorDA channels
+	      NT_FP64,					   // 4.par: nTG channels
+		   NT_FP64,					   // 5.par: begPt
+		   NT_FP64,					   // 6.par: endPt
+		   NT_FP64,					   // 7.par: PtsPerChunk
+		   NT_FP64,					   // 8.par: ofs
+		   NT_FP64,					   // 9.par: yscl
+		   NT_FP64,					   // 10.par: nCompress
+		   NT_FP64,					   // 11.par: nChunk
+		   NT_FP64,					// 12.par: nChan
+		   NT_FP64,					   // 13.par: nPnts
+		   NT_FP64,					   // 14.par: begTape
+		   NT_FP64,					   // 15.par: InChkBeg
+		   0,							   // end of parameters
+	
+	"UFe1_UtilConvolveTG\0",				// Function name    
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     NT_FP64,							// Return value type.
+   	   NT_FP32 | WAVE_TYPE,		// 1.par: wBigWave Igor DA or AD wave
+         NT_I16  | WAVE_TYPE,		// 2.par: wRaw short integer wave 
+	      NT_FP64,					   // 4.par: nTrueADorDA channels
+	      NT_FP64,					   // 5.par: nTG channels
+		   NT_FP64,					   // 6.par: begPt
+		   NT_FP64,					   // 7.par: endPt
+		   NT_FP64,					   // 9.par: PtsPerChunk
+		   NT_FP64,					   // 10.par: ofs
+		   NT_FP64,					   // 11.par: yscl
+		   NT_FP64,					   // 12.par: nCompress
+		   NT_FP64,					   // 13.par: nChunk
+		   NT_FP64,						// 14.par: nChan
+		   NT_FP64,					   // 15.par: nPnts
+		   NT_FP64,					   // 16.par: begTape
+		   0,							   // end of parameters
+	
+	"UFe1_UtilConvolve\0",				// Function name    
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     NT_FP64,							// Return value type.
+   	   NT_FP32 | WAVE_TYPE,		// 1.par: wBigWave Igor DA or AD wave
+         NT_I16  | WAVE_TYPE,		// 2.par: wRaw short integer wave 
+		   NT_FP64,						// 3.par: direction: DA or AD
+	      NT_FP64,					   // 4.par: nTrueADorDA channels
+	      NT_FP64,					   // 5.par: nTG channels
+		   NT_FP64,					   // 6.par: begPt
+		   NT_FP64,					   // 7.par: endPt
+		   NT_FP64,						// 8.par: RepOs
+		   NT_FP64,					   // 9.par: PtsPerChunk
+		   NT_FP64,					   // 10.par: ofs
+		   NT_FP64,					   // 11.par: yscl
+		   NT_FP64,					   // 12.par: nCompress
+		   NT_FP64,					   // 13.par: nChunk
+		   NT_FP64,						// 14.par: nChan
+		   NT_FP64,					   // 15.par: nPnts
+		   NT_FP64,					   // 16.par: bStoreIt
+		   0,							   // end of parameters
+	
+	"UFe1_UtilWaveCopy\0",				// Function name   
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     NT_FP64,						   // Return value type.
+         NT_I16  | WAVE_TYPE,		// 1.par: wIntTarget short integer wave 
+         NT_FP32 | WAVE_TYPE,		// 2.par: wFloatSource 4 byte float wave 
+		   NT_FP64,					   // 3.par: nPnts
+		   NT_FP64,					   // 4.par: nSourceOfs
+		   NT_FP64,					   // 5.par: scl
+		   0,							   // end of parameters
+
+	"UFe1_UtilWaveExtract\0",			// Function name   
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     NT_FP64,							// Return value type.
+         NT_FP32 | WAVE_TYPE,		// 1.par: wFloatTarget 4 byte float wave 
+         NT_FP32 | WAVE_TYPE,		// 2.par: wFloatSource 4 byte float wave 
+		   NT_FP64,					   // 3.par: nPnts
+		   NT_FP64,					   // 4.par: nSourceOfs
+		   NT_FP64,					   // 6.par: nStep
+		   NT_FP64,					   // 5.par: scl
+		   0,								// end of parameters
+
+	"UFe1_UtilRealWaveSet\0",			// Function name   
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     NT_FP64,							// Return value type.
+         NT_FP32 | WAVE_TYPE,		// 1.par: wFloatTarget 4 byte float wave 
+		   NT_FP64,					   // 2.par: nBeg
+		   NT_FP64,					   // 3.par: nEnd
+		   NT_FP64,					   // 4.par: value
+		   0,							   // end of parameters
+
+	"UFe1_UtilRealWaveMultiply\0",		// Function name   
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     NT_FP64,							// Return value type: unused.
+         NT_FP32 | WAVE_TYPE,		// 1.par: wFloatSource1 4 byte float wave 
+			NT_FP64,					   // 2.par: nBeg1
+			NT_FP32 | WAVE_TYPE,		// 3.par: wFloatSource2 4 byte float wave 
+			NT_FP64,					   // 4.par: nBeg2
+			NT_FP64,					   // 5.par: nPts
+			NT_FP32 | WAVE_TYPE,		// 6.par: wFloatTarget  4 byte float wave for the products 
+		   0,							   // end of parameters
+
+	"UFe1_UtilRealWaveMultiplyAdd\0",		// Function name   
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     NT_FP64,							// Return value type : sum of products.
+         NT_FP32 | WAVE_TYPE,		// 1.par: wFloatSource1 4 byte float wave 
+			NT_FP64,					   // 2.par: nBeg1
+			NT_FP32 | WAVE_TYPE,		// 3.par: wFloatSource2 4 byte float wave 
+			NT_FP64,					   // 4.par: nBeg2
+			NT_FP64,					   // 5.par: nPts
+		   0,							   // end of parameters
+/*
+	"UFe1_UtilCorrelation_\0",				// Function name   
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     NT_FP64,						   // Return value type.
+         NT_FP32 | WAVE_TYPE,		// 1.par: wData	4 byte float wave 
+			NT_FP64,					   // 2.par: nDPts
+		   NT_FP32 | WAVE_TYPE,		// 3.par: wTempl	4 byte float wave 
+			NT_FP64,					   // 4.par: nTPts
+		   NT_FP32 | WAVE_TYPE,		// 3.par: wSums	4 byte float wave 
+		   NT_FP32 | WAVE_TYPE,		// 4.par: wCorrelation 4 byte float wave 
+			NT_FP64,					   // 5.par: nPrintIt	controls how much is printed for debugging 
+			0,							   // end of parameters
+*/
+
+	"UFe1_UtilCorrelation\0",				// Function name   
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     NT_FP64,						   // Return value type.
+         NT_FP32 | WAVE_TYPE,		// 1.par: wData	4 byte float wave 
+		   NT_FP32 | WAVE_TYPE,		// 2.par: wTempl	4 byte float wave 
+			NT_FP64,					   // 3.par: nTPts
+		   NT_FP64,					   // 4.par: nMaskStart
+		   NT_FP32 | WAVE_TYPE,		// 5.par: wSums	4 byte float wave 
+		   NT_FP32 | WAVE_TYPE,		// 6.par: wCorrelation 4 byte float wave 
+			NT_FP64,					   // 7.par: nPrintIt	controls how much is printed for debugging 
+			NT_FP64,					   // 8.par: nBeg
+			NT_FP64,					   // 9.par: nEnd
+			0,							   // end of parameters
+
+	"UFe1_UtilFileDialog\0",		// Function name 
+   F_UTIL | F_EXTERNAL,		  		// Function category,
+      HSTRING_TYPE,	     		  	// Returns the full file path selected by user or empty string
+		   HSTRING_TYPE,				// Prompt	: Message displayed in dialog
+		   HSTRING_TYPE,			   // Filter	: controls types of files shown
+		   NT_FP64,					   // Index		: controls initial type of file shown (DOES NOT CHANGE VALUE)
+		   HSTRING_TYPE,			   // InitDir	: sets initial directory
+		   HSTRING_TYPE,				// DefExt	: Default file extension
+			HSTRING_TYPE,			   // FilePath	: sets initial file
+		   0,							   // end of parameters
+
+//	"UFe1_UtilIsIsValidString\0",// Function name 
+//  F_UTIL | F_EXTERNAL,		  		// Function category,
+//     NT_FP64,							// Return value type.
+//		   HSTRING_TYPE,				// string to check 
+//		   0,							   // end of parameters
+ 
+	"UFe1_UtilTotalMemoryLoad\0",		// Function name   
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     NT_FP64,						   // Returns a number between 0 and 100 that gives a general idea of current memory utilization, in which 0 indicates no memory use and 100 indicates full memory use. 
+			0,							   // end of parameters
+
+	"UFe1_UtilTotalPhys\0",				// Function name   
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     NT_FP64,						   // Returns total physical (not virtual) memory in bytes 
+			0,							   // end of parameters
+
+	"UFe1_UtilAvailPhys\0",				// Function name   
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     NT_FP64,						   // Returns  the number of bytes of physical (not virtual) memory available. 
+			0,							   // end of parameters
+
+	"UFe1_UtilTotalVirtual\0",				// Function name   
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     NT_FP64,						   // Returns total virtual memory in bytes 
+			0,							   // end of parameters
+
+	"UFe1_UtilAvailVirtual\0",			// Function name   
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     NT_FP64,						   // Returns  the number of bytes of virtual memory available. 
+			0,							   // end of parameters
+
+	"UFe1_UtilContiguousMemory\0",		// Function name   
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     NT_FP64,							// Returns whether this number of bytes can be allocated. 'Make' cannot be used as it issues an error box when failing
+		   NT_FP64,						// 1.par: Number of bytes to allocate
+			0,							   // end of parameters
+
+	"UFe1_UtilHeapCompact\0",			// Function name   
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     NT_FP64,						   // Returns  the number of bytes of the largets committed free block in the heap. 
+			0,							   // end of parameters
+
+	"UFe1_Util_GetAllUsersDirectory\0",// Function name 
+ 	F_UTIL | F_EXTERNAL,			 	// Function category,
+			HSTRING_TYPE,				// Returns string like 'C:WinNt:System32'
+		   0,								// end of parameters
+
+	"UFe1_Util_GetSystemDirectory\0",	// Function name 
+ 	F_UTIL | F_EXTERNAL,			 	// Function category,
+			HSTRING_TYPE,				// Returns string like 'C:WinNt:System32'
+		   0,								// end of parameters
+
+
+	// More function descriptions can appear here.
+	
+	0,										// end  of function resource.
+END
+

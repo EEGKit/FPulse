@@ -1,0 +1,15 @@
+// Error script
+
+PULSE
+
+Protocol:    Name = "Run Second"
+
+Dac:	Chan = 0;	SmpInt = 1000;	Gain = 0.5;
+Adc:	Chan = 0;	SmpInt = 1000;	TGChan=5;
+
+Frames:		N = 4 
+  Sweeps:	N = 1					  
+   Segment:	Dac = 0, 6
+  EndSweep
+EndFrame
+

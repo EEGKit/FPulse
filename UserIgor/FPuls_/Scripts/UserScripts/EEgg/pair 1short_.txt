@@ -1,0 +1,33 @@
+// This script has been automatically converted to the  FPuls4  syntax,   but you may have to make some manual conversions.
+// You WILL have to manually convert multiple Dacs,   frame lists (e.g. 10 | 10 | 15) ,   
+// 'Sweeps' without P over N,    Ramps .
+
+// C:UserIgor:Scripts: pair 1.txt   23.02.07	(manu)
+// Syntax:  [ Dig =   Ch,   Dur,   Del,   DDur,   DDel ]
+// Syntax: Segment/Blank... :	Dac =   Ch,   Dur,   A/R,  Del ;      Amp	 =  	Amp,   Scl,   DAmp,   DDur
+// paired recordings pre =  CC;     post =  VC;     stim train =  10 x 1 ms at 50 Hz
+// Adc is controlled by AxoClamp telegraph
+FPULS4
+SmpIntDac = 50
+
+// The Protocol line is ignored,   the script name is used instead. You may want to rename the file. 
+// Protocol:Name = "IN_GC_10x1at50Hz_every15s"
+Adc = 0,  TGChan = 5,  RGB = (55000:0:0),  Units = mV// pre
+Adc = 7,  TGChan = 6,  RGB = (0:55000:0),  Units = pA// post
+Dac = 0,  Gain = 0.5,  RGB = (0:0:55000),  Units = mV// test Rin pre
+Dig = 0
+Dig = 1
+Dig = 2
+
+
+Block = MyBlock,  Laps = 1,  Frames = 3// recording duration =  20 min
+      Dur = 70,  NewDs,  ;    Dac = 0;    Dig = 0,  digdur = 1,  digdel = 1// 500 ms for the baseline and a 1ms trigger on digout 0 to trig the oscilloscope,  ;    
+  Loops = 4// 10  pulses...
+      Dur = 20,  ;    Dac = 0,  Amp = 200;    Dig = 1,  digdur = 1// ..of 2 ms trigged by digout 1 that controls an external stimulus generator...,  ;    
+      Dur = 20;    Dac = 0;    // ..with a repetition rate at 50Hz
+  EndLoops
+      Dur = 50;    Dac = 0,  Amp = 0
+      Dur = 50;    Dac = 0,  Amp = -1000;    Dig = 2,  digdur = 1// Dac =  test Rin pre ,  ;     Dig =  test Rin post
+      Dur = 50;    Dac = 0;    
+      Dur = 700,  nostore;    
+

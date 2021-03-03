@@ -1,0 +1,14 @@
+PULSE
+Protocol:Name="A0A1"
+Dac:Chan=0;SmpInt=100;Gain=1//kiki
+Adc:Chan=0;SmpInt=100;Gain=1
+Frames:N=2
+Sweeps:N=6
+Blank:Dac=0,20
+Segment:Dac=0,1;Amp=2000
+Segment:Dac=0,49;Amp=-4000,1,1000;Dig=0,1
+Segment:Dac=0,1;Amp=0
+Blank:Dac=0,50
+EndSweep
+Blank:Dac=0,1000
+EndFrame

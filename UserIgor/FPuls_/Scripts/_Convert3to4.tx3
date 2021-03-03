@@ -1,0 +1,17 @@
+// Purpose:	Test Script conversion
+PULSE	
+Protocol:	Name	= "Script3to4"			// no longer used
+Dac:		Chan = 0;	SmpInt = 100; Gain=1
+Adc:		Chan = 1;	SmpInt = 100; TGChan = 6
+
+Blank:	Dac=0, 1000
+
+Frames:	N	=2
+  Sweeps:	N	=3    
+    Segment:	Dac= 0, 10;	Amp	=    2000,1,100; 
+    Segment:	Dac= 0,	10;	Amp	=	0
+    Blank:	Dac =0, 500
+  EndSweep
+EndFrame
+
+Blank:	Dac=0, 1000; Amp=1000

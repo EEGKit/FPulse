@@ -1,0 +1,57 @@
+PULSE   
+        Protocol: Name  = "Syn"
+        Adc:      Chan = 0; TGChan = 5; SmpInt = 50; RGB=(50000,0,0); Units =pA //Em
+        Dac:      Chan = 0; SmpInt = 50; Gain = 0.5; RGB=(0,50000,0); Units =mV         //command
+
+
+
+        Frames:  N   = 30
+                Sweeps:  N   = 1                        
+                        Segment: Dac = 0, 58                    
+                        Segment: Dac = 0, 1; Amp = 0,1,0; Dig = 0, 0.2, 0
+                        Segment: Dac = 0, 400; Amp = 0
+                        Segment: Dac = 0, 10; Amp = -20
+                        Segment: Dac = 0, 100; Amp = 0
+                        Blank:    Dac = 0, 4431; Amp = 0        
+                EndSweep
+        EndFrame 
+        
+        
+     Frames:     N = 4
+                Sweeps:  N   = 1        
+                Segment: Dac = 0, 50
+                Loop:           N = 10
+                 Segment:       Dac = 0, 5; Dig = 1, 1, 0
+                 Segment:       Dac = 0, 5; Dig = 1, 1, 0
+                 Segment:       Dac = 0, 5; Dig = 1, 1, 0
+               Segment: Dac = 0, 5;  // Minimum 5
+                 Segment:       Dac = 0, 2; Amp = 2000,1,0;  // oder 20 ms, 1 nA
+                 Segment:       Dac = 0, 3; 
+                 Segment:       Dac = 0, 2; Amp = 2000,1,0; 
+                 Segment:       Dac = 0, 3;
+                 Segment:       Dac = 0, 2; Amp = 2000,1,0; 
+                 Segment:       Dac = 0, 49; //  Minimum 9
+                 Segment:       Dac = 0, 5; Dig = 0, 0.2, 0
+                 Segment:       Dac = 0, 5; Dig = 0, 0.2, 0
+                 Segment:       Dac = 0, 49; Dig = 0, 0.2, 0
+                 Segment:       Dac = 0, 60;
+                EndLoop
+                Segment: Dac = 0, 450
+                Blank:    Dac = 0, 7500; Amp = 0        
+                EndSweep
+        EndFrame 
+
+
+        Frames:  N   = 120
+                Sweeps:  N   = 1        
+                        Segment: Dac = 0, 58                    
+                        Segment: Dac = 0, 1; Amp = 0,1,0; Dig = 1, 1, 0
+                        Segment: Dac = 0, 400; Amp = 0
+                        Segment: Dac = 0, 10; Amp = -20
+                        Segment: Dac = 0, 100; Amp = 0
+                        Blank:    Dac = 0, 4431; Amp = 0
+                EndSweep
+        EndFrame 
+
+
+ 

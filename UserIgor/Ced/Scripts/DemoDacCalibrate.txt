@@ -1,0 +1,15 @@
+// DemoDacCalibrate.txt
+
+PULSE	
+Protocol:	Name	= "DemoDacCalibrate"
+Adc:		Chan = 0;		SmpInt =1000
+Dac:		Chan = 0;		SmpInt =1000
+
+
+Frames:	N	=10
+Sweeps:	N	= 1         
+Segment:	Dac	= 0, 5000;	Amp	=    -2000
+Segment:	Dac	= 0, 5000;	Amp	=    2000
+EndSweep
+EndFrame 
+

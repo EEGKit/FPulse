@@ -1,0 +1,17 @@
+FPULSE6   
+ 
+  SmpIntDac = 100
+
+   Adc = 0, gain = 5,  RGB=(50000:0:0), Units =pA //Em
+   Dac = 0, Gain = 0.5, RGB=(0:50000:0), Units =mV  //command
+   dig = 0    
+
+Block, Laps = 1, Frames = 60
+   dur =  550, newds;	dac=0, Amp = -1000, deltaa=100; Dig = 0, digdur=10
+   dur =  450, nostore;	dac=0, Amp = -1000, deltaa=100
+Block, Laps = 1, Frames = 60
+   dur =  550, newds;	dac=0, Amp = 0, deltaa=-100; Dig = 0, digdur=10
+   dur =  450, nostore;	dac=0, Amp = 0
+Block, Laps = 1, Frames = 60
+   dur =  550, newds;	dac=0, Amp =1000 0, deltaa=-100; Dig = 0, digdur=10
+   dur =  450 ;		dac=0, Amp = 0

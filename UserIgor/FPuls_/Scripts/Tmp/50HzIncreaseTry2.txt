@@ -1,0 +1,54 @@
+// C:UserIgor:Scripts:IN_GC_50Hz.txt   22.12.03	for S.Hefft
+
+// Syntax:  [ Dig =  Ch, Dur, Del, DDur, DDel ]
+// Syntax: Segment/Blank..  :	Dac =  Ch, Dur, A/R,Del ;  Amp	= 	Amp, Scl, DAmp, DDur
+
+// paired recordings synaptic experiments
+// Adc is controlled by AxoClamp telegraph
+
+PULSE
+Protocol:    Name = "50HzIncreaseTry2"
+Adc:         Chan = 0;   SmpInt = 50; TGChan=5; RGB=(55000,0,0); Units = mV  // pre
+Adc:         Chan = 7;   SmpInt = 50; TGChan=6; RGB=(0,55000,0); Units = pA   // post
+Dac:         Chan = 0;   SmpInt = 50; Gain = 0.5; 	RGB=(0,0,55000); 	Units = mV // pre
+
+Frames:      N    = 5
+  Sweeps:	N    =  1;    	PoN = 0        
+   Segment:   Dac = 0, 100;			Dig = 0,1,1	// 100 ms for the baseline and a 1ms oscilloscope trigger on digout 0
+
+      Segment:   Dac	= 0, 2;	Amp = 1500 | 1500 | 1500| 1500 | 1500; 	Dig = 2, 1 , 1020 | 2, 1 , 1040 | 2, 1 , 1080 | 2, 1 , 1120 | 2, 1 , 1180 // test pulse
+      Segment:   Dac	= 0, 18;										// ..with a repetition rate of  50Hz
+
+      Segment:   Dac	= 0, 2;	Amp = 1500 | 1500 | 1500| 1500 | 1500 
+      Segment:   Dac	= 0, 18;										// ..with a repetition rate of  50Hz
+
+      Segment:   Dac	= 0, 2;	Amp = 0 	| 1500 | 1500| 1500 | 1500 //
+      Segment:   Dac	= 0, 18;										// 
+ 
+      Segment:   Dac	= 0, 2;	Amp = 0		| 0 	| 1500| 1500	 | 1500	 //
+      Segment:   Dac	= 0, 18;										//
+ 
+      Segment:   Dac	= 0, 2;	Amp = 0		| 0 	| 1500| 1500	 | 1500
+      Segment:   Dac	= 0, 18;										//
+ 
+      Segment:   Dac	= 0, 2;	Amp = 0		| 0 	| 0 	| 1500	 | 1500 ; 	Dig = 1, 1 , 1020 | 1, 1 , 1040 | 1, 1 , 1080 | 1, 1 , 1120 | 1, 1 , 1180   // single AP
+      Segment:   Dac	= 0, 18;										//
+ 
+      Segment:   Dac	= 0, 2;	Amp = 0		| 0 	| 0	 | 1500	 | 1500	//
+      Segment:   Dac	= 0, 18;										//
+ 
+      Segment:   Dac	= 0, 2;	Amp = 0		| 0 	| 0	 | 0 		| 1500	//
+      Segment:   Dac	= 0, 18;										//
+ 
+      Segment:   Dac	= 0, 2;	Amp = 0		| 0 	| 0	 | 0		 | 1500	//
+      Segment:   Dac	= 0, 18;										//
+ 
+      Segment:   Dac	= 0, 2;	Amp = 0		| 0 	| 0 	| 0		 | 1500	//
+      Segment:   Dac	= 0, 18;										//
+ 
+    Segment:	Dac = 0, 1279
+    Blank:	Dac = 0, 13421 										// todo: adjust to total duration 15.0 s 
+  EndSweep
+EndFrame
+
+

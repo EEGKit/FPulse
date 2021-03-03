@@ -1,0 +1,19 @@
+FPULS4
+SmpIntDac 	= 100						
+
+Adc = 0,			Gain = 1, RGB = (0:65535:0), 
+Dac = 0, 	Name = PipStim, 	Gain = 2, Units=	mV	
+Dig = 1
+Dig = 2
+
+Block=Pre, Laps=2, Frames  = 2
+    dur =   50, nostore, newds
+    dur = 150 ;		dac=PipStim; 		Dig=1, digdur=10 
+    dur = 100;  		dac=PipStim, amp=40, deltaa = -30;
+    dur =  100, nostore;dac=PipStim
+
+Block, Laps=3, Frames  = 2
+    dur =   50, nostore, newds
+    dur = 150 ;		dac=PipStim; 		Dig=2, digdur=30  
+    dur =   50; 		dac=PipStim, amp=60, deltaa = 30;
+    dur =  100, nostore;dac=PipStim

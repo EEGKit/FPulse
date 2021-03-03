@@ -1,0 +1,14 @@
+PULSE	
+Protocol:	Name	= "DemoSpeed2Ad1Tg24us"
+Dac:		Chan = 0;		SmpInt =24
+Adc:		Chan = 0;		SmpInt =24; TGChan=5
+Adc:		Chan = 1;		SmpInt =24
+
+
+Frames:	N	=20
+Sweeps:	N	= 1         
+Ramp:	Dac	= 0, 1108.8;	Amp	=    -3800,1,400 // time 1108.800ms allows SI 14,15,16,18,20,21,22,24,25
+Ramp:	Dac	= 0, 1108.8;	Amp	=    0
+EndSweep
+EndFrame 
+

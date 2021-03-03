@@ -1,0 +1,16 @@
+// UF just does NOT work -> try 20us
+
+PULSE	
+Protocol:	Name	= "DemoTG20us"
+Dac:		Chan = 0;		SmpInt =20
+Adc:		Chan = 2;		SmpInt =20; TGChan=5
+Adc:		Chan = 0;		SmpInt =20; TGChan=6
+
+
+Frames:	N	= 1
+Sweeps:	N	= 1         
+Ramp:	Dac	= 0, 1108.8;	Amp	=    -3800,1,400 // time 1108.800ms allows SI 14,15,16,18,20,21,22,24,25
+Ramp:	Dac	= 0, 1108.8;	Amp	=    0
+EndSweep
+EndFrame 
+

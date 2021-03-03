@@ -1,0 +1,29 @@
+// C:UserIgor:Scripts:Calcium current measurement.txt   17.02.06
+
+// all durations are in ms except SmpInt which is in µs
+// Syntax:  [ Dig =  Ch, Dur, Del, DDur, DDel ]
+// Syntax: Segment/Blank:	Dac =  Ch, Dur, A/R,Del ; Amp	=Amp, Scl, DAmp, DDur
+// Long pulse
+
+PULSE
+	Protocol:	Name	= "Calcium current measurement"
+	Adc:         Chan = 0; SmpInt = 20; TGMCChan = 1; RGB=(50000,0,0); Units=pA
+	Dac:         Chan = 0; SmpInt = 20; Gain = 50; Name=DacStim0; RGB=(0,50000,0)
+//	PoN:	   Src=0; Units=pA
+
+	Frames:	N = 12	
+		Sweeps:	N = 1;// PoN=1//; CorrAmp=.25
+			Segment: Dac = 0, 10 
+			Loop: N = 1
+				Segment: Dac = 0, 20; Amp= 80, 1, 0; Dig = 0, 2, 0 	
+ 				Segment: Dac = 0, 10; Amp= 0
+				StimWave:Dac =  0, 4;		Wave = apwave.100, 1, 20		// action potential shifted by 20 mV
+				Segment: Dac = 0, 1; Amp= 0
+				StimWave:Dac =  0, 40;		Wave = apwave.100, 1, 0, 10	// action potential time-stretched x 3
+				Segment: Dac = 0, 6; Amp= 0
+			EndLoop
+		EndSweep
+		Blank: Dac= 0, 4750; Amp=0	
+	EndFrame
+
+ 

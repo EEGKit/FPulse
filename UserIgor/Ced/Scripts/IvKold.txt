@@ -1,0 +1,22 @@
+// C:UserIgor:Scripts:IVK.txt   17.07.02
+
+// Syntax:  [ Dig =  Ch, Dur, Del, DDur, DDel ]
+// Syntax: Segment/Blank..  :	Dac =  Ch, Dur, A/R,Del ;  Amp	= 	Amp, Scl, DAmp, DDur
+// Dac Gain and Units for AxoPatch in VC must be set to : 50   ( 1 V from the Dac ~ 20 mV at the cell )
+// Dac Gain and Units for AxoPatch in CC must be set to : 0.5  ( 1 V from the Dac ~  2  nA  at the cell )
+
+PULSE
+Protocol:    Name = "IVK"
+Adc:         Chan = 0; SmpInt = 100
+Adc:         Chan = 2; SmpInt = 100 
+Dac:         Chan = 0; SmpInt = 100; Name=DacStim0 
+PoN:         Src = 0; Units=pA
+Frames:      N    = 15
+Sweeps:      N    = 5         
+  Segment:	Dac =  0, 20   
+  Segment:	Dac =  0, 100; Amp =10,,10 ; 	 	Dig =  0,.5,-5    
+  Segment:	Dac =  0, 180    
+  Blank:	Dac =  0, 500
+  EndSweep
+Blank:		Dac = 0,1000
+EndFrame 

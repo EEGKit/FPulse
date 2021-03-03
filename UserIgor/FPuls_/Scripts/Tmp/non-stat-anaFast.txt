@@ -1,0 +1,27 @@
+// C:UserIgor:Scripts:non-stat-ana.txt   29.01.03
+
+// all durations are in ms except SmpInt which is in us
+// Syntax:  [ Dig =  Ch, Dur, Del, DDur, DDel ]
+// Syntax: Segment/Blank..  :	Dac =  Ch, Dur, A/R,Del ;  Amp	= 	Amp, Scl, DAmp, DDur
+
+// activation of Na channels
+
+PULSE
+Protocol:	Name	= "non-stat-ana  FAST"
+Adc:         Chan = 0; SmpInt = 25; TGChan=5; RGB=(50000,0,0); Units=pA
+Dac:         Chan = 0; SmpInt = 25; Gain = 50; Name=DacStim0; RGB=(0,50000,0)
+PoN:         	Src = 0; Units = pA
+Frames:	N	= 2//  100
+Sweeps:	N	= 3; PoN = 1; CorrAmp=.5
+Segment:	Dac = 0,  10;	Amp= 0; 
+Segment:	Dac = 0, 50;	Amp= -50, 1
+Segment:	Dac = 0, 30;	Amp= 80, 1, ; Dig = 0, .5, -5  
+Segment:	Dac = 0, 100;	Amp= 0
+
+Blank:		Dac	= 0, 610       		       // ISI
+EndSweep
+Blank:		Dac	= 0, 0					// IFI
+EndFrame
+
+Blank: Dac = 0, 500                                    // IPI
+ 

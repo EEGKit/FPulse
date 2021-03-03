@@ -1,0 +1,23 @@
+// C:UserIgor:Ced:Demo200Frm.txt   07.11.02
+
+// Purpose:	Measure the time needed to load this script
+//			Takes about 10 seconds
+
+// Syntax:  [ Dig =  Ch, Dur, Del, DDur, DDel ]
+// Syntax: Segment/Blank..  :	Dac =  Ch, Dur, A/R,Del ;  Amp	= 	Amp, Scl, DAmp, DDur
+// Syntax: Stimwave		:	Dac =  Ch, Dur, A/R,Del ;  Wave	=	wave file name, Scl
+// Syntax: Expo			:	Dac =  Ch, Dur, A/R,Del ;  AmpTau =	Amp1, TauRise1, TauDecay1, deltaT1, Scl1 / Amp2, TauRise2, TauDecay2, deltaT2, Scl2 / ...
+
+PULSE
+Protocol:    Name = "Demo200Frm"
+Adc:         Chan = 0; SmpInt = 100;TGChan=5
+Dac:         Chan = 0; Name=DacStim0; Gain=1
+//PoN:         Src = 0
+
+Frames:      N    =200
+Sweeps:      N    = 1//2         
+  Segment:	Dac =  0, 5   
+  Segment:	Dac =  0, 5; Amp =1000,,-1 
+  Segment:	Dac =  0, 10   
+  EndSweep
+EndFrame 

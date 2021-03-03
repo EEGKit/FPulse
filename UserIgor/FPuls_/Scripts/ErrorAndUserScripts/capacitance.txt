@@ -1,0 +1,25 @@
+// C:UserIgor:Scripts:capacitance.txt   29.01.03
+
+// all durations are in ms except SmpInt which is in us
+// Syntax:  [ Dig =  Ch, Dur, Del, DDur, DDel ]
+// Syntax: Segment/Blank..  :	Dac =  Ch, Dur, A/R,Del ;  Amp	= 	Amp, Scl, DAmp, DDur
+
+// activation of Na channels
+
+PULSE
+Protocol:	Name	= "capacitance"
+Adc:         Chan = 0; SmpInt =10; TGChan=5; RGB=(50000,0,0); Units=pA
+Dac:         Chan = 0; SmpInt = 10; Gain = 50; Name=DacStim0; RGB=(0,50000,0)
+
+Frames:	N	= 100
+Sweeps:	N	= 1
+Segment:	Dac = 0,  20;	Amp= 0; Dig = 0, .5, 1  // *****110 
+Segment:	Dac = 0, 5;	Amp= -150
+Segment:	Dac = 0, 30;	Amp= 0
+Segment:	Dac = 0, 50;	Amp= 150
+
+Blank:		Dac	= 0, 10        				// ISI
+EndSweep
+Blank:		Dac	= 0, 50					// IFI
+EndFrame
+ 

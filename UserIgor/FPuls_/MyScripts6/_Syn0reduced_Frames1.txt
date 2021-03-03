@@ -1,0 +1,46 @@
+FPULSE6   
+ 
+  SmpIntDac = 50
+
+   Adc = 0, TGChan = 5,  RGB=(50000:0:0), Units =pA //Em
+   Dac = 0, Gain = 0.5, RGB=(0:50000:0), Units =mV  //command
+   Dig = 0
+   Dig = 1
+
+Block, Laps = 1, Frames = 2
+   dur =  400,     nostore;	       
+   dur =  200,  newds;                    
+   dur =  400;		 			Dig = 1, digdur=1
+   dur =  400;		     dac=0, Amp = -1000
+   dur =  600,       nostore;	
+   dur =  400,  newds;                   
+   dur =  400;		 			Dig = 0, digdur=0.2
+   dur =  800;		     dac=0, Amp = -800
+   dur = 1000,     nostore;	       
+        
+
+Block, Laps = 4, Frames = 2
+   dur  =  100,	 newds;
+   Loops = 2
+      dur =  20; 				Dig = 1, digdur=1
+      dur =  20; 				Dig = 1, digdur=1
+      dur =  100;	     dac=0, Amp = 2000;	// oder 20 ms, 1 nA
+      dur =  20;			 	//  Minimum 9
+      dur =  20; 				Dig = 0, digdur=0.2
+      dur =  20; 				Dig = 0, digdur=0.2
+   EndLoops
+   dur  =  200
+   dur  = 3000,      nostore;
+
+Block, Laps = 3, Frames = 1
+   dur =  100,	newds;                    
+   dur =  100;		 			Dig = 1, digdur=1
+   dur =  300;		
+   dur =  100;		     dac=0, Amp =-600
+   dur =  400,       nostore;	
+
+   dur =  100, 	newds;                    
+   dur =  100;					Dig = 0, digdur=0.2
+   dur =  300;		
+   dur =  100;		     dac=0, Amp =-400
+   dur =  400,       nostore;	       

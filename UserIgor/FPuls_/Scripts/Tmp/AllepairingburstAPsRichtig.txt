@@ -1,0 +1,31 @@
+// C:UserIgor:Scripts:Synaptics.txt   18.10.02
+
+// Syntax:  [ Dig =  Ch, Dur, Del, DDur, DDel ]
+// Syntax: Segment/Blank..  :	Dac =  Ch, Dur, A/R,Del ;  Amp	= 	Amp, Scl, DAmp, DDur
+
+// pairing experiment for induction of LTP, trakt in gcl or pp (100 Hz, 10 APs), induction of a burst of single spikes in postsynaptic interneuron
+
+PULSE
+Protocol:     Name = "pairing burst of APs in postsyn neuron"
+Adc:           Chan = 0;   SmpInt = 50; TGMCChan=1; RGB=(50000,0,0); Units = pA   // post
+//Adc:         Chan = 7;   SmpInt = 50; TGMCChan=1; RGB=(0,50000,0); Units = mV  // pre
+Dac:           Chan = 0;   SmpInt = 50; Gain = 0.5; RGB=(50000,0,0); Units = mV     // post IClamp
+//Dac:         Chan = 1;   SmpInt = 50; Gain = 0.5; RGB=(0,50000,0); Units = pA      // pre VClamp
+
+Frames:        N    =  12 
+  Sweeps:      N    = 1        
+  Segment:    Dac = 0, 50;
+  
+  Loop: N=25 												//number of spikes in the train in the trakt stimulation
+    Segment:   Dac = 0, 32; 						//inter pulse interval, now 33,3 Hz		
+    Segment:   Dac = 0, 1; 	Amp = 2000, 1, 0;	Dig = 1, 1, -1	
+//    Segment:   Dac = 0, 4;	
+    EndLoop
+
+    	Segment:   Dac = 0, 125;						// store.  time between end of train
+	Blank:  	 Dac = 0, 2000;						// discard. time between end of train
+
+EndSweep
+ 
+EndFrame
+ 

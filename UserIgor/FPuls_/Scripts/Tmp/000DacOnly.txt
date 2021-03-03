@@ -1,0 +1,13 @@
+// C:UserIgor:Scripts:DacOnly.txt 
+
+PULSE	
+Protocol:	Name	= "DacOnly"
+Dac:		Chan = 0;		SmpInt = 250; Gain = 0.5
+
+Frames:	N = 2
+Sweeps: N = 1       
+Segment:	Dac	= 0, 200	
+Segment:	Dac = 0,500;	Amp	=	60, 10,20
+Segment:	Dac	= 0, 300	
+EndSweep
+EndFrame 

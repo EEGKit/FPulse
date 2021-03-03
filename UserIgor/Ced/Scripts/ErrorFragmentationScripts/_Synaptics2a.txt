@@ -1,0 +1,20 @@
+// C:UserIgor:Scripts:IVCC.txt   18.10.02
+
+// Syntax:  [ Dig =  Ch, Dur, Del, DDur, DDel ]
+// Syntax: Segment/Blank..  :	Dac =  Ch, Dur, A/R,Del ;  Amp	= 	Amp, Scl, DAmp, DDur	
+
+// current clamp VI relation 
+
+Script	= "synaptics"
+SmpIntDac = 50						// newstyle
+
+Adc = 0,	 TGChan=5, RGB=(50000:0:0), Units =pA
+Adc = 7,	 TGChan=6, RGB=(0:50000:0), Units =mV
+Dac = 0,	 Gain = 10, RGB=(50000:0:0), Units =mV	// pre Iclamp
+Dig=0
+
+Block, Repeats=10, Frames=3
+dur= 40,	store=1;		Dac = 0,
+dur= 2, 	store=1;		Dac = 0,	Amp =45;            Dig= 0, digdur=.5, digdel=-5;
+dur= 278,	store=1;		Dac = 0,	Amp=5000
+dur =4700 ,store=0;		Dac = 0, 	Amp=0			  // IFI

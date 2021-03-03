@@ -1,0 +1,16 @@
+// C:UserIgor:Scripts:Fire-Test_green AMP.txt 
+// Crash Daniel D when switching 1 frame - 2 frames
+
+PULSE	
+Protocol:	Name	= "Firing pattern"
+Adc:		Chan = 0;		SmpInt = 25; TGChan=1; RGB=(0,50000,0); Units =mV
+Dac:		Chan = 0;		SmpInt = 25; Gain = 0.5; RGB=(50000,0,0); Units =mV
+
+Frames:	N = 20
+Sweeps: N = 1        
+Segment:	Dac	= 0, 10 ;            			Dig= 0, 10, 50    
+Segment:	Dac = 0, 10;		Amp =	50
+Segment:	Dac	= 0, 280
+
+EndSweep
+EndFrame 

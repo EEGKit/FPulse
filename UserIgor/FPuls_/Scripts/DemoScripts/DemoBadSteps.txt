@@ -1,0 +1,31 @@
+// DemoBadSteps.txt
+
+// Purpose:	Exhibit the unwanted DAC steps
+// Usage :	Connect DAC0 and ADC0, start the acqusition and read the CFS data
+// Problem:	You will notice annoying steps (where you expected to see a smooth ramp)
+// Explanation:  in the Current Clamp mode the AxoPatch has a gain of 2 nA / V = 2 pA / mV.
+//			To compensate for this you set the DAC gain to .5 allowing you to write the script Amp directly in pA. 
+//			For the 200 pA ramp desired below the Ced1401 will output a 100 mV ramp.
+//			For this the Ced1401 uses his 12bit Dac with 2^12 = 4096 steps spread over a range of -10 to +10 V,
+//			leaving appr.  5 mV  stepsize  or about  20 steps of appr.  10 pA on the desired 200 pA ramp.
+//			This is NOT an error, the system hardware is designed this way.
+// Solution1:	Use a 16 bit Dac  and  have this FPULSE program modified to handle this new hardware.
+//			The steps will still be there but smaller by a factor of 16 and will be appr. .6 pA (probably obscured by noise).
+// Solution2:	Scale down the stimulus signal between Ced1401 and the PatchClampAmp with a resistive divider,
+//			e.g. by a factor of 10. You then have 2 pA / 10mV and you must change the DAC Gain from .5  to  5 .
+//			The Ced1401 will still output 5 mV steps but spread over a ramp of 1000 mV.
+//			The steps will still be there but smaller by a factor of 10 and will be appr. 1 pA(probably obscured by noise).
+			
+PULSE	
+Protocol:	Name	= "DemoBadSteps"
+Adc:		Chan = 0;		SmpInt = 20; TGChan=5; Units =mV
+Dac:		Chan = 0;		SmpInt = 20; Gain =0.5;  Units =pA		// postsynaptic cell
+
+Frames:	N	= 2
+Sweeps:	N	= 1         
+Segment:	Dac	= 0, 10	
+Ramp:	      Dac = 0,2000;	Amp	= 200;         Dig= 1, 1.5, -2     // in pA -20,1,-2 default
+Ramp:	      Dac = 0,1000;	Amp	= 0;
+Segment:	Dac	= 0, 200;	Amp	= 0;
+EndSweep
+EndFrame 

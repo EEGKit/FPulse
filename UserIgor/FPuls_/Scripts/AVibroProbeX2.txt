@@ -1,0 +1,13 @@
+PULSE	
+Protocol:	Name	= "Demo7AD32us"
+Dac:		Chan = 0;		SmpInt = 25000
+Adc:		Chan = 0;		SmpInt = 25000
+Adc:		Chan = 2;		SmpInt = 25000
+
+Frames:	N	=1	// 1 prot x 6 frames  WORKS,   6 prot x 1 frame FAILS   031006
+Sweeps:	N	=1         
+Ramp:	Dac	= 0, 10000;	Amp	=    -9800,1,500
+Ramp:	Dac	= 0, 10000;	Amp	=    0
+EndSweep
+EndFrame 
+

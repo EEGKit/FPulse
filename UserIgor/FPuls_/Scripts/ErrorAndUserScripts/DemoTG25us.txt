@@ -1,0 +1,18 @@
+PULSE	
+Protocol:	Name	= "DemoTG25us"
+Dac:		Chan = 0;		SmpInt =25; Gain=.5
+Adc:		Chan = 2;		SmpInt =25; TGChan=5
+Adc:		Chan = 5;		SmpInt =25;Gain=1
+//Adc:		Chan = 1;		SmpInt =25; TGChan=6//TTGMCChan=1//
+//Adc:		Chan = 6;		SmpInt =25;Gain=1//; TGMCChan=2
+
+//Adc:		Chan = 1;		SmpInt =20
+
+
+Frames:	N	= 20
+Sweeps:	N	= 1         
+Ramp:	Dac	= 0, 1108.8;	Amp	=    -800,1,100 // time 1108.800ms allows SI 14,15,16,18,20,21,22,24,25
+Ramp:	Dac	= 0, 1108.8;	Amp	=    0
+EndSweep
+EndFrame 
+

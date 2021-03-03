@@ -1,0 +1,146 @@
+// CED1401WinCustom.RC : XOP-specific resources for CED1401 on Windows
+
+//	This file is compiled by the resource compiler and creates 
+//   XOP-specific	resources that IGOR looks for in an XOP module.
+
+// Defines XOP-specific symbols.
+#include "\Program files\wavemetrics\IGORXOPS\XOPSUPPORT\XOPResources.h"	
+#include "\Program files\wavemetrics\IGORXOPS\XOPSUPPORT\IgorXOP.h"	  // NT_I16
+
+1100 STR#				
+BEGIN    
+   //   1 
+	"FPulseCed-XOP requires Igor 2.0 or later. \0",	  
+	"FPulseCed-XOP was called to execute an unknown function.\0",
+	"Input string is non-existent. \0",
+	"Wave does not exist \0",
+	"Coefficient wave must be single or double precision floating point \0",
+	"m must be ² l; m and l must be within -1 to 1 \0",
+	"The logfit XFUNC requires a math coprocessor \0",
+	"The plgndr XFUNC requires a math coprocessor \0",
+	"Input number must not be negative \0",
+	"Is not 2 byte integer wave \0",
+	"Is not 4 byte float wave \0",
+	"Is not text wave \0",
+	"Waves have different lengths \0",
+	"Out of memory.....           \0",
+	"Is neither 2 byte integer wave nor 4 byte float wave \0",
+
+   //  16 
+															"?\0", "?\0", "?\0", "?\0",
+   "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0",
+   "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0",
+   "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0",
+   "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0",
+   "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0",
+   "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0",
+   "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0",
+   "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0",
+   
+	// 100  Start of CED errors
+   "1401 is there but switched off (-500) \0",
+
+	0,								// ENDE der String-Resource.
+END
+
+
+// no menu item 
+
+
+// XOPI - Describes general XOP properties to IGOR. 
+1100 XOPI					  
+BEGIN
+	XOP_VERSION,			  // Version number of host XOP system.
+	DEV_SYS_CODE,			  // Code for development system used to make XOP
+	0,							  // True if XOP requires hierarchical menus
+	1,							  // True if XOP requires math coprocessor
+	0							  // True if XOP requires MMU
+END
+
+
+// GLEICHE REIHENFOLGE IN  'sfunc[]'  UND HIER IN CED1401WinCustom.RC
+// Describes FUNCTIONS added by XOP to IGOR.
+1100 XOPF	
+BEGIN
+
+	
+	//---------------- START OF MULTICLAMP CONTROL INTERFACE --------------------
+
+	"xMCCMSG_CheckAPIVersion\0",	// Function name  
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     NT_FP64,						   // Return value type.
+		   0,								// end of parameters
+	
+	"xMCCMSG_CreateObject\0",		// Function name  
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     NT_FP64,						   // Returns pointer to hMCCmsg as DOUBLE
+		   0,								// end of parameters
+	
+	"xMCCScanMultiClamps\0",		// Function name 
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     HSTRING_TYPE,	     			// Returns string '700A: ComPort1,AxoBus1,ch0, 700B:Serial number, channel'
+		   NT_FP64,					   // 1.par: hMCCmsg
+		   0,							   // end of parameters
+	
+	"xMCCMSG_SelectMultiClamp\0",	// Function name 
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     NT_FP64,						   // Return value type.
+		   NT_FP64,					   // 1.par: hMCCmsg
+		   NT_FP64,					   // 2.par: uModel
+		   HSTRING_TYPE,			   // 3.par: szSerialNumber	(only 700B)
+		   NT_FP64,					   // 4.par: uCOMPortID			(only 700A)
+		   NT_FP64,					   // 5.par: uDeviceID			(only 700A)
+		   NT_FP64,					   // 6.par: uChannelID			(only 700A)
+		   0,							   // end of parameters
+	
+	"xMCCMSG_SetMode\0",				// Function name 
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     NT_FP64,						   // Return value is error indicator
+		   NT_FP64,					   // 1.par: hMCCmsg
+		   NT_FP64,					   // 2.par: mode (VC or CC)
+		   0,							   // end of parameters
+	
+	"xMCCMSG_GetMode\0",				// Function name 
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     NT_FP64,						   // Return value is Mode
+		   NT_FP64,					   // 1.par: hMCCmsg
+		   0,							   // end of parameters
+
+	"xMCCMSG_SetPrimarySignalGain\0",	// Function name    
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     NT_FP64,						   // Return value is error indicator
+		   NT_FP64,					   // 1.par: hMCCmsg
+		   NT_FP64,					   // 2.par: PrimaryGain
+		   0,							   // end of parameters
+
+	"xMCCMSG_GetPrimarySignalGain\0",	// Function name    
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     NT_FP64,						   // Return value is error indicator
+		   NT_FP64,					   // 1.par: hMCCmsg
+		   0,							   // end of parameters
+
+	"xMCCMSG_GetSecondarySignalGain\0",	// Function name    
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     NT_FP64,						   // Return value is error indicator
+		   NT_FP64,					   // 1.par: hMCCmsg
+		   0,							   // end of parameters
+	
+	"xMCCMSG_Reset\0",				// Function name    
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     NT_FP64,						   // Return value is error indicator
+		   NT_FP64,					   // 1.par: hMCCmsg
+		   0,							   // end of parameters
+	
+	"xMCCMSG_DestroyObject\0",		// Function name
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     NT_FP64,						   // Return value type.
+		   NT_FP64,					   // 1.par: hMCCmsg
+		   0,							   // end of parameters
+	
+	// --------------- END   OF MULTICLAMP CONTROL INTERFACE ------------------
+
+	// More function descriptions can appear here.
+	
+	0,								   // ENDE der Funktionen-Resource.
+END
+

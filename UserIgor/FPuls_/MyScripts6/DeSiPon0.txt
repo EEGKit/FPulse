@@ -1,0 +1,19 @@
+PULSE
+Protocol:    Name = "DemoSimplePon"
+Adc:         Chan = 0; SmpInt = 100
+Dac:         Chan = 0; Name=PipStim; Gain=2;Units=mV
+PoN:	Src=0  // der Adc  channel !
+
+Frames:      N    =2
+Sweeps:      N    = 4; PoN=1 // ; CorrAmp = .1       
+  Blank:		Dac =  0, 50   
+  Segment:	Dac =  0, 150   
+  Segment:	Dac =  0, 100; Amp =4000,,-1500 
+  Segment:	Dac =  0, 50   
+  Blank:		Dac =  0, 50   
+  EndSweep
+Blank:	Dac=0,100
+EndFrame
+Blank:	Dac=0,500
+ 
+// Im Acq window 'Result' wählen

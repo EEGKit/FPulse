@@ -1,0 +1,20 @@
+// Purpose:	check if system is capable to sample 2 AD channels including 2 telegraph channels  at 40kHz 
+// Usage:	connect DA0 - AD0 - AD1, turn (most or all) acquisition windows off, turn 'timing statistics' on, 
+//			turn 'display all points/high resolution' off 
+//			watch out for warnings or errors 
+//			display traces after acquisition and look for irregularities in the signal
+
+PULSE	
+Protocol:	Name	= "DemoSpeed2Ad2Tg25us"
+Dac:		Chan = 0;		SmpInt =25; Gain=.5
+Adc:		Chan = 0;		SmpInt =25; TGChan=5
+Adc:		Chan = 1;		SmpInt =25; TGChan=7
+
+
+Frames:	N	=40
+Sweeps:	N	= 1         
+Ramp:	Dac	= 0, 1250;	Amp	=    -3800,1,400 // time 1108.800ms allows SI 14,15,16,18,20,21,22,24,25
+Ramp:	Dac	= 0, 1250;	Amp	=    0
+EndSweep
+EndFrame 
+

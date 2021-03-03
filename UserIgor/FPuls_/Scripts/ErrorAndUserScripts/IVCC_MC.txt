@@ -1,0 +1,23 @@
+// C:UserIgor:Scripts:IVCC.txt   24.06.03
+
+// Syntax:  [ Dig =  Ch, Dur, Del, DDur, DDel ]
+// Syntax: Segment/Blank..  :	Dac =  Ch, Dur, A/R,Del ;  Amp	= 	Amp, Scl, DAmp, DDur	
+
+// current clamp VI relation 
+// Adc is controlled by MultiClamp instead of AxoClamp telegraph
+
+PULSE	
+Protocol:	Name	= "IVCC_MC"
+Adc:		Chan = 0;		SmpInt = 50; TGMCChan=1; RGB=(50000,0,0); Units =mV
+Dac:		Chan = 0;		SmpInt = 50;	Gain = 0.5; RGB=(0,50000,0); Units =pA     // Gain 0.5 or 2.5 with 700A
+
+Frames:	N	= 14
+Sweeps:	N	= 1         
+Segment:	Dac = 0, 20;       		 Dig = 0, 0.5, 0.2; 	  
+Segment:	Dac = 0,1000;	Amp = 200,1,-20,0     // in pA 20,1,-2 default
+Segment:	Dac = 0, 500;	Amp =    0
+Blank:	Dac	= 0, 1500;			  // ISI
+EndSweep
+Blank:	Dac	= 0, 500;			  // IFI
+EndFrame 
+

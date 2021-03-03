@@ -1,0 +1,17 @@
+// Purpose:	Test for Online analysis
+PULSE	
+Protocol:	Name	= "A0A2"
+Dac:		Chan = 0;		SmpInt = 100; Gain=1
+Adc:		Chan = 1;		SmpInt = 100; Gain=1
+Adc:		Chan = 0;		SmpInt = 100; Gain=2//TGChan=5
+
+Frames:	N	=3	// 10
+Sweeps:	N	=1         
+Segment:	Dac	= 0, 400;	Amp	=    1000
+Ramp:		Dac	= 0, 500;	Amp	=    4000,1,-1000 
+Ramp:		Dac	= 0, 500;	Amp	=    -1000
+Segment:	Dac = 0, 200;	Amp	=	0
+EndSweep
+//Blank:	Dac=0, 1000
+EndFrame 
+Blank:	Dac=0, 1000

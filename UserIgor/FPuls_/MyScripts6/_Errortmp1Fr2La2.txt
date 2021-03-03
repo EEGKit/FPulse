@@ -1,0 +1,21 @@
+FPULSE6
+SmpIntDac 	= 100						// newstyle
+
+Adc = 0, TGChan=5
+Adc = 1
+Dac = 0, Name = PipStim, 	Gain =1
+
+Block=Pre, Frames  =2, Laps=2
+
+      dur = 300,nostore,newds;dac=0, 	
+      dur = 500;			dac=0,  	amp= 3150, deltaa=-300
+      dur = 200,nostore,newds;dac=0, 	
+      dur = 1000;			dac=0,  	amp= 3100, deltaa=-300
+      dur = 500,nostore;	dac=0, 	
+     dur = 500;			dac=0,  	amp= 3050, deltaa=-300
+     dur = 500;			dac=0,  	amp= 3050, deltaa=-300
+      dur = 500,nostore;	dac=0, 	
+      dur = 500,nostore;	dac=0, 	
+     dur = 500;			dac=0,  	amp= 3050, deltaa=-300
+      dur = 1000,	newds;	dac=0,  	amp= 3000, deltaa=-300
+     dur = 1000;			dac=0,  	amp= 3000

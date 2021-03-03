@@ -1,0 +1,26 @@
+// This script has been automatically converted to the  FPuls4  syntax,   but you may have to make some manual conversions.
+// You WILL have to manually convert multiple Dacs,   frame lists (e.g. 10 | 10 | 15) ,   
+// 'Sweeps' without P over N,    Ramps .
+
+// Purpose:	Test for Stimwave
+FPULS4
+SmpIntDac = 25
+
+// The Protocol line is ignored,   the script name is used instead. You may want to rename the file. 
+// Protocol:Name = "Stimwave1"
+Dac = 0,  Gain = 1
+Adc = 1,  Gain = 1
+//Adc:		Chan =  0;    		SmpInt =  80;     Gain = 1
+Dig = 0
+
+
+Block = MyBlock,  Laps = 1,  Frames = 2//4//2
+  Loops = 1//3                      // Sweeps without Pon  must be replaced by Loops,   but nested  Loops are not allowed.
+      Dur = 6,  nostore,  NewDs,  ;    Dac = 0;    
+      Dur = 6;    Dac = 0,  Amp = 100;    Dig = 0,  digdur = 1,  digdel = .2,  
+      Dur = 6;    Dac = 0,  Wave = APwave.200,  scl = 1,  ofs = 0,  sclX = 1,  
+      Dur = 12;    Dac = 0,  Wave = SinWave2.ibw,  scl = 1|.6,  
+      Dur = 12;    Dac = 0,  Wave = SinWave2.ibw,  scl = .5,  ofs = 80,  sclX = .2,  
+      Dur = 6,  nostore;    Dac = 0;    
+  EndLoops
+      Dur = 6,  nostore;    Dac = 0;    

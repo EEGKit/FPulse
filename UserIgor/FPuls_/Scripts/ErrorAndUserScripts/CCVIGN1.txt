@@ -1,0 +1,15 @@
+// C:UserIgor:Scripts:CCVIgn1.txt  
+
+PULSE	
+Protocol:	Name	= "IVCC"
+Adc:		Chan = 0;	SmpInt = 25; TGChan=5
+Dac:		Chan = 0;	SmpInt = 25; Gain = 0.5
+
+Frames:	N = 25
+Sweeps: N = 1        
+Segment:	Dac = 0, 200	
+Segment:	Dac = 0, 900;	Amp	=1000, 1, -50;            Dig= 1, 1.5, -1  
+Segment:	Dac = 0, 700;	Amp	=0
+EndSweep
+Blank:	Dac	= 0, 5000			  // IFI
+EndFrame 

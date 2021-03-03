@@ -1,0 +1,18 @@
+
+PULSE   
+Protocol:       Name    = single AP
+
+
+Adc:            Chan = 0;               SmpInt = 20; TGChan=5; RGB=(50000,0,0); Units =mV
+Dac:            Chan = 0;               SmpInt = 20; Gain =0.5; RGB=(0,50000,0); Units =mV// postsynaptic cell
+
+
+
+Frames: N       = 1
+Sweeps: N       = 1         
+Segment:        Dac     = 0, 10;                      Dig = 0, 1,.1 // 10 ms for the baseline and a 1ms trigger on digout 0 for oscilloscope at start
+Segment:        Dac = 0, 2;                     Dig = 1, 1 //  2ms timewindow for 1ms digout 1 for stimgenerator
+Segment:        Dac     = 0, 30;                                      // 30 ms for recording of the AP and ADP or AHP
+EndSweep
+Blank:  Dac     = 0, 5000                         // Inter-protokoll Intervall
+EndFrame 

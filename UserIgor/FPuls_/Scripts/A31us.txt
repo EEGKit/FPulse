@@ -1,0 +1,20 @@
+PULSE	
+Protocol:	Name	= "A31us"
+Dac:		Chan = 0;		SmpInt = 25; Gain=1
+Adc:		Chan = 0;		SmpInt = 25; //TGChan=5
+Adc:		Chan = 1;		SmpInt = 25; TGChan=6
+Adc:		Chan = 2;		SmpInt = 25
+//Adc:		Chan = 3;		SmpInt = 25; //TGChan=7   // TG only removed for test 031029
+//Adc:		Chan = 4;								// only removed for test 031029
+
+//Blank: Dac=0,1000; Amp=1000
+Frames:	N	=2
+ //prot x 6 frames  WORKS,   6 prot x 1 frame FAILS   031006
+Sweeps:	N	=2         ; PoN=1
+Ramp:	Dac	= 0, 1000;	Amp	=    -6800,1,500//; Dig= 0,1000,1 // time 1108.800ms allows SI 14,15,16,18,20,21,22,24,25,28
+Ramp:	Dac	= 0, 1000;	Amp	=    0
+Segment:Dac = 0, 1600; Amp =3000
+Blank:	Dac = 0, 400; Amp =3000
+EndSweep
+EndFrame 
+//Blank:	Dac = 0, 3000; Amp = 5000

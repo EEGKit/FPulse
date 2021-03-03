@@ -1,0 +1,19 @@
+PULSE
+Protocol:Name="A0A1"
+Dac:Chan=0;SmpInt=100;Gain=2//kiki
+Adc:Chan=0;SmpInt=100;Gain=10//TGChan=6
+Adc:Chan=3;SmpInt=100;Gain=1
+PoN:Src=0;
+
+Frames:N=3//100
+	//Sweeps:N=1
+	Sweeps:N=3;PoN=1
+		Segment:Dac=0,10; Amp=0
+		Segment:Dac=0,20; Amp=500
+		Ramp:Dac=0,80;Amp=3000,1,1000
+		Ramp:Dac=0,80;Amp=500
+		Segment:Dac=0,10;Amp=500
+	Blank:Dac=0,100
+	EndSweep
+	Blank:Dac=0,1000
+EndFrame

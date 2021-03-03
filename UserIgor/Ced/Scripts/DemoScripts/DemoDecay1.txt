@@ -1,0 +1,21 @@
+//	DemoDecay
+// 	Purpose :  Check the robustness of the various decay fits and rise fits
+
+PULSE	
+Protocol:	Name	= "DemoDecay1"
+Dac:		Chan = 0;		SmpInt = 200; Gain=1
+Adc:		Chan = 0;		SmpInt = 200; Gain= 1
+PoN:		Src = 0; RGB=(32000,0,0)
+
+Frames:	N	=2	
+Sweeps:	N	=3; PoN=1         
+Segment:Dac= 0, 80;
+Segment:Dac= 0, 40;		Amp = -200
+Segment:Dac= 0, 80;
+Ramp:	Dac= 0, 150;		Amp	=    8000, 1, -4000
+Segment:Dac= 0, 50;		Amp	=    8000, 1, -4000
+Ramp:	Dac	= 0, 500;	Amp	=    1000 
+Ramp:	Dac	= 0, 1100;	Amp	=    0
+EndSweep
+EndFrame 
+

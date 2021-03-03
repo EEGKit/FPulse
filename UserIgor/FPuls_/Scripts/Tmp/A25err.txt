@@ -1,0 +1,12 @@
+PULSE	
+Protocol:	Name	= "A25err"
+Dac:		Chan = 0;		SmpInt = 10000; Gain=1
+Adc:		Chan = 1;		SmpInt = 10000; Gain=2
+
+
+Frames:	N	=5
+Sweeps:	N	=1
+Segment:	Dac	= 0, 30;	Amp	=   100
+Segment:	Dac	= 0, 20;	Amp	=   0
+EndSweep
+EndFrame 

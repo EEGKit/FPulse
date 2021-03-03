@@ -1,0 +1,13 @@
+PULSE	
+Protocol:	Name	= "DemoSpeed1D1A80s"
+Dac:		Chan = 0;		SmpInt =20
+Adc:		Chan = 0;		SmpInt =20
+
+
+Frames:	N	=40
+Sweeps:	N	= 1         
+Ramp:	Dac	= 0, 1000;	Amp	=    -5000,1,250
+Ramp:	Dac	= 0, 1000;	Amp	=    0
+EndSweep
+EndFrame 
+
