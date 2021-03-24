@@ -1,9 +1,0 @@
-FPULSE6
-SmpIntDac 	= 100						// newstyle
-
-Adc = 0
-Dac = 0, Name = PipStim, 	Gain = 2
-
-Block=Pre, Frames  = 5
-      dur = 150;  	dac=0, 	
-      dur = 150;	dac=0,  	amp= 3000, deltaa=-1200

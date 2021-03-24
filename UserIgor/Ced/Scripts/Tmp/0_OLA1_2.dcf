@@ -1,1 +1,0 @@
-IGORWAVES/N=(4,4)	wWLocBEGIN	1238	1639	55	193	1241	1643	210	358	1238	1639	367	505	1238	1639	523	660ENDX SetScale/P x 0,1,"", wWLoc; SetScale/P y 0,1,"", wWLoc; SetScale d 0,0,"", wWLocWAVES/T	wWABEGIN	""	""	"Dac0;FC;1;;(40000,0,40000);0;;1;0|"	""ENDX SetScale/P x 0,1,"", wWA; SetScale y 0,0,"", wWA

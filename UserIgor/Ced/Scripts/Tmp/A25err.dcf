@@ -1,1 +1,0 @@
-IGORWAVES/N=(2,5)	wWLocBEGIN	20	359	289	506	0	364	703	289	506	0ENDX SetScale/P x 0,1,"", wWLoc; SetScale/P y 0,1,"", wWLoc; SetScale d 0,0,"", wWLocWAVES/T	wWABEGIN	"Dac0;SM;1;UnitsUnUsed;(40000,0,40000);0;0;1"	"Adc1;SM;1;UnitsUnUsed;(0,53248,0);0;0;1"ENDX SetScale/P x 0,1,"", wWA; SetScale y 0,0,"", wWA

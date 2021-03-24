@@ -1,1 +1,0 @@
-PULSEProtocol:Name="DemoTGtest3"  Dac:Chan=0;SmpInt=1000;Gain=1  Adc:Chan=0;SmpInt=1000;TGMCChan=1_700B_SN_0106200  Adc:Chan=1;SmpInt=1000;TGMCChan=1_700B_SN_106200  Frames:N=20  Sweeps:N=1  Ramp:Dac=0,2000;Amp=-3800,1,400  Ramp:Dac=0,2000;Amp=0  EndSweep  EndFrame

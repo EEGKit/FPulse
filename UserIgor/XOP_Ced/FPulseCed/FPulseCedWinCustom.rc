@@ -1,0 +1,589 @@
+//
+// FPulseCedWinCustom.RC : XOP-specific resources for CED1401 on Windows
+
+//	This file is compiled by the resource compiler and creates 
+//   XOP-specific	resources that IGOR looks for in an XOP module.
+
+// Defines XOP-specific symbols.
+#include "XOPResources.h"	
+#include "IgorXOP.h"	  // NT_I16
+
+// Custom error messages
+// those above 100 are copied from USE1401.h. The original numbers ranging from..
+// -500  to  -611 are converted to a range suitable for IGOR ( see XOPEntry() in XopMain.c )
+//   same order as the list of #defines in FPulseCedError.H
+1100 STR#				
+BEGIN    
+   //   1 
+	"FPulseCed-XOP requires Igor 2.0 or later. \0",	  
+	"FPulseCed-XOP was called to execute an unknown function.\0",
+	"Input string is non-existent. \0",
+	"Wave does not exist \0",
+	"Coefficient wave must be single or double precision floating point \0",
+	"m must be ² l; m and l must be within -1 to 1 \0",
+	"The logfit XFUNC requires a math coprocessor \0",
+	"The plgndr XFUNC requires a math coprocessor \0",
+	"Input number must not be negative \0",
+	"Is not 2 byte integer wave \0",
+	"Is not 4 byte float wave \0",
+	"Is not text wave \0",
+	"Waves have different lengths \0",
+	"Out of memory.....           \0",
+	"Is neither 2 byte integer wave nor 4 byte float wave \0",
+
+   //  16 
+															"?\0", "?\0", "?\0", "?\0",
+   "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0",
+   "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0",
+   "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0",
+   "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0",
+   "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0",
+   "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0",
+   "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0",
+   "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0",
+   // 100  Start of CED errors
+   "1401 is there but switched off (-500) \0",
+   "1401 is not connected  (-501) \0",
+   "If 1401 is present, it is ill (-502) \0",
+   "Interface card is missing  (-503) \0",
+   "1401 failed to come ready  (-504) \0",
+   "Interface has bad switches (-505) \0",
+   "1401+ did not come ready (-506) \0",
+   "Could not grab the interrupt vector (-507) \0",
+   "1401 is already in use (-508) \0",
+   "Could not get DMA channel (-509) \0",
+   //  110  
+   "The handle provided was bad (-510) \0",
+   "The 1401 number provided was bad (-511) \0",
+   "unused 112 \0",
+   "unused 113 \0",
+   "unused 114 \0",
+   "unused 115 \0",
+   "unused 116 \0",
+   "unused 117 \0",
+   "unused 118 \0",
+   "unused 119 \0",
+   // 120 
+   "No such function (-520) \0",
+   "No such sub function (-521) \0",
+   "No room in output buffer (-522) \0",
+   "No input in buffer (-523) \0",
+   "String is longer than buffer (-524) \0",
+   "Failed to lock memory (-525) \0",
+   "Failed to unlock memory (-526) \0",
+   "Area is already set up (-527) \0",
+   "Area is not set up (-528) \0",
+   "Illegal area number (-529) \0",
+   // 130 
+   "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0",
+   // 140 
+   "Command file not found (-540) \0",
+   "Error readind command file (-541) \0",
+   "Unknown command (-542) \0",
+   "Not enough host space to load (-543) \0",
+   "Could not lock resource or command (-544) \0",
+   "CLOAD command failed (-545) \0",
+   "?\0", "?\0", "?\0", "?\0",
+   // 150 
+   "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0",
+   // 160 
+   "tohost/1401 failed  (-560 ) \0",
+   "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0",
+   // 170 
+   "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0",
+   // 180 
+   "Not 386 enhanced mode  (-580) \0",
+   "No device driver  (-581) \0",
+   "Device driver is too old  (-582) \0",
+   "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0",
+   // 190 
+   "Timeout occurred  (-590) \0",
+   "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0",
+   // 200 
+   "The buffer for GetString is too small (-600) \0",
+   "There is already a callback  (-601) \0",
+   "Bad parameter to dereg callback (-602) \0",
+   "?\0", "?\0", "?\0", "?\0", "?\0", "?\0", "?\0",
+   // 210 
+   "Failed talking to driver (-610) \0",
+   "Needed  memory and could not get it (-611) \0",
+   // End of CED errors
+
+	0,								// end of string resource.
+END
+
+
+// no menu item 
+
+
+// XOPI - Describes general XOP properties to IGOR. 
+1100 XOPI					  
+BEGIN
+	XOP_VERSION,			  // Version number of host XOP system.
+	DEV_SYS_CODE,			  // Code for development system used to make XOP
+	0,							  // True if XOP requires hierarchical menus
+	1,							  // True if XOP requires math coprocessor
+	0							  // True if XOP requires MMU
+END
+
+
+// Describes OPERATIONS that the XOP adds to IGOR
+// SAME ORDER IN 'sfunc[]'  AND HERE IN FPulseCedWinCustom.RC
+
+1100 XOPF	
+BEGIN
+"xUtilGetSystemDirectory\0",	
+ 	F_UTIL | F_EXTERNAL,		  		
+			HSTRING_TYPE,				// Returns string like 'C:WinNt:System32'
+			0,							
+
+/* 2010-01-05 unused
+	"xCedOpen\0",					  
+	F_UTIL | F_EXTERNAL,				
+      NT_FP64,							// Returns CED handle
+		   0,						  		
+*/
+
+	"xCedCloseAndOpen\0",			  
+	F_UTIL | F_EXTERNAL,				
+      NT_FP64,					  		// Returns CED handle
+		   NT_FP64,						// Par1: OLD Ced handle (valid or invalid)
+		   0,							  	
+
+	"xCedClose\0",					  
+	F_UTIL | F_EXTERNAL,			,
+      NT_FP64,					  		// Return value type.
+		   NT_FP64,					  	// Par1: Ced handle
+		   0,							  	
+	
+	"xCedState\0",					   
+	F_UTIL | F_EXTERNAL,				
+      NT_FP64,							// Return value type.
+		   NT_FP64,					  	// Par1: Ced handle
+		   0,							  	
+
+	"xCedStateOf1401\0",			 
+	F_UTIL | F_EXTERNAL,				
+      NT_FP64,							// Return value type.
+		   NT_FP64,						// Par1: Ced handle
+		   0,							  	
+
+	"xCedKillIO\0",					   
+	F_UTIL | F_EXTERNAL,			
+      NT_FP64,							// Return value type.
+		   NT_FP64,						// Par1: Ced handle
+		   0,						  		
+
+	"xCedReset\0",				
+	F_UTIL | F_EXTERNAL,				
+      NT_FP64,							// Return value type.
+		   NT_FP64,						// Par1: Ced handle
+		   0,							  	
+
+	"xCedDriverType\0",				  
+	F_UTIL | F_EXTERNAL,			   
+      NT_FP64,						   // Return value type.
+		   0,							   
+
+	"xCedTypeOf\0",					   
+	F_UTIL | F_EXTERNAL,			
+      NT_FP64,							// Return value type.
+		   NT_FP64,						// Par1: Ced handle
+		   0,							   
+
+	"xCedGetMemSize\0",			
+	F_UTIL | F_EXTERNAL,				
+      NT_FP64,							// Return value type.
+		   NT_FP64,						// Par1: Ced handle
+		   0,								
+
+	"xCedLdErrOut\0",				 
+	F_UTIL | F_EXTERNAL,				
+      NT_FP64,							// Return value type.
+		   NT_FP64,						// Par1: Ced handle
+		   NT_FP64,					  	// 2.par ErrShow
+		   HSTRING_TYPE,				// 3.par: string handle path 
+		   HSTRING_TYPE,				// 4.par: string handle commands
+		   0,							   
+
+	"xCedGetErrorString\0",			  
+	F_UTIL | F_EXTERNAL,				
+      HSTRING_TYPE,						// Return value type = string
+		   NT_FP64,					  	// Par1: negative error code (-500...-611)
+		   0,							  
+
+	"xCedSendString\0",				  
+	F_UTIL | F_EXTERNAL,				
+      NT_FP64,							// Return value type.
+		   NT_FP64,						// Par1: Ced handle
+		   HSTRING_TYPE,				// 2.par: string handle 
+		   0,								
+
+	"xCedSendStringErrOut\0",		
+	F_UTIL | F_EXTERNAL,				
+      NT_FP64,							// Return value type.
+		   NT_FP64,						// Par1: Ced handle
+		   NT_FP64,					  	// 2.par ErrShow
+		   HSTRING_TYPE,				// 3.par string handle 
+		   0,							   
+
+	"xCedGetResponse\0",			  
+	F_UTIL | F_EXTERNAL,			
+      NT_FP64,							// Return value type.
+		   NT_FP64,						// Par1: Ced handle
+		   HSTRING_TYPE,				// 2.par command string handle 
+		   HSTRING_TYPE,				// 3.par text string handle 
+		   NT_FP64,					  	// 4.par ErrMode
+		   0,							   
+
+	"xCedGetResponseTwoIntAsString\0",  
+	F_UTIL | F_EXTERNAL,				
+      HSTRING_TYPE,						// Return value type = string
+		   NT_FP64,						// Par1: Ced handle
+		   HSTRING_TYPE,				// 2.par: string handle 
+		   0,							   
+
+	"xCedLastErrCode\0",			
+	F_UTIL | F_EXTERNAL,				
+      NT_FP64,							// Return value type.
+		   NT_FP64,						// Par1: Ced handle
+		   HSTRING_TYPE,				// 2.par text string handle 
+		   0,							   
+
+	"xCedWorkingSet\0",			
+	F_UTIL | F_EXTERNAL,			  	
+      NT_FP64,							// Return value type.
+		   NT_FP64,						// 1.par: min. Kb
+		   NT_FP64,						// 2.par: max. Kb
+		   NT_FP64,						// 3.par: PrintMode	int
+		   0,							   
+
+	"xCedSetTransferArea\0",		  
+	F_UTIL | F_EXTERNAL,			  	
+      NT_FP64,							// Return value type.
+		   NT_FP64,						// Par1: Ced handle
+		   NT_FP64,						// 2.par: nr 
+		   NT_FP64,						// 3.par: pts
+           NT_I16 | WAVE_TYPE,			// 4.par: wRaw short integer wave 
+		   NT_FP64,						// 5.par: PrintMode	int
+		   0,							   
+	
+	"xCedUnSetTransferArea\0",		
+	F_UTIL | F_EXTERNAL,			  
+      NT_FP64,							// Return value type.
+			NT_FP64,					// Par1: Ced handle
+			NT_FP64,					// 2.par: nr 
+			NT_I16 | WAVE_TYPE,			// 3.par: wRaw short integer wave 
+			NT_FP64,					// 4.par: PrintMode	int
+		   0,							   
+	
+
+// Utilities  OPENFILENAME
+
+	"xUtilConvolve\0",				// Function name    
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     NT_FP64,							// Return value type.
+   	   NT_FP32 | WAVE_TYPE,				// 1.par: wBigWave Igor DA or AD wave
+         NT_I16  | WAVE_TYPE,			// 2.par: wRaw short integer wave 
+		   NT_FP64,						// 3.par: direction: DA or AD
+		   NT_FP64,						// 4.par: nTrueADorDA channels
+	       NT_FP64,						// 5.par: nTG channels
+		   NT_FP64,						// 6.par: begPt
+		   NT_FP64,						// 7.par: endPt
+		   NT_FP64,						// 8.par: RepOs
+		   NT_FP64,						// 9.par: PtsPerChunk
+		   NT_FP64,						// 10.par: ofs
+		   NT_FP64,						// 11.par: yscl
+		   NT_FP64,						// 12.par: nCompress
+		   NT_FP64,						// 13.par: nChunk
+		   NT_FP64,						// 14.par: nChan
+		   NT_FP64,						// 15.par: nPnts
+		   NT_FP64,						// 16.par: bStoreIt
+		   0,							   
+	
+	"xUtilWaveCopy\0",				// Function name   
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     NT_FP64,							// Return value type.
+         NT_I16  | WAVE_TYPE,			// 1.par: wIntTarget short integer wave 
+         NT_FP32 | WAVE_TYPE,			// 2.par: wFloatSource 4 byte float wave 
+		   NT_FP64,						// 3.par: nPnts
+		   NT_FP64,						// 4.par: nSourceOfs
+		   NT_FP64,						// 5.par: scl
+		   0,							   
+
+	"xUtilWaveExtract\0",			// Function name   
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     NT_FP64,							// Return value type.
+         NT_FP32 | WAVE_TYPE,			// 1.par: wFloatTarget 4 byte float wave 
+         NT_FP32 | WAVE_TYPE,			// 2.par: wFloatSource 4 byte float wave 
+		   NT_FP64,						// 3.par: nPnts
+		   NT_FP64,						// 4.par: nSourceOfs
+		   NT_FP64,						// 6.par: nStep
+		   NT_FP64,						// 5.par: scl
+		   0,								
+
+	"xUtilRealWaveSet\0",			// Function name   
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     NT_FP64,							// Return value type.
+         NT_FP32 | WAVE_TYPE,			// 1.par: wFloatTarget 4 byte float wave 
+		   NT_FP64,						// 2.par: nBeg
+		   NT_FP64,						// 3.par: nEnd
+		   NT_FP64,						// 4.par: value
+		   0,							   
+
+/*
+	"xUtilOpenFileDialog\0",		// Function name 
+   F_UTIL | F_EXTERNAL,	  				// Function category,
+       HSTRING_TYPE,	     	  		// Returns the full file path selected by user or empty string
+		   HSTRING_TYPE,				// Prompt	: Message displayed in dialog
+		   HSTRING_TYPE,				// Filter	: controls types of files shown
+		   NT_FP64,						// Index		: controls initial type of file shown (DOES NOT CHANGE VALUE)
+		   HSTRING_TYPE,				// InitDir	: sets initial directory
+		   HSTRING_TYPE,				// FilePath	: sets initial file
+		   0,							   
+ */
+	"xUtilFileDialog\0",			// Function name 
+   F_UTIL | F_EXTERNAL,		  			// Function category,
+       HSTRING_TYPE,	     		  	// Returns the full file path selected by user or empty string
+		   HSTRING_TYPE,				// Prompt	: Message displayed in dialog
+		   HSTRING_TYPE,				// Filter	: controls types of files shown
+		   NT_FP64,						// Index		: controls initial type of file shown (DOES NOT CHANGE VALUE)
+		   HSTRING_TYPE,				// InitDir	: sets initial directory
+		   HSTRING_TYPE,				// DefExt	: Default file extension
+			HSTRING_TYPE,				// FilePath	: sets initial file
+		   0,							   
+ 
+	"xUtilTotalMemoryLoad\0",		// Function name   
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     NT_FP64,							// Returns a number between 0 and 100 that gives a general idea of current memory utilization, in which 0 indicates no memory use and 100 indicates full memory use. 
+			0,							   
+
+	"xUtilTotalPhys\0",				// Function name   
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     NT_FP64,							// Returns total physical (not virtual) memory in bytes 
+			0,							   
+
+	"xUtilAvailPhys\0",				// Function name   
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     NT_FP64,							// Returns  the number of bytes of physical (not virtual) memory available. 
+			0,							   
+
+	"xUtilTotalVirtual\0",				// Function name   
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     NT_FP64,							// Returns total virtual memory in bytes 
+			0,							   
+
+	"xUtilAvailVirtual\0",			// Function name   
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     NT_FP64,							// Returns  the number of bytes of virtual memory available. 
+			0,							   
+
+	"xUtilContiguousMemory\0",		// Function name   
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     NT_FP64,							// Returns whether this number of bytes can be allocated. 'Make' cannot be used as it issues an error box when failing
+		   NT_FP64,						// 1.par: Number of bytes to allocate
+			0,							   
+
+	"xUtilHeapCompact\0",			// Function name   
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+     NT_FP64,							// Returns  the number of bytes of the largets committed free block in the heap. 
+			0,							   
+
+/////////////////////////////////////////////////////////////////////////////////////////
+// START OF CFS INTERFACE  (in FPulseCfs.C)
+
+	"xCfsCreateFile\0",				// Function name    
+	 F_UTIL | F_EXTERNAL,		  	// Function category,
+       NT_FP64,					  	// Return hnd        short
+		   HSTRING_TYPE,				// 1.par: FName      string handle
+		   HSTRING_TYPE,				// 2.par: Comment    string handle
+		   NT_FP64,					   // 3.par: BlockSize  WORD
+		   NT_FP64,						// 4.par: Channels   short
+		   NT_FP64,					   // 5.par: maxDSVar     int
+		   NT_FP64,					   // 6.par: maxFileVar   int
+         NT_FP64,					   // 7.par: ErrMode	int
+		   0,								
+
+	"xCfsOpenFile\0",					// Function name    
+     F_UTIL | F_EXTERNAL,		  	// Function category,
+       NT_FP64,					  	// Return hnd         short
+		   HSTRING_TYPE,				// 1.par: FName       string handle
+		   NT_FP64,						// 2.par: enableWrite short
+		   NT_FP64,						// 3.par: memoryTable short
+		   NT_FP64,						// 4.par: ErrMode     int
+		   0,								
+
+	"xCfsCloseFile\0",				// Function name    
+	 F_UTIL | F_EXTERNAL,		  	// Function category,
+       NT_FP64,						// Return value type.
+	      NT_FP64,						// 1.par: hnd         short
+	      NT_FP64,						// 2.par: ErrMode	int
+		   0,								
+
+    "xCfsCommitFile\0",				// Function name    
+	 F_UTIL | F_EXTERNAL,		  	// Function category,
+       NT_FP64,						// Return value type.
+	      NT_FP64,						// 1.par: hnd         short
+	      NT_FP64,						// 2.par: ErrMode	int
+		   0,								
+
+    "xCfsGetGenInfo\0",				// Function name    
+	 F_UTIL | F_EXTERNAL,		  	// Function category,
+        HSTRING_TYPE,				// Returns string 'time, CFSSEP, date, CFSSEP, comment
+	      NT_FP64,						// 1.par: hnd         short
+          NT_FP64,				   // 2.par: ErrMode	int
+		   0,								
+
+    "xCfsGetFileInfo\0",			// Function name    
+	 F_UTIL | F_EXTERNAL,		  	// Function category,
+        HSTRING_TYPE,				// Returns string 'channels, CFSSEP, fileVars, CFSSEP, DSVars, CFSSEP, dataSections'
+		   NT_FP64,						// 1.par: hnd         short
+           NT_FP64,				   // 2.par: ErrMode	int
+		   0,								
+
+	"xCfsGetFileChan\0",				// Function name    
+	 F_UTIL | F_EXTERNAL,		  	// Function category,
+        HSTRING_TYPE,				// Returns string 'ChannelName, CFSSEP, yUnits, CFSSEP, xUnits, CFSSEP, DataType, CFSSEP, DataKind, CFSSEP, Spacing, CFSSEP, Other'
+		   NT_FP64,						// 1.par: hnd         short
+		   NT_FP64,						// 2.par: channel     short
+           NT_FP64,				   // 3.par: ErrMode	int
+		   0,								
+
+	"xCfsSetFileChan\0",				// Function name    
+	 F_UTIL | F_EXTERNAL,		  	// Function category,
+        NT_FP64,					 	// Return value type.
+		   NT_FP64,					   // 1.par: hnd         short
+		   NT_FP64,					   // 2.par: Channel     short
+		   HSTRING_TYPE,			   // 3.par: ChannelName string handle
+		   HSTRING_TYPE,				// 4.par: yUnits      string handle
+		   HSTRING_TYPE,			   // 5.par: xUnits      string handle
+		   NT_FP64,					   // 6.par: DataType    char/Byte
+		   NT_FP64,					   // 7.par: DataKind    char/Byte
+		   NT_FP64,						// 8.par: Spacing     short
+		   NT_FP64,					   // 9.par: Other       short
+	   NT_FP64,						   // 10.par: ErrMode	int
+		   0,							   
+
+	"xCfsSetDSChan\0",		      // Function name    
+	 F_UTIL | F_EXTERNAL,		  	// Function category,
+       NT_FP64,					  	// Return value type.
+		   NT_FP64,					   // 1.par: hnd         short
+		   NT_FP64,					   // 2.par: Channel     short
+		   NT_FP64,					   // 3.par: DataSection WORD
+		   NT_FP64,					   // 4.par: StartOffset long
+		   NT_FP64,					   // 5.par: Points      long
+		   NT_FP64,						// 6.par: yScale      float    
+		   NT_FP64,					   // 7.par: yOffset     float
+		   NT_FP64,					   // 8.par: xScale      float
+		   NT_FP64,					   // 9.par: xOffset     float
+	   NT_FP64,						   // 10.par: ErrMode	int
+		   0,							   
+
+	"xCfsGetDSChan\0",				// Function name    
+	 F_UTIL | F_EXTERNAL,		  	// Function category,
+       HSTRING_TYPE,				  	// Returns string 'StartOffset, Points, yScale, yOffset, xScale, xOffset'
+		   NT_FP64,					   // 1.par: hnd         short
+		   NT_FP64,					   // 2.par: Channel     short
+		   NT_FP64,					   // 3.par: DataSection WORD
+	   NT_FP64,						   // 4.par: ErrMode	int
+		   0,							   
+
+	"xCfsGetChanData\0",          // Function name    
+	 F_UTIL | F_EXTERNAL,		  	// Function category,
+       NT_FP64,					  	// Return value type.
+		   NT_FP64,					   // 1.par: hnd         short
+		   NT_FP64,					   // 2.par: Channel     short
+		   NT_FP64,					   // 3.par: DataSection WORD
+		   NT_FP64,					   // 4.par: FirstElementlong
+		   NT_FP64,						// 5.par: NumElements long
+           NT_I16 | WAVE_TYPE,	// 6.par: wDataADS    short integer wave 
+		   NT_FP64,					   // 7.par: AreaSize    long
+	   NT_FP64,						   // 8.par: ErrMode	int
+		   0,								
+
+	"xCfsInsertDS\0",					// Function name    
+	 F_UTIL | F_EXTERNAL,		  	// Function category,
+       NT_FP64,					  	// Return value type.
+		   NT_FP64,					   // 1.par: hnd         short
+		   NT_FP64,					   // 2.par: DataSection WORD
+		   NT_FP64,					   // 3.par: FlagSet     WORD
+	   NT_FP64,						   // 4.par: ErrMode	int
+		   0,							   
+
+   "xCfsWriteData\0",				// Function name    
+	F_UTIL | F_EXTERNAL,			  	// Function category,
+      NT_FP64,						  	// Return value type.
+		   NT_FP64,					   // 1.par: hnd         short
+		   NT_FP64,					   // 2.par: DataSection WORD
+		   NT_FP64,					   // 3.par: StartOffset long
+		   NT_FP64,						// 4.par: Bytes       WORD
+         NT_I16 | WAVE_TYPE,		// 5.par: wDataADS    short integer wave 
+	   NT_FP64,							// 6.par: ErrMode	int
+		   0,								
+
+   "xCfsReadData\0",					// Function name    
+	F_UTIL | F_EXTERNAL,			   // Function category,
+      NT_FP64,						   // Return value type.
+		   NT_FP64,					   // 1.par: hnd         short
+		   NT_FP64,					   // 2.par: DataSection WORD
+		   NT_FP64,					   // 3.par: StartOffset long
+		   NT_FP64,					   // 4.par: Bytes       WORD
+           NT_I16 | WAVE_TYPE,   // 5.par: wDataADS    short integer wave 
+	       NT_FP64,				   // 6.par: ErrMode	int
+		   0,							   
+
+	"xCfsSetVarVal\0",				// Function name    
+	 F_UTIL | F_EXTERNAL,	  		// Function category,
+       NT_FP64,					  	// Return value type.
+		   NT_FP64,					   // 1.par: hnd         short
+		   NT_FP64,					   // 2.par: VarNo       short
+		   NT_FP64,					   // 3.par: VarKind     short
+		   NT_FP64,					   // 4.par: DataSection WORD
+		   HSTRING_TYPE,				// 5.par: VarAsString string handle
+	   NT_FP64,							// 6.par: ErrMode	int
+		   0,								
+
+	"xCfsGetVarVal\0",				// Function name    
+	 F_UTIL | F_EXTERNAL,		  	// Function category,
+       HSTRING_TYPE,		     	  	// Returns the number as a string
+		   NT_FP64,					   // 1.par: hnd         short
+		   NT_FP64,					   // 2.par: VarNo       short
+		   NT_FP64,					   // 3.par: VarKind     short
+		   NT_FP64,						// 4.par: DataSection WORD
+	   NT_FP64,						   // 10.par: ErrMode	int
+		   0,							   
+
+	"xCfsGetVarType\0",	         // Function name    
+	 F_UTIL | F_EXTERNAL,		  	// Function category,
+       NT_FP64,	          	  	// Return value type.
+		   NT_FP64,					   // 1.par: hnd         short
+		   NT_FP64,					   // 2.par: VarNo       short
+		   NT_FP64,					   // 3.par: VarKind     short
+	   NT_FP64,						   // 10.par: ErrMode	int
+		   0,								
+
+	"xCfsGetVarDesc\0",				// Function name    
+	 F_UTIL | F_EXTERNAL,	      // Function category,
+       HSTRING_TYPE,		     	   // Returns string 'VarSize, CFSSEP, VarType, CFSSEP, Units, CFSSEP, Description'
+		   NT_FP64,					   // 1.par: hnd         short
+		   NT_FP64,					   // 2.par: VarNo       short
+		   NT_FP64,					   // 3.par: VarKind     short
+	   NT_FP64,						   // 10.par: ErrMode	int
+		   0,							   
+
+	"xCfsSetDescriptor\0",			// Function name    
+	 F_UTIL | F_EXTERNAL,		  	// Function category,
+       NT_FP64,					  	// Return value type.
+		   NT_FP64,					   // 1.par: nType: DSVAR or FILEARRAY
+		   NT_FP64,					   // 2.par: nChan
+		   HSTRING_TYPE,				// 3.par: variable list (string handle).
+		   0,								
+
+// END   OF CFS INTERFACE
+/////////////////////////////////////////////////////////////////////////////////////////
+
+	// More function descriptions can appear here.
+	
+	0,										// end  of function resource.
+END
+
