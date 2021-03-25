@@ -13,9 +13,9 @@
 
 
 // ANSI headers IgorXOP.h XOP.h XOPSupport.h
-#include "XOPStandardHeaders.h"// Include ANSI headers, Mac headers, IgorXOP.h, XOP.h and XOPSupport.h
+#include "XOPStandardHeaders.h"
 
-#include "FPulseCED.h"
+#include "FPulseCed.h"
 #include "XopMain.h"
 #include "Use1401.h"				// for the CED1401
 
@@ -188,10 +188,11 @@ FUNC sFunc[] =
 
 
 
-int	xCedCloseAndOpen( struct { double OldHnd; double HndReturn; } *p )
+int	xCedCloseAndOpen( void *ptr )
 // p->n1401 should be 0  (see prog int lib 3.20, dec 99, p.5)
 // avoid or show IGORs error message box, show it only in case of error, do not show it when a pos. handle has been returned
 {
+	struct { double OldHnd; double HndReturn; } *p = ptr;
 	short		n1401	= 0;
 	p->HndReturn = CEDCloseAndOpen( (short)p->OldHnd, n1401 ); 	// return 0 when OK or a negative error code
 	// 2010-01-05
@@ -234,9 +235,10 @@ short	CEDCloseAndOpen( short Hnd_, short n1401 )
 
 
 
-int	xCedClose( struct { double hnd; double IgorReturn; } *p )
+int	xCedClose(void *ptr)
 // returns 0 when OK or returns neg. error code
 {
+	struct { double hnd; double IgorReturn; } *p = ptr;
 	p->IgorReturn = CEDClose( (short)p->hnd );			// return 0 when OK or a negative error code
 	//return ( (int)p->ErrShow & ERR_AUTO_IGOR ) ? p->IgorReturn : 0;	// 0 avoids,  != 0 shows IGORs error message box 
 	return 0;			// FPuls must process any errors
@@ -254,9 +256,10 @@ short	CEDClose( short hnd )
 }
 
 
-int	xCedState( struct { double hnd; double IgorReturn; } *p )
+int	xCedState( void *ptr )
 // returns 0 when Ced is open and OK   or   returns   -1 (=CED_NOT_OPEN) if Ced was closed or otherwise inactive
 {
+	struct { double hnd; double IgorReturn; } *p = ptr;
 	short code	= CED_NOT_OPEN;
 	short hnd	= (short)p->hnd;
 
@@ -274,9 +277,10 @@ int	xCedState( struct { double hnd; double IgorReturn; } *p )
 }
 
 
-int	xCedStateOf1401( struct {  double hnd; double IgorReturn; } *p )
+int	xCedStateOf1401( void *ptr )
 // returns 0 when Ced is open and OK   or   returns specific negative error code if Ced was closed or otherwise inactive
 {
+	struct {  double hnd; double IgorReturn; } *p = ptr;
 	p->IgorReturn = U14StateOf1401( (short)p->hnd );// return 0 when OK or a negative error code
 	return 0;								// returning 0 will avoid Igors error reporting even if there were erros
 	//return ( p->IgorReturn );				// in case of error a negative error code is returned which will trigger Igors error reporting
@@ -284,35 +288,39 @@ int	xCedStateOf1401( struct {  double hnd; double IgorReturn; } *p )
 
 
 // 2010-02-03
-int	xCedKillIO( struct { double hnd; double IgorReturn; } *p )
+int	xCedKillIO( void *ptr )
 {
+	struct {  double hnd; double IgorReturn; } *p = ptr;
 	p->IgorReturn = U14KillIO1401( (short)p->hnd );				// return 0 when OK or a negative error code
 	return 0;
 }
 
 
 // 2010-02-03
-int	xCedReset( struct { double hnd; double IgorReturn; } *p )
+int	xCedReset( void *ptr )
 {
+	struct { double hnd; double IgorReturn; } *p = ptr;
 	p->IgorReturn = U14Reset1401( (short)p->hnd );				// return 0 when OK or a negative error code
 	return 0;
 }
 
 
 
-int	xCedDriverType(  struct { double type; } *p )	
+int	xCedDriverType( void *ptr )
 //	Returns driver type of Ced
 {
-   p->type = (double)U14DriverType();
+	struct { double type; } *p = ptr;
+	p->type = (double)U14DriverType();
 	return 0;
 }
 
 
 
 // 2010-02-03
-int  xCedTypeOf(  struct { double hnd; double type; } *p )	
+int  xCedTypeOf( void *ptr )
 //	Returns type of Ced if everything allright or negative error code otherwise.
 {
+	struct { double hnd; double type; } *p = ptr;
 	p->type = (double)U14TypeOf1401( (short)p->hnd );
 	return 0;
 }
@@ -320,8 +328,9 @@ int  xCedTypeOf(  struct { double hnd; double type; } *p )
 
 
 // 2010-02-03
-int	xCedGetMemSize( struct { double hnd; double nSize; } *p )
+int	xCedGetMemSize( void *ptr )
 {
+	struct { double hnd; double nSize; } *p = ptr;
 	p->nSize = CEDGetMemSize((short)p->hnd );
 	return 0;                   
 }
@@ -336,9 +345,10 @@ int	CEDGetMemSize( short hnd )
 }
 
 
-int xCedLdErrOut( struct { Handle CmdStr; Handle DirStr; double ErrShow; double hnd; double res; } *p )
+int xCedLdErrOut( void *ptr )
 // loads external CED commands and possibly prints error message
 {
+	struct { Handle CmdStr; Handle DirStr; double ErrShow; double hnd; double res; } *p = ptr;
 	Handle    CmdStrH, DirStrH;
 	int       err = 0;//lenC, lenD, err = 0;
 	
@@ -387,9 +397,10 @@ short CEDLdErrOut( short hnd, int ErrShow, LPSTR dir, LPSTR commands )
 // DRAWBACK : directory cannot be specified (looks on current drive....)
 
 
-int	xCedGetErrorString( struct { double code; Handle sRes; } *p )
+int	xCedGetErrorString( void *ptr )
 // returns human-readable error string when error code is passed
 {
+	struct { double code; Handle sRes; } *p = ptr;
 	char	errBuf[100];
 	char	errString[410];
 	int		outlen, err = 0;
@@ -423,10 +434,10 @@ int   CountSepsInList( char *sString, char *sSep );
 char *StringFromList( int index, char *sString, char *sSep );
 
 
-
-int	xCedSendString( struct { Handle str; double hnd; double res; } *p )
+int	xCedSendString( void *ptr )
 // sends a command string to the CED
 {
+	struct { Handle str; double hnd; double res; } *p = ptr;
    Handle   str1;
 // 060130 dispose ?
 	int      err = 0;
@@ -448,8 +459,9 @@ int	xCedSendString( struct { Handle str; double hnd; double res; } *p )
 }
 
 
-int xCedSendStringErrOut( struct { Handle str; double ErrShow; double hnd; double res; } *p )
+int xCedSendStringErrOut( void *ptr )
 {
+	struct { Handle str; double ErrShow; double hnd; double res; } *p = ptr;
 	Handle   str1;
 	int      err = 0;
 
@@ -520,8 +532,9 @@ int CEDGetResponse( short hnd, LPSTR command, LPSTR text, int ErrMode )
    return nResponse;
 }
 
-int	xCedGetResponse( struct { double errMode; Handle sTxt; Handle sCmd; double hnd; double res; } *p )
+int	xCedGetResponse( void *ptr )
 {
+	struct { double errMode; Handle sTxt; Handle sCmd; double hnd; double res; } *p = ptr;
 	Handle	sTxt = IHC( p->sTxt );
 	Handle	sCmd = IHC( p->sCmd );
 
@@ -534,9 +547,10 @@ int	xCedGetResponse( struct { double errMode; Handle sTxt; Handle sCmd; double h
 
 
 
-int	xCedGetResponseTwoIntAsString( struct { Handle sCmd; double hnd; Handle sRes; } *p )
+int	xCedGetResponseTwoIntAsString( void *ptr )
 // expects 2 integers as a response to 'instr' (e.g.'ERR;') from  the CED, returns these 2 integers as a string 
 {
+	struct { Handle sCmd; double hnd; Handle sRes; } *p = ptr;
 	short	sendErr, hnd	= (short)p->hnd;
 	int		err		= 0;
 	int		outlen;
@@ -573,9 +587,10 @@ int	xCedGetResponseTwoIntAsString( struct { Handle sCmd; double hnd; Handle sRes
 
 
 
-int xCedLastErrCode( struct { Handle sText; double hnd; double res; } *p )
+int xCedLastErrCode( void *ptr )
 // prints informational string for errCode
 {
+	struct { Handle sText; double hnd; double res; } *p = ptr;
 	short		errCode;
 	short		hnd = (short)p->hnd;
 	if ( hnd >= 0 )
@@ -664,7 +679,7 @@ void DisplayError( short code, LPSTR sText, LPSTR sOrg, int ErrShow )
 // Best wishes, Tim Bergel
 
 
-int xCedWorkingSet( struct {  double bMode; double MaxKb;  double MinKb; double res; }* p)
+int xCedWorkingSet( void *ptr )
 // Igor wrapper for Tim Bergels (CED) version to adjust the working set size of Win2000, NT, XP
 // Needed for U14Ld() to succeed which fails without a previous call to this function if very larges waves (~100MB) have been defined before by Igor.
 // Needed also for transfer areas > 64KB up to 1MB (test with scripts CCVIGN_MB.txt(456.3s, 18252kpts) and Spk50Hz_Gs.txt )
@@ -672,6 +687,7 @@ int xCedWorkingSet( struct {  double bMode; double MaxKb;  double MinKb; double 
 // ..performance of the system but the example dates to 95..97 with an increase to 4MB on a 16MB system.
 // FOR INCREASING THE ProcessWorkingSetSize TO WORK YOU MUST HAVE ADMINISTRATOR RIGHTS!
 {
+	struct {  double bMode; double MaxKb;  double MinKb; double res; }* p = ptr;
    int   nMinKb					= (int)p->MinKb;
    int   nMaxKb					= (int)p->MaxKb;
 	int	bMode						= (int)p->bMode; 
@@ -691,10 +707,11 @@ int xCedWorkingSet( struct {  double bMode; double MaxKb;  double MinKb; double 
 }
 
 
-int xCedSetTransferArea( struct {  double ErrMode; waveHndl wRaw; double pts; double nr; double hnd; double res; }* p)
+int xCedSetTransferArea( void *ptr)
 // locks the memory area used for the transfers between CED and computer
 // for transfer areas > 64KB up to 1MB 
 {
+	struct {  double ErrMode; waveHndl wRaw; double pts; double nr; double hnd; double res; }* p = ptr;
    short hnd			= (short)p->hnd;
    int   nr				= (int)p->nr;       // area nr must be 0 (although CED manual says in the range 0..7)
    int   nBytes		= (int)p->pts * 2;
@@ -742,9 +759,10 @@ int xCedSetTransferArea( struct {  double ErrMode; waveHndl wRaw; double pts; do
 }
 
 
-int xCedUnSetTransferArea( struct {  double ErrMode; waveHndl wRaw; double nr; double hnd; double res; }* p)
+int xCedUnSetTransferArea( void *ptr)
 // unlocks the memory used for the transfers between CED and computer
 {
+	struct {  double ErrMode; waveHndl wRaw; double nr; double hnd; double res; }* p = ptr;
    short hnd     = (short)p->hnd;
    int   nr      = (int)p->nr;       // area nr must be 0 (although CED manual says in the range 0..7)
    int   ErrMode = (int)p->ErrMode; 
@@ -833,13 +851,14 @@ void DebugPrintWaveProperties( char *sText, waveHndl wWave )
 #define DADIREC   0
 #define ADDIREC   1
 
-int xUtilConvolve( struct {	double bStoreIt; double	nPnts; double	nChan; double	nChunk; double	nCompress; 
-										double yscl; double ofs;  double PtsPerChunk; double RepOs; double endPt; double begPt; 
-										double nTG;  double nTrueADorDA; double nDirec; waveHndl wRaw; waveHndl wBigWave; double res; }* p)
+int xUtilConvolve( void *ptr)
 // XOP because IGOR itself is too slow..(2GHz: Igor~3us/pt, XOP~40ns/pt)
 // ASSUMPTION: the channel order is at first ALL non-compressed true AD channels, then all telegraph channels which are compressed by the same factor
 								  
 {
+	struct {double bStoreIt; double	nPnts; double	nChan; double	nChunk; double	nCompress;
+		double yscl; double ofs;  double PtsPerChunk; double RepOs; double endPt; double begPt;
+		double nTG;  double nTrueADorDA; double nDirec; waveHndl wRaw; waveHndl wBigWave; double res; }* p = ptr;
    long      ofs          = (long)p->ofs;
    long      PtsPerChunk  = (long)p->PtsPerChunk;
    long      repOs        = (long)p->RepOs;
@@ -1021,9 +1040,10 @@ int xUtilConvolve( struct {	double bStoreIt; double	nPnts; double	nChan; double	
 }
 
 	
-int xUtilWaveCopy( struct { double scl; double nSourceOfs; double nPnts; waveHndl wFloatSource; waveHndl wIntTarget; double res; }* p)
+int xUtilWaveCopy( void *ptr )
 // XOP because IGOR itself is too slow..
 {
+   struct { double scl; double nSourceOfs; double nPnts; waveHndl wFloatSource; waveHndl wIntTarget; double res; }* p = ptr;
    long      nSourceOfs  = (long)p->nSourceOfs;
    long      nPnts       = (long)p->nPnts;
    long      i;
@@ -1068,10 +1088,11 @@ int xUtilWaveCopy( struct { double scl; double nSourceOfs; double nPnts; waveHnd
 }
 
 
-int xUtilWaveExtract( struct { double scl; double nStep; double nSourceOfs; double nPnts; waveHndl wFloatSource; waveHndl wFloatTarget; double res; }* p)
+int xUtilWaveExtract( void *ptr )
 // XOP because IGOR itself is too slow..
 // 040204 accepts also Float target, additional parameter step
 {
+	struct { double scl; double nStep; double nSourceOfs; double nPnts; waveHndl wFloatSource; waveHndl wFloatTarget; double res; }* p = ptr;
    long      nPnts       = (long)p->nPnts;
    long      nSourceOfs  = (long)p->nSourceOfs;
    long      nStep       = (long)p->nStep;
@@ -1134,9 +1155,10 @@ int xUtilWaveExtract( struct { double scl; double nStep; double nSourceOfs; doub
 
 
 
-int xUtilRealWaveSet( struct { double value; double nEnd; double nBeg; waveHndl wFloatTarget; double res; }* p)
+int xUtilRealWaveSet( void *ptr )
 // XOP because IGOR itself is too slow..
 {
+   struct { double value; double nEnd; double nBeg; waveHndl wFloatTarget; double res; }* p = ptr;
    long      nBeg  = (long)p->nBeg;
    long      nEnd  = (long)p->nEnd;
    long      i;
@@ -1172,13 +1194,14 @@ int xUtilRealWaveSet( struct { double value; double nEnd; double nBeg; waveHndl 
 
 #define	csREADMODE	"cREADMODE"								// must be the same in XOP  and in IGOR
   
-int xUtilFileDialog( struct { Handle FilePath; Handle DefExt; Handle InitDir; double Index; Handle Filter; Handle Prompt; Handle ReturnFilePath; }* p)
+int xUtilFileDialog( void *ptr )
 // Advantage 1 :	IGOR's command 'Open  /D...' is much simpler but not truely capable of selecting directories..
 //						..because there seems to be no way to blank out files , which are confusing to the user
 //						To select a directory call from IGOR like : gsDataPath = xUtilFileDialog( "Select directory" , "Directories; ;;" ,  1, sPath,  "", "_" )	
 //						additionally there are some lines of IGOR code necessary as framework, see FPulse for sample code
 // Advantage 2 :	custom file filters other than those IGOR provides can be used
 {
+   struct { Handle FilePath; Handle DefExt; Handle InitDir; double Index; Handle Filter; Handle Prompt; Handle ReturnFilePath; }* p = ptr;
    long		Index       = (long)p->Index;
    Handle   strFilePath, strDefExt, strInitDir, strFilter, strPrompt;
 	Handle	strReturnFilePath;							// needed extra as XOP cannot receive AND return using the same pointer
@@ -1268,9 +1291,10 @@ int xUtilFileDialog( struct { Handle FilePath; Handle DefExt; Handle InitDir; do
 
 
 
-int 	xUtilMemoryLoad( struct { double res; }* p)
+int 	xUtilMemoryLoad( void *ptr )
 // From MSVC Knowledge base, HOWTO: Determine the Amount of Physical Memory Installed, Article ID: Q117889  
 {
+	struct { double res; }* p = ptr;
 	MEMORYSTATUS MemoryStatus;
 
    memset( &MemoryStatus, sizeof(MEMORYSTATUS), 0 );
@@ -1283,9 +1307,10 @@ int 	xUtilMemoryLoad( struct { double res; }* p)
 }
 
 
-int 	xUtilTotalPhys( struct { double res; }* p)
+int 	xUtilTotalPhys(void *ptr)
 // From MSVC Knowledge base, HOWTO: Determine the Amount of Physical Memory Installed, Article ID: Q117889  
 {
+	struct { double res; }* p = ptr;
 	MEMORYSTATUS MemoryStatus;
 
    memset( &MemoryStatus, sizeof(MEMORYSTATUS), 0 );
@@ -1298,9 +1323,10 @@ int 	xUtilTotalPhys( struct { double res; }* p)
 }
 
 
-int 	xUtilAvailPhys( struct { double res; }* p)
+int 	xUtilAvailPhys( void *ptr)
 // From MSVC Knowledge base, HOWTO: Determine the Amount of Physical Memory Installed, Article ID: Q117889  
 {
+	struct { double res; }* p = ptr;
 	MEMORYSTATUS MemoryStatus;
 
    memset( &MemoryStatus, sizeof(MEMORYSTATUS), 0 );
@@ -1313,9 +1339,10 @@ int 	xUtilAvailPhys( struct { double res; }* p)
 }
 
 
-int 	xUtilTotalVirtual( struct { double res; }* p)
+int 	xUtilTotalVirtual( void *ptr)
 // From MSVC Knowledge base, HOWTO: Determine the Amount of Physical Memory Installed, Article ID: Q117889  
 {
+	struct { double res; }* p = ptr;
 	MEMORYSTATUS MemoryStatus;
 
    memset( &MemoryStatus, sizeof(MEMORYSTATUS), 0 );
@@ -1328,9 +1355,10 @@ int 	xUtilTotalVirtual( struct { double res; }* p)
 }
 
 
-int 	xUtilAvailVirtual( struct { double res; }* p)
+int 	xUtilAvailVirtual( void *ptr)
 // From MSVC Knowledge base, HOWTO: Determine the Amount of Physical Memory Installed, Article ID: Q117889  
 {
+	struct { double res; }* p = ptr;
 	MEMORYSTATUS MemoryStatus;
 
    memset( &MemoryStatus, sizeof(MEMORYSTATUS), 0 );
@@ -1343,9 +1371,10 @@ int 	xUtilAvailVirtual( struct { double res; }* p)
 }
 
 
-int 	xUtilContiguousMemory( struct { double nBytes; double res; }* p)
+int 	xUtilContiguousMemory( void *ptr )
 // Check if 'nBytes' can be allocated in a contiguous memory as waves need it. 'Make' cannot be used as it issues an error box when failing.
 {
+	struct { double nBytes; double res; }* p = ptr;
 	waveHndl		waveHndPtr;
 	char			*WaveNm		= "UF_Temp_xUtilContiguousMemCheck";
    int			nType			= NT_FP32;					// arbitrary, make 4-byte wave
@@ -1364,8 +1393,9 @@ int 	xUtilContiguousMemory( struct { double nBytes; double res; }* p)
 
 
 // 060206  does not work: does no compacting and returns always 638976 bytes
-int 	xUtilHeapCompact( struct { double res; }* p)
+int 	xUtilHeapCompact(void *ptr)
 {
+	struct { double res; }* p = ptr;
 	HANDLE	hHeap			= GetProcessHeap();
 	UINT		nHeapSize	= HeapCompact( hHeap, 0 );
    p->res = (double)nHeapSize;
@@ -1373,8 +1403,9 @@ int 	xUtilHeapCompact( struct { double res; }* p)
 }
 
 
-int 	xUtilGetSystemDirectory( struct { Handle sRes; }* p)
+int 	xUtilGetSystemDirectory( void *ptr )
 {
+	struct { Handle sRes; }* p = ptr;
    char		errbuf[MAX_PATH + 100];
 	char		sDirPath[MAX_PATH + 20];
    int			len, err	= 0;

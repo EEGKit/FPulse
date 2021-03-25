@@ -41,10 +41,10 @@
 // 091002 q&d (not thoroughly tested) clip strings one character shorter than previously in xCfsSetVarVal()
 // 030401 some temporary prints to check string size (removed again)
 
-#include "XOPStandardHeaders.h"// Include ANSI headers, Mac headers, IgorXOP.h, XOP.h and XOPSupport.h
+#include "XOPStandardHeaders.h"
 
-#include "CFS.H"
-#include "FPulseCED.h"
+#include "Cfs.h"
+#include "FPulseCed.h"
 
 #include "XopMain.h"
 
@@ -72,12 +72,13 @@ int       PrintFileError( int ErrMode );
 #define FILEERR -1
 
 
-int xCfsCreateFile( struct { double ErrMode;   double maxFileVar; double maxDSVar; double Channels; 
-                             double BlockSize; Handle Comment;    Handle FileName; double res; }* p)
+int xCfsCreateFile( void *ptr) {
+   struct { double ErrMode;   double maxFileVar; double maxDSVar; double Channels;
+            double BlockSize; Handle Comment;    Handle FileName; double res; }* p = ptr;
 // IGOR wrapper for CreateCFSFile()
 // Difference to CFS: as IGOR doesn't know stuctures the CFS data structures FileArray and DSArray cannot be passed but must be hidden  
 // 121201 error in CreateCFSFile(): returns always positive handle, and never negative error code -> code fails later e.g in WriteData()
-{
+
    int    maxDSVar   = (int)p->maxDSVar;
    int    maxFileVar = (int)p->maxFileVar;
    short  Channels   = (short)p->Channels;
@@ -137,9 +138,10 @@ int xCfsCreateFile( struct { double ErrMode;   double maxFileVar; double maxDSVa
 
 									  
 
-int xCfsOpenFile( struct { double ErrMode;   double memoryTable; double enableWrite; Handle FileName; double res; }* p)
+int xCfsOpenFile(void *ptr) {
+    struct { double ErrMode;   double memoryTable; double enableWrite; Handle FileName; double res; }* p = ptr;
 // IGOR wrapper for OpenCFSFile()
-{
+
    short  memoryTable	= (short)p->memoryTable;	// 1 store some 4 bytes / datasection in memory rather than on disk
    short  enableWrite	= (short)p->enableWrite;	// O allow no changes, 1 modifications are possible with Setxxx()
    Handle CFileName  = IHC( p->FileName );
@@ -175,9 +177,9 @@ int xCfsOpenFile( struct { double ErrMode;   double memoryTable; double enableWr
 }
 
 							   
-int xCfsCloseFile( struct { double ErrMode; double hnd; double res; }* p)
+int xCfsCloseFile( void *ptr) {
+   struct { double ErrMode; double hnd; double res; }* p = ptr;
 // IGOR wrapper for CFS CloseCFSFile()
-{
    short     hnd     = (short)p->hnd;
    short     code    = CloseCFSFile( hnd );
    if ( code < 0 )
@@ -187,9 +189,9 @@ int xCfsCloseFile( struct { double ErrMode; double hnd; double res; }* p)
 }
 
 
-int xCfsCommitFile( struct { double ErrMode; double hnd; double res; }* p)
+int xCfsCommitFile( void *ptr) {
+   struct { double ErrMode; double hnd; double res; }* p = ptr;
 // IGOR wrapper for CFS CommitCFSFile()
-{
    short     hnd     = (short)p->hnd;
    short     code    = CommitCFSFile( hnd );
    if ( code < 0 )
@@ -199,8 +201,8 @@ int xCfsCommitFile( struct { double ErrMode; double hnd; double res; }* p)
 }
 
 
-int xCfsGetGenInfo( struct { double ErrMode;  double hnd; Handle sRes; }* p)
-{
+int xCfsGetGenInfo( void *ptr) {
+   struct { double ErrMode;  double hnd; Handle sRes; }* p = ptr;
 // IGOR wrapper for CFS GetGenInfo()
 // Difference to CFS: as IGOR doesn't know pointers the 3 CFS strings are returned as string list   
 // Flaw / Limitation: Neither 'time' nor 'date' nor 'comment' may contain the character 'CFSSEP' 
@@ -234,8 +236,8 @@ int xCfsGetGenInfo( struct { double ErrMode;  double hnd; Handle sRes; }* p)
 }
 
 				  
-int xCfsGetFileInfo( struct { double ErrMode; double hnd; Handle sRes; }* p)
-{
+int xCfsGetFileInfo( void *ptr ) { 
+   struct { double ErrMode; double hnd; Handle sRes; }* p = ptr;
 // IGOR wrapper for CFS GetFileInfo()
 // Difference to CFS: as IGOR doesn't know pointers the 4 CFS variable pointers are returned as string list   
    short     hnd          = (short)p->hnd;
@@ -269,11 +271,12 @@ int xCfsGetFileInfo( struct { double ErrMode; double hnd; Handle sRes; }* p)
 }
 				   
 
-int xCfsGetFileChan( struct { double ErrMode; double Channel;  double hnd; Handle sRes; }* p)
+int xCfsGetFileChan( void *ptr) {
+   struct { double ErrMode; double Channel;  double hnd; Handle sRes; }* p = ptr;
 // IGOR wrapper for CFS GetFileChan()
 // Difference to CFS: as IGOR doesn't know pointers the 3 strings and 4 CFS variable pointers are returned as string list   
 // Flaw / Limitation: Neither 'Units' nor 'Description' may contain the character 'CFSSEP' 
-{
+
    short     hnd          = (short)p->hnd;
    short     Channel      = (short)p->Channel;
    TDesc     ChannelName;
@@ -311,10 +314,10 @@ int xCfsGetFileChan( struct { double ErrMode; double Channel;  double hnd; Handl
 
 
 
-int xCfsSetFileChan( struct { double ErrMode; double Other;  double Spacing;     double DataKind; double DataType; Handle xUnits; 
-                             Handle yUnits; Handle ChannelName; double Channel;  double hnd;      double res; }* p)
+int xCfsSetFileChan( void *ptr) {
+   struct { double ErrMode; double Other;  double Spacing;     double DataKind; double DataType; Handle xUnits;
+            Handle yUnits; Handle ChannelName; double Channel;  double hnd;      double res; }* p = ptr;
 // IGOR wrapper for CFS SetFileChan()
-{
    short     hnd          = (short)p->hnd;
    short     Channel      = (short)p->Channel;
    TDataType DataType     = (TDataType)p->DataType;
@@ -334,10 +337,10 @@ int xCfsSetFileChan( struct { double ErrMode; double Other;  double Spacing;    
 }
 
 
-int xCfsSetDSChan( struct { double ErrMode; double xOffset;     double xScale;      double yOffset; double yScale; double Points;
-                           double StartOffset; double DataSection; double Channel; double hnd;    double res; }* p)
+int xCfsSetDSChan( void *ptr) {
+   struct { double ErrMode; double xOffset;     double xScale;      double yOffset; double yScale; double Points;
+                           double StartOffset; double DataSection; double Channel; double hnd;    double res; }* p = ptr;
 // IGOR wrapper for CFS SetDSChan(), no difference to CFS implementation
-{
    short     hnd         = (short)p->hnd;
    short     Channel     = (short)p->Channel;
    WORD      DataSection = (WORD)p->DataSection;
@@ -354,10 +357,11 @@ int xCfsSetDSChan( struct { double ErrMode; double xOffset;     double xScale;  
 }
 
 
-int xCfsGetDSChan( struct { double ErrMode; double DataSection; double Channel; double hnd; Handle sRes; }* p)
+int xCfsGetDSChan( void *ptr) {
+   struct { double ErrMode; double DataSection; double Channel; double hnd; Handle sRes; }* p = ptr;
 // IGOR wrapper for CFS GetDSChan()
-// Difference to CFS: the 6 CFS variabls are returned as string list   
-{
+// Difference to CFS: the 6 CFS variabls are returned as string list
+
    short     hnd         = (short)p->hnd;
    short     Channel     = (short)p->Channel;
    WORD      DataSection = (WORD)p->DataSection;
@@ -390,11 +394,11 @@ int xCfsGetDSChan( struct { double ErrMode; double DataSection; double Channel; 
 }
 
 
-int xCfsGetChanData( struct { double ErrMode;	double AreaSize;	waveHndl wDataADS;	double NumElements;
-                           double FirstElement; double DataSection; double Channel;		double hnd;    double res; }* p)
+int xCfsGetChanData( void *ptr) {
+   struct { double ErrMode;	double AreaSize;	waveHndl wDataADS;	double NumElements;
+            double FirstElement; double DataSection; double Channel;		double hnd;    double res; }* p = ptr;
 // IGOR wrapper for CFS GetChanData()
 // Difference to CFS: as IGOR doesn't know pointers the CFS buffer is passed as a wave   
-{
    short     hnd         = (short)p->hnd;
    short     Channel     = (short)p->Channel;
    WORD      DataSection = (WORD)p->DataSection;
@@ -435,9 +439,10 @@ int xCfsGetChanData( struct { double ErrMode;	double AreaSize;	waveHndl wDataADS
 }
 
 
-int xCfsInsertDS( struct { double ErrMode; double FlagSet; double DataSection; double hnd; double res; }* p)
+int xCfsInsertDS( void *ptr) {
+   struct { double ErrMode; double FlagSet; double DataSection; double hnd; double res; }* p = ptr;
 // IGOR wrappper for CFS InsertDS()
-{
+
    short     hnd         = (short)p->hnd;
    WORD      DataSection = (WORD)p->DataSection;
    WORD      FlagSet     = (WORD)p->FlagSet;
@@ -450,10 +455,11 @@ int xCfsInsertDS( struct { double ErrMode; double FlagSet; double DataSection; d
 }
 
 
-int xCfsWriteData( struct { double ErrMode; waveHndl wDataADS; double Bytes; double StartOffset; double DataSection; double hnd; double res; }* p)
+int xCfsWriteData( void *ptr) {
+   struct { double ErrMode; waveHndl wDataADS; double Bytes; double StartOffset; double DataSection; double hnd; double res; }* p = ptr;
 // IGOR wrappper for CFS WriteData()
-// Difference to CFS: as IGOR doesn't know pointers the CFS buffer is passed as a wave   
-{
+// Difference to CFS: as IGOR doesn't know pointers the CFS buffer is passed as a wave
+
    short     hnd         = (short)p->hnd;
    WORD      DataSection = (WORD)p->DataSection;
    long      StartOffset = (long)p->StartOffset;
@@ -497,10 +503,10 @@ int xCfsWriteData( struct { double ErrMode; waveHndl wDataADS; double Bytes; dou
 }
 
 
-int xCfsReadData( struct { double ErrMode; waveHndl wDataADS; double Bytes; double StartOffset; double DataSection; double hnd; double res; }* p)
+int xCfsReadData( void *ptr ) {
+   struct { double ErrMode; waveHndl wDataADS; double Bytes; double StartOffset; double DataSection; double hnd; double res; }* p = ptr;
 // IGOR wrappper for CFS ReadData()
 // Difference to CFS: as IGOR doesn't know pointers the CFS buffer is passed as a wave   
-{
    short     hnd         = (short)p->hnd;
    WORD      DataSection = (WORD)p->DataSection;
    long      StartOffset = (long)p->StartOffset;
@@ -532,11 +538,11 @@ int xCfsReadData( struct { double ErrMode; waveHndl wDataADS; double Bytes; doub
 }
 
 
-int xCfsSetVarVal( struct { double ErrMode; Handle VarAsString; double DataSection; double VarKind; double VarNo; double hnd; double res; }* p)
+int xCfsSetVarVal( void *ptr) {
+   struct { double ErrMode; Handle VarAsString; double DataSection; double VarKind; double VarNo; double hnd; double res; }* p = ptr;
 // IGOR wrappper for CFS SetVarVal()
 // Difference to CFS: as IGOR doesn't know pointers the CFS variable is passed as string even if it is a number   
 // returns to IGOR the type which is expected by the array, NOT the type actually passed
-{
    short     hnd          = (short)p->hnd;
    short     VarNo        = (short)p->VarNo;
    TCFSKind  VarKind      = (TCFSKind)p->VarKind;   // FILEVAR or DS VAR
@@ -610,14 +616,14 @@ int xCfsSetVarVal( struct { double ErrMode; Handle VarAsString; double DataSecti
 }
 
 
-int xCfsGetVarVal( struct { double ErrMode; double DataSection; double VarKind; double VarNo; double hnd; Handle sRes; }* p)
+int xCfsGetVarVal( void *ptr) {
+   struct { double ErrMode; double DataSection; double VarKind; double VarNo; double hnd; Handle sRes; }* p = ptr;
 // IGOR wrapper for CFS GetVarVal()
 // Difference to CFS: as IGOR doesn't know pointers the CFS variable is not passed but returned as string   
 
 //? lock handles ?...
 
 //? two sorts of errors can occur: memory and CFS ...not all are handled correctly...
-{
    short     hnd          = (short)p->hnd;
    short     VarNo        = (short)p->VarNo;
    TCFSKind  VarKind      = (TCFSKind)p->VarKind;   // FILEVAR or DS VAR
@@ -692,9 +698,9 @@ int xCfsGetVarVal( struct { double ErrMode; double DataSection; double VarKind; 
 }
 
 
-int xCfsGetVarType( struct { double ErrMode; double VarKind; double VarNo; double hnd; double res; }* p)
+int xCfsGetVarType( void *ptr) {
+   struct { double ErrMode; double VarKind; double VarNo; double hnd; double res; }* p = ptr;
 // returns to IGOR variable type as integer (INT1..LSTR) , no corrsesponding CFS function
-{
    short     hnd          = (short)p->hnd;
    short     VarNo        = (short)p->VarNo;
    TCFSKind  VarKind      = (TCFSKind)p->VarKind;   // FILEVAR or DS VAR
@@ -734,11 +740,11 @@ int GetVarSize( short hnd, short VarNo, TCFSKind VarKind, int ErrMode )
 }
 
 
-int xCfsGetVarDesc( struct { double ErrMode; double VarKind; double VarNo; double hnd; Handle sRes; }* p)
+int xCfsGetVarDesc( void *ptr) {
+   struct { double ErrMode; double VarKind; double VarNo; double hnd; Handle sRes; }* p = ptr;
 // IGOR wrapper for CFS GetVarDesc()
 // Difference to CFS: as IGOR doesn't know pointers the 4 CFS variable pointers are returned as string list   
 // Flaw / Limitation: Neither 'Units' nor 'Description' may contain the character 'CFSSEP' 
-{
    short     hnd         = (short)p->hnd;
    short     VarNo       = (short)p->VarNo;
    short     VarKind     = (short)p->VarKind;   // FILEVAR or DS VAR
@@ -774,9 +780,10 @@ int xCfsGetVarDesc( struct { double ErrMode; double VarKind; double VarNo; doubl
    return err;
 }
 
-int xCfsSetDescriptor( struct { Handle sEle; double Chan; double Type; double res; }* p)
+int xCfsSetDescriptor( void *ptr) {
+   struct { Handle sEle; double Chan; double Type; double res; }* p = ptr;
 // sets CFS descriptor data in CFS structure with values passed as string list
-{ 
+
    int       nChan      = (int)p->Chan;
    int       nType      = (int)p->Type;
 	int       err   = 0;
