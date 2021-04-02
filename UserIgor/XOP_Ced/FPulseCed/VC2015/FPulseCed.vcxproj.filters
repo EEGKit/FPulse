@@ -9,10 +9,6 @@
       <UniqueIdentifier>{ff78c843-347c-4f72-80da-cc53fd19be6f}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{8419575a-3823-4f01-90c8-8b0a11ce6444}</UniqueIdentifier>
-      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="FPulseCed.rc">
@@ -51,8 +47,8 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Library Include="..\..\XOPSupport\IGOR.lib" />
-    <Library Include="..\..\..\..\XOP Toolkit 6\IgorXOPs6\XOPSupport\VC2015\XOPSupport.lib" />
+    <Library Include="..\..\..\..\..\XOP Toolkit 6\IgorXOPs6\XOPSupport\IGOR.lib" />
+    <Library Include="..\..\..\..\..\XOP Toolkit 6\IgorXOPs6\XOPSupport\VC2015\XOPSupport.lib" />
     <Library Include="..\CFS32.lib" />
     <Library Include="..\Use1432.lib" />
   </ItemGroup>

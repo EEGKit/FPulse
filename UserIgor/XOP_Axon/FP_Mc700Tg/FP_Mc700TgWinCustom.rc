@@ -4,8 +4,8 @@
 //   XOP-specific	resources that IGOR looks for in an XOP module.
 
 // Defines XOP-specific symbols.
-#include "XOPResources.h"	
-#include "IgorXOP.h"	  // NT_I16
+#include "..\..\..\..\XOP Toolkit 6\IgorXOPs6\XOPSupport\XOPResources.h"
+#include "..\..\..\..\XOP Toolkit 6\IgorXOPs6\XOPSupport\IgorXOP.h"	  // NT_I16
 
 
 #include "FP_MC700Tg.h"		// sets MCTG_IGORMAINFRM: compile and link all code necessary for the MultiClamp telegraph connection	

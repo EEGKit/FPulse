@@ -1,7 +1,7 @@
 //
 //	XopMain.c -- 
 
-#include "XOPStandardHeaders.h"// Include ANSI headers, Mac headers, IgorXOP.h, XOP.h and XOPSupport.h
+#include <XOPStandardHeaders.h>
 
 #include "XopMain.h"
 

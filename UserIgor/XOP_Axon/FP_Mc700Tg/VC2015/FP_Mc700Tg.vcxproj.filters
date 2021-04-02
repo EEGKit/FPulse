@@ -45,7 +45,7 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Library Include="..\..\XOPSupport\IGOR.lib" />
-    <Library Include="..\..\XOPSupport\VC2015\XOPSupport.lib" />
+    <Library Include="..\..\..\..\..\XOP Toolkit 6\IgorXOPs6\XOPSupport\IGOR.lib" />
+    <Library Include="..\..\..\..\..\XOP Toolkit 6\IgorXOPs6\XOPSupport\VC2015\XOPSupport.lib" />
   </ItemGroup>
 </Project>

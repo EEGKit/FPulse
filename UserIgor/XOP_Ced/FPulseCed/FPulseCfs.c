@@ -41,7 +41,7 @@
 // 091002 q&d (not thoroughly tested) clip strings one character shorter than previously in xCfsSetVarVal()
 // 030401 some temporary prints to check string size (removed again)
 
-#include "XOPStandardHeaders.h"
+#include <XOPStandardHeaders.h>
 
 #include "Cfs.h"
 #include "FPulseCed.h"

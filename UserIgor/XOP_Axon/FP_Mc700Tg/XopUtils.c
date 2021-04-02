@@ -1,7 +1,7 @@
 //
 // XopUtils.c
 
-#include "XOPStandardHeaders.h" 
+#include <XOPStandardHeaders.h>
 #include "XopUtils.h" 
 
 #define	kMAXSTRING	2000// 1000

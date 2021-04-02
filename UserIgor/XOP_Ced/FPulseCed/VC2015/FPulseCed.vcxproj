@@ -65,7 +65,7 @@
       <WarningLevel>Level3</WarningLevel>
       <MinimalRebuild>false</MinimalRebuild>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>..\..\XOPSupport</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\..\XOP Toolkit 6\IgorXOPs6\XOPSupport</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AssemblerListingLocation>
       </AssemblerListingLocation>
@@ -124,7 +124,7 @@
       <Optimization>MaxSpeed</Optimization>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>..\..\XOPSupport</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\..\XOP Toolkit 6\IgorXOPs6\XOPSupport</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;FPulseCed_EXPORTS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AssemblerListingLocation>
       </AssemblerListingLocation>
@@ -188,8 +188,8 @@
     <ClCompile Include="..\XopMain.c" />
   </ItemGroup>
   <ItemGroup>
-    <Library Include="..\..\..\..\XOP Toolkit 6\IgorXOPs6\XOPSupport\VC2015\XOPSupport.lib" />
-    <Library Include="..\..\XOPSupport\IGOR.lib" />
+    <Library Include="..\..\..\..\..\XOP Toolkit 6\IgorXOPs6\XOPSupport\IGOR.lib" />
+    <Library Include="..\..\..\..\..\XOP Toolkit 6\IgorXOPs6\XOPSupport\VC2015\XOPSupport.lib" />
     <Library Include="..\CFS32.lib" />
     <Library Include="..\Use1432.lib" />
   </ItemGroup>

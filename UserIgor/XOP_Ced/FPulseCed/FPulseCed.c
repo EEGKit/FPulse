@@ -13,7 +13,7 @@
 
 
 // ANSI headers IgorXOP.h XOP.h XOPSupport.h
-#include "XOPStandardHeaders.h"
+#include <XOPStandardHeaders.h>
 
 #include "FPulseCed.h"
 #include "XopMain.h"

@@ -139,7 +139,7 @@ telegraphed data but also for the flags (e.g. bIsConnected)  and also the TimerI
 //				Flaw: program will fail when (in Demo mode) more than 1 700A panel or more than 1 700B panel is open.
 
 
-#include "XOPStandardHeaders.h"// Include ANSI headers, Mac headers, IgorXOP.h, XOP.h and XOPSupport.h
+#include <XOPStandardHeaders.h>
 
 #include "XopMain.h"
 #include "XopUtils.h" 
