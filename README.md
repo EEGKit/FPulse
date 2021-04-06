@@ -1,6 +1,6 @@
 # Introduction
 
-FPulse is a program for patch-clamp recordings. This version FPulse 3.x  was build successfully for IgorPro 6.x.
+FPulse is a program for patch-clamp recordings. The experimental protocols can defined through its own scripting language. A number of example scripts are are available in [FPulse Example Scripts](https://git.ist.ac.at/jonasgroup/FPulse/-/tree/master/UserIgor/FPulse/SomeDemoScripts). FPulse uses MultiClamp amplifier(s), and CED1401 data acquistion systems, and is running in top of IgorPro from Wavemetrics.
 
 If not stated otherwise, all copyrights are with:
 
@@ -10,9 +10,9 @@ If not stated otherwise, all copyrights are with:
   Copyright (C) 2011-2021 Peter Jonas, Institute of Science and Technology, Austria
 ```
 
-This code is provided under the GPLv3 (see COPYING).
+This code is provided under the GPLv3 license (see COPYING).
 
-The Copyright does not apply to these files (instructions for downloading these from the vendor are shown further):
+The Copyright does not apply to these files (instructions for downloading these from the vendor are shown further below):
 
 ```
 	.\UserIgor\XOP_Axon\FP_Mc700Tg\MultiClampBroadcastMsg.hpp
@@ -35,14 +35,12 @@ This repository is setup mainly for documentation purpose, no active development
 
 # Installing FPulse
 * Prerequisites are
-    - MS Windows (XP or later)
+    - MS Windows (7 or later)
 	- IgorPro 6.x
 	- MultiClamp 700A or 700B
 	- CED 1401
 
-* Download and unzip
-
-   https://git.ist.ac.at/jonasgroup/FPulse/-/archive/master/FPulse-master.zip
+* Download and unzip [FPulse (latest)](https://git.ist.ac.at/jonasgroup/FPulse/-/archive/master/FPulse-master.zip)
 
 or use git
 
@@ -56,6 +54,11 @@ or use git
 ```
 in a "cmd" shell with administrative permissions.
 
+The example scripts will be available under
+
+```
+   C:\FPulse\SomeDemoScripts\
+```
 
 
 # Build requirements
@@ -92,8 +95,7 @@ If that is not the case, you need adapt the include path such that it points to 
 ```
 
 
-https://docs.microsoft.com/en-us/cpp/build/reference/i-additional-include-directories?view=msvc-160
-To set this compiler option in the Visual Studio development environment
+According to [this documentation](https://docs.microsoft.com/en-us/cpp/build/reference/i-additional-include-directories?view=msvc-160), you need to set this compiler option in the Visual Studio development environment:
 
 - Open the project's Property Pages dialog box. For details, see Set C++ compiler and build properties in Visual Studio.
 
@@ -133,7 +135,7 @@ So from a technical reason you might not need them. But you might want to use th
 
 * Download, and install  [CFS library](http://ced.co.uk/files/MS54.exe) in the default location (C:\CFS library\), and extract C:\CFS Library\CPP\CFS32.dll
 
-* xDownload and install [Installer of MC700B](http://axograph.com/installers/MultiClamp_2_1_0_16.exe), in the default location (C:\Program Files (x86)\Molecular Devices\MultiClamp 700B Commander), and extract AxMultiClampMsg.dll from
+* Download and install [Installer of MC700B](http://axograph.com/installers/MultiClamp_2_1_0_16.exe), in the default location (C:\Program Files (x86)\Molecular Devices\MultiClamp 700B Commander), and extract AxMultiClampMsg.dll from
 
 
 
