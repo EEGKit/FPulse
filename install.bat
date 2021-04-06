@@ -1,3 +1,4 @@
+ECHO OFF
 REM
 REM FPulse Installer
 REM    installs FPulse 3.43 on IgorPro 6 
@@ -7,7 +8,6 @@ REM Copyright (C) 2021 Alois Schlögl, IST Austria
 
 REM make install run as admin
 REM https://developpaper.com/how-to-make-bat-batch-run-with-administrators-permission/
-ECHO OFF
 
 REM source directory of FPulse 
 set SRCDIR="%~dp0"
@@ -15,7 +15,6 @@ REM installation directory of FPulse
 set DESTDIR=C:\FPulse
 
 REM Directory to Igor Pro User files - here are some examples
-REM Windows10 
 SET IPUF=%UserProfile%"\Documents\WaveMetrics\Igor Pro 6 User Files\"
 SET IPUF="C:\Program Files (x86)\WaveMetrics\Igor Pro Folder\"
 if not exist %IPUF% ( 
@@ -23,44 +22,48 @@ if not exist %IPUF% (
 	exit /B
 )
 
-REM === UNINSTALL ===
-if [%1]==[-u] (
+if [%0]==[uninstall.bat] GOTO UNINSTALL0
+if [%1]==[-u]            GOTO UNINSTALL
+GOTO INSTALL
+
+:UNINSTALL0
+	cd \
+:UNINSTALL
+	ECHO === Uninstall Igor links %IPUF% ===
 	del /Q %IPUF%"Igor Extensions\"FP_Mc700Tg.xop 
 	del /Q %IPUF%"Igor Extensions\"FPulseCed.xop  
 	del /Q %IPUF%"Igor Help Files\"FPulse.ihf 
 	del /Q %IPUF%"Igor Procedures\"FPulse.ipf 
-	rmdir %IPUF%"User Procedures\"FPulse
-	rmdir %IPUF%"User Procedures\"FPulse_
+	del /Q %IPUF%"User Procedures\"FPulse*
+	ECHO === Remove DLL's from CED and MultiClamp (need elevated permissions) ===
+	del /Q C:\Windows\SysWOW64\Use1432.dll
+	del /Q C:\Windows\SysWOW64\CFS32.dll
+	del /Q C:\Windows\SysWOW64\AxMultiClampMsg.dll
+	ECHO === Uninstall %DESTDIR% ===
 	rmdir /S /Q %DESTDIR%
-	REM --- FIXME: need elevated permissions ---
-	del /Q C:\windows\SysWOW64\Use1432.dll
-	del /Q C:\windows\SysWOW64\CFS32.dll
-	del /Q C:\windows\SysWOW64\AxMultiClampMsg.dll
-	exit /B	
-)
+	GOTO END
 
-REM === COPYING THE FILES ===
+:INSTALL
+	ECHO === Copying Files into %DESTDIR% ===
+	xcopy %SRCDIR%UserIgor\FPulse               %DESTDIR% /E /I /Q
+	copy  %SRCDIR%\install.bat  %DESTDIR%\uninstall.bat
+	mkdir %DESTDIR%\XOPs
+	copy  %SRCDIR%\UserIgor\XOP_Axon\FP_Mc700Tg\VC2015\FP_Mc700Tg.xop  %DESTDIR%\XOPs\
+	copy  %SRCDIR%\UserIgor\XOP_Ced\FPulseCed\VC2015\FPulseCed.xop     %DESTDIR%\XOPs\
 
-xcopy %SRCDIR%UserIgor\FPulse               %DESTDIR% /E /I
-mkdir %DESTDIR%\XOPs
-copy  %SRCDIR%\UserIgor\XOP_Axon\FP_Mc700Tg\VC2015\FP_Mc700Tg.xop  %DESTDIR%\XOPs\
-copy  %SRCDIR%\UserIgor\XOP_Ced\FPulseCed\VC2015\FPulseCed.xop     %DESTDIR%\XOPs\
-REM --- FIXME: need elevated permissions ---
-copy  %SRCDIR%UserIgor\XOP_Dll\Use1432.dll 	c:\windows\SysWOW64\
-copy  %SRCDIR%UserIgor\XOP_Dll\CFS32.dll 	c:\windows\SysWOW64\
-copy  %SRCDIR%UserIgor\XOP_Dll\AxMultiClampMsg.dll 	c:\windows\SysWOW64\
+	ECHO === Install DLLs (need elevated permissions) ===
+	copy  %SRCDIR%UserIgor\XOP_Dll\Use1432.dll 	C:\Windows\SysWOW64\
+	copy  %SRCDIR%UserIgor\XOP_Dll\CFS32.dll 	C:\Windows\SysWOW64\
+	copy  %SRCDIR%UserIgor\XOP_Dll\AxMultiClampMsg.dll 	C:\Windows\SysWOW64\
 
+	ECHO === Create Links for Igor ===
+	mklink %IPUF%"Igor Extensions\"FP_Mc700Tg.xop %DESTDIR%\XOPs\FP_Mc700Tg.xop
+	mklink %IPUF%"Igor Extensions\"FPulseCed.xop  %DESTDIR%\XOPs\FPulseCed.xop
+	mklink %IPUF%"Igor Help Files\"FPulse.ihf     %DESTDIR%\FPulse.ihf
+	mklink %IPUF%"Igor Procedures\"FPulse.ipf     %DESTDIR%\FPulse.ipf
+	mklink /D %IPUF%"User Procedures\"FPulse      %DESTDIR%
+	GOTO END
 
-REM === CREATING THE REQUIRED LINKS === 
-mklink %IPUF%"Igor Extensions\"FP_Mc700Tg.xop %DESTDIR%\XOPs\FP_Mc700Tg.xop
-mklink %IPUF%"Igor Extensions\"FPulseCed.xop  %DESTDIR%\XOPs\FPulseCed.xop
-mklink %IPUF%"Igor Help Files\"FPulse.ihf     %DESTDIR%\FPulse.ihf
-mklink %IPUF%"Igor Procedures\"FPulse.ipf     %DESTDIR%\FPulse.ipf
-mklink /D %IPUF%"User Procedures\"FPulse      %DESTDIR%
-
-REM === START IgorPro ===
-ECHO start Igor.exe
-
-Echo execution completed, any key to exit
+:END
 exit /B
 
