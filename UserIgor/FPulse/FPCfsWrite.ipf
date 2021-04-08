@@ -1129,7 +1129,7 @@ static Function	stComputePOverNCorrection( sFolder, wG, wIO, wFix, wE, wBFS, pr,
 				// print "ComputePOverNCorrection()   Blank / segment",  eTyp( wE, wBFS,  c, bl,  0 ), eTyp( wE, wBFS,  c, bl, 1 ) , mI( "Blank" ), mI( "Segment" ) 
 				// Use the first real segment for offset computation (one could also use a possible leading blank  OR  use a  leading  blank and the following segment) 
 				// If the first element is blank then use the second element. It is the user's responsibility to ensure that it is segment (whose value is constant by definition).
-				variable	nElement	= ( eTyp( wE, wBFS,  c, bl, 0 )  == mI( "Blank" ) 	?  1  :  0	
+				variable	nElement	=   eTyp( wE, wBFS,  c, bl, 0 )  == mI( "Blank" ) 	?  1  :  0
 				BAvgEndPt=  BegPt + ( eVL( wE, wBFS, c, bl, 0, sw, nElement, cDUR ) / nSmpInt) 						// in points
 				//BaseSubtractOfs	= mean( wPoN, BAvgBegPt ,  BAvgEndPt )  							// !!! in this special case pnt2x has been omitted as the wave has x scaling = 1 : x = points (mean and faverage yield same result)
 				BaseSubtractOfs	= faverage( wPoN, pnt2x(  wPoN, BAvgBegPt ),  pnt2x(  wPoN, BAvgEndPt ) )  	// !!! in this special case pnt2x  could be omitted as the wave has x scaling = 1 : x = points (mean and faverage yield same result)
