@@ -34,7 +34,7 @@ GOTO INSTALL
 	del /Q %IPUF%"Igor Extensions\"FPulseCed.xop  
 	del /Q %IPUF%"Igor Help Files\"FPulse.ihf 
 	del /Q %IPUF%"Igor Procedures\"FPulse.ipf 
-	del /Q %IPUF%"User Procedures\"FPulse*
+	rmdir %IPUF%"User Procedures\"FPulse
 	ECHO === Remove DLL's from CED and MultiClamp (need elevated permissions) ===
 	del /Q C:\Windows\SysWOW64\Use1432.dll
 	del /Q C:\Windows\SysWOW64\CFS32.dll

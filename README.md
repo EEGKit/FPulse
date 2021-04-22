@@ -35,26 +35,28 @@ This repository is setup mainly for documentation purpose, no active development
 
 # Installing FPulse
 * Prerequisites are
-    - MS Windows (7 or later)
-	- IgorPro 6.x
+	- MS Windows (7 or later)
+	- IgorPro 6.20+
 	- MultiClamp 700A or 700B
 	- CED 1401
 
-* Download and unzip [FPulse (latest)](https://git.ist.ac.at/jonasgroup/FPulse/-/archive/master/FPulse-master.zip)
-
-or use git
+* Download and unzip [FPulse (latest)](https://git.ist.ac.at/jonasgroup/FPulse/-/archive/master/FPulse-master.zip) or use git
 
 ```
    git clone https://git.ist.ac.at/jonasgroup/FPulse
 ```
 
-* The binaries can be deployed by running
+If you have an old version of FPulse installed, it is strongly recommended to uninstall it. (e.g. the uninstaller of 3.3.3 can be found on  C:\UserIgor\FPulse ).
+
+* The recommended way to install FPulse is by opening a CMD prompt with admin permission ("Run as administrator) and running
+
 ```
    install.bat
 ```
-in a "cmd" shell with administrative permissions.
+FPulse will be installed in C:\FPulse, which contains also the ```uninstall.bat``` script (it needs also admin permissions).
 
-The example scripts will be available under
+
+* Fpulse example scripts for controlling the experiment will be available under
 
 ```
    C:\FPulse\SomeDemoScripts\
@@ -65,7 +67,7 @@ The example scripts will be available under
 
 ### Igor XOP toolkit
 
-[XOP toolkit 6](http://www.wavemetrics.net/ecomm/xop/XOPToolkit6.exe "XOP toolkit 6") has been used for the interface been C-code and IgorPro.
+[XOP toolkit 6](https://www.wavemetrics.com/products/xoptoolkit "XOP toolkit 6") has been used for the interface been C-code and IgorPro.
 
 [1]: https://www.wavemetrics.com/products/xoptoolkit "XOP toolkit"
 
@@ -110,8 +112,7 @@ You might also need to adapt the path in the "*.rc" files. (When you rebuild the
 
 ### Files from _Axon Instruments_ and _Cambridge Electronic Devices (CED)_
 
-These the files are currently also in the [repository]
-[2]:
+These files are currently also in the [repository](https://git.ist.ac.at/jonasgroup/FPulse/-/tree/master):
 
 ```
 	.\UserIgor\XOP_Axon\FP_Mc700Tg\MultiClampBroadcastMsg.hpp
@@ -129,14 +130,13 @@ These the files are currently also in the [repository]
 	.\UserIgor\XOP_Ced\FPulseCed\MACHINE.H
 ```
 
-So from a technical reason you might not need them. But you might want to use them legal reasons, or in case we are now allowed to redistribute them. 
+So from a technical reason you might not need them. But you might need them for legal reasons, or in case we are now allowed to redistribute them.
 
 * Download, and install [1401 Windows Installer](http://ced.co.uk/files/winsupp.exe) in the default location (C:\1401\), and extract C:\1401\utils\Use1432.dll these files
 
 * Download, and install  [CFS library](http://ced.co.uk/files/MS54.exe) in the default location (C:\CFS library\), and extract C:\CFS Library\CPP\CFS32.dll
 
 * Download and install [Installer of MC700B](http://axograph.com/installers/MultiClamp_2_1_0_16.exe), in the default location (C:\Program Files (x86)\Molecular Devices\MultiClamp 700B Commander), and extract AxMultiClampMsg.dll from
-
 
 
 
@@ -147,6 +147,11 @@ In case of questions concerning FPulse, you can contact any of these:
   Ulrich Fröbe <ulfroebe@gmail.com>,
   Alois Schlögl <alois.schloegl@ist.ac.at>
 
+
+# Related tools:
+* [Biosig](https://biosig.sourceforge.io/)
+* [StimFit](http://stimfit.org)
+* [SigViewer](https://github.com/cbrnr/sigviewer)
 
 
 
