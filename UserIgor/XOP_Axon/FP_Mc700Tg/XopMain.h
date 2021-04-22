@@ -1,7 +1,7 @@
 //
 // XopMain.h 
 
-#pragma pack(4)				// All structures are 4-byte-aligned
+#pragma pack(2)				// All structures are 2-byte-aligned
 
 typedef struct
 {
@@ -10,10 +10,5 @@ typedef struct
 
 FUNC sFunc[];
 
+#pragma pack()				// All structures are default-aligned.
 
-#pragma pack()					// All structures were 4-byte-aligned.
-
-// 2012-03-13 test
-#define UINT  unsigned short
-#define Handle Ptr*
-//typedef Ptr* Handle;
