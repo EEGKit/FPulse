@@ -146,7 +146,7 @@ telegraphed data but also for the flags (e.g. bIsConnected)  and also the TimerI
 
 #include "FP_MC700Tg.h"			// sets MCTG_IGORMAINFRM: compile and link all code necessary for the MultiClamp telegraph connection	
 
-#pragma pack(4)					// All structures are 4-byte-aligned for MCTG .
+#pragma pack(2)				// All structures are 2-byte-aligned for Igor Toolkit .
 
 
 // SAME ORDER HERE IN  '(*sFunc[])' AND IN xxxWinCustom.RC
@@ -168,8 +168,8 @@ FUNC sFunc[] =
 
 ////////////////////////////////////////////////////////////////////////
 
+#pragma pack()					// All structures are default-aligned 
 
-#pragma pack()					// All structures were 4-byte-aligned for MCTG .
 
 #ifdef MCTG_IGORMAINFRM			
 
@@ -657,7 +657,7 @@ void	OnRequest( HWND hWnd, UINT nMC )
 void	OnBroadcast( HWND hWnd )  
 {
 	char		sMsg[2000];
-//	LPARAM	lparamSignalIDs;
+//	LPARAM		lparamSignalIDs;
 	UINT		uRetVal;
 
    ASSERT(hWnd != NULL, "Window handle in OnBroadcast is NULL " );
@@ -827,7 +827,11 @@ int		ProcessTimerMsg( HWND hwnd, WPARAM TimerId )	//todo return TRUE,FALSE or br
 		// Search all ComPorts and search all possible devices up to MAX_MC700CHANS
 		// if only com port 1 is used in demo mode then searching com ports 2..4 is not necessary..
       //sprintf( sMsg, "Info (FPulseCed.xop): No AxoPatch MultiClamp found, starting in demo mode. Trying to connect.... \r" );
-	   sprintf( sMsg, "Info (FP_MC700Tg.xop): No AxoPatch MultiClamp found. \r" );
+#ifdef _DEBUG
+		sprintf( sMsg, "Info FP_MC700Tg.xop (debug): No AxoPatch MultiClamp found. \r" );
+#else
+		sprintf(sMsg, "Info FP_MC700Tg.xop (release): No AxoPatch MultiClamp found. \r");
+#endif
 		XOPNotice( sMsg );
 
 		return TRUE;

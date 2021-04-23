@@ -25,9 +25,6 @@
 #endif	// MCTG_IGORMAINFRM	
 
 
-#pragma pack(4)    //  all structures are 4-byte-aligned for MCTG.
-
-
 #define REQUIRES_IGOR_200          1 + FIRST_XOP_ERR
 #define UNKNOWN_XFUNC              2 + FIRST_XOP_ERR
 
@@ -117,7 +114,6 @@ static void  XOPEntry(void)
 }
 
 
-
 HOST_IMPORT int 
 XOPMain( IORecHandle ioRecHandle )
 //	This is the initial entry point at which the host application calls XOP.
@@ -125,13 +121,15 @@ XOPMain( IORecHandle ioRecHandle )
 //	main() does any necessary initialization and then sets the XOPEntry field of the
 //	  ioRecHandle to the address to be called for future MessMages.
 {	
-	#ifdef XOP_GLOBALS_ARE_A4_BASED
+	char	sMsg[300];
+
+#ifdef XOP_GLOBALS_ARE_A4_BASED
 		#ifdef __MWERKS__
 			// For CodeWarrior 68K XOPs.
 			SetCurrentA4();							// Set up correct A4. This allows globals to work.
 			SendXOPA4ToIgor(ioRecHandle, GetA4());	// And communicate it to Igor.
 		#endif
-	#endif
+#endif
 	
 	// 2021-03-12 what is this? VC2015 complains in combination with Toolkit6, but is not mentionned in manual
 //LoadXOPSegs();										// für Funktionen
@@ -142,13 +140,19 @@ XOPMain( IORecHandle ioRecHandle )
 
 #ifdef MCTG_IGORMAINFRM	 		
 	{
-	// char	sMsg[200];
 	//	SetXOPType((long)(RESIDENT | IDLES));		// Specify XOP to stick around and to receive IDLE messages.
 
 	MCTgClientRegisterMessages();
-	gTheWindow	= GetParent(IgorClientHWND() );
-	// Initialisation message is confusing for the user so it has been removed
-	//sprintf( sMsg, "FPulseCed.XOP (+MCTG)\tWITHOUT XOP WINDOW (#ifdef MCTG_IGORMAINFRM) IgorClientHWND:%08X>%08X (%s) \r", IgorClientHWND(), gTheWindow, CALLING_METHOD ? "direct" : "message" );	XOPNotice( sMsg );
+
+	// 2021-04-23 GetParent() a reasonable value in Igor637 but NULL in Igor8 which will finally crash Igor 8.  GetAncestor() seems to work.
+	// gTheWindow = GetParent(IgorClientHWND());			// gWindow is a reasonable value in Igor637  but NULL in Igor8 (will crash)
+	gTheWindow = GetAncestor(IgorClientHWND(), GA_PARENT);//GA_PARENT, GA_ROOT and GA_ROOTOWNER: handles gTheWindow and IgorClientHWND() are same
+	if (gTheWindow == NULL) {
+		sprintf(sMsg, "*** FATAL ERROR *** while loading FP_Mc700Tg.xop (Axon MC7700 will not work) \r\tParent window handle is NULL IgorClientHWND:%08X  ->  gTheWindow:>%08X \r", IgorClientHWND(), gTheWindow);	XOPNotice(sMsg);
+		return EXIT_FAILURE;
+	}
+	// Initialisation message may be confusing to the user so it can be removed
+	sprintf(sMsg, "Loaded FP_Mc700Tg.xop (210421)\tWITHOUT XOP WINDOW (#ifdef MCTG_IGORMAINFRM) IgorClientHWND:%08X > %08X \r", IgorClientHWND(), gTheWindow);	XOPNotice(sMsg);
 
 	// This hook is for the 'Registered' messages (Open, Close, Request, Broadcast, Reconnect, Id) and for WM_TIMER
 	gRegisteredMsgHook = SetWindowsHookEx( WH_GETMESSAGE, &GetMsgFirstProc,NULL,GetCurrentThreadId());
@@ -168,14 +172,18 @@ XOPMain( IORecHandle ioRecHandle )
 		SetXOPResult(IGOR_OBSOLETE);
 		return EXIT_FAILURE;
 	}
+
+	// Initialisation message to remind the programmer about the Release/Debug mode..
+	// Better: Remind earlier, remind while releasing and not at program start...
+#ifdef _DEBUG
+	sprintf(sMsg, "Loaded FP_MC700Tg.xop (210421 debug)\r");
+#else
+	sprintf(sMsg, "Loaded FP_MC700Tg.xop (210421)\r");
+#endif
+	XOPNotice(sMsg);
+
 	SetXOPResult(0L);//0L);// test: -1 has no effect
 	return EXIT_SUCCESS;
 }
 
 //////////////////////////////////////////////////////////////////
-
-
-
-
-#pragma pack()    // All structures are 4-byte-aligned for MCTG.
-
