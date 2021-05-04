@@ -148,11 +148,11 @@ XOPMain( IORecHandle ioRecHandle )
 	// gTheWindow = GetParent(IgorClientHWND());			// gWindow is a reasonable value in Igor637  but NULL in Igor8 (will crash)
 	gTheWindow = GetAncestor(IgorClientHWND(), GA_PARENT);//GA_PARENT, GA_ROOT and GA_ROOTOWNER: handles gTheWindow and IgorClientHWND() are same
 	if (gTheWindow == NULL) {
-		sprintf(sMsg, "*** FATAL ERROR *** while loading FP_Mc700Tg.xop (Axon MC7700 will not work) \r\tParent window handle is NULL IgorClientHWND:%08X  ->  gTheWindow:>%08X \r", IgorClientHWND(), gTheWindow);	XOPNotice(sMsg);
+		sprintf(sMsg, "*** FATAL ERROR *** while loading FP_Mc700Tg.xop (Axon MC7700 will not work) \r\tParent window handle is NULL IgorClientHWND:%08p  ->  gTheWindow:>%08p \r", IgorClientHWND(), gTheWindow);	XOPNotice(sMsg);
 		return EXIT_FAILURE;
 	}
 	// Initialisation message may be confusing to the user so it can be removed
-	sprintf(sMsg, "Loaded FP_Mc700Tg.xop (210421)\tWITHOUT XOP WINDOW (#ifdef MCTG_IGORMAINFRM) IgorClientHWND:%08X > %08X \r", IgorClientHWND(), gTheWindow);	XOPNotice(sMsg);
+	sprintf(sMsg, "Loaded FP_Mc700Tg.xop (210421)\tWITHOUT XOP WINDOW (#ifdef MCTG_IGORMAINFRM) IgorClientHWND:%08p > %08p \r", IgorClientHWND(), gTheWindow);	XOPNotice(sMsg);
 
 	// This hook is for the 'Registered' messages (Open, Close, Request, Broadcast, Reconnect, Id) and for WM_TIMER
 	gRegisteredMsgHook = SetWindowsHookEx( WH_GETMESSAGE, &GetMsgFirstProc,NULL,GetCurrentThreadId());

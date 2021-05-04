@@ -5,7 +5,7 @@
 //   XOP-specific	resources that IGOR looks for in an XOP module.
 
 // Defines XOP-specific symbols.
-#include "..\..\..\..\XOP Toolkit 6\IgorXOPs6\XOPSupport\XOPResources.h""
+#include "..\..\..\..\XOP Toolkit 6\IgorXOPs6\XOPSupport\XOPResources.h"
 #include "..\..\..\..\XOP Toolkit 6\IgorXOPs6\XOPSupport\IgorXOP.h"	  // NT_I16
 
 // Custom error messages

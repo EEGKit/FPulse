@@ -27,6 +27,9 @@
     <ClInclude Include="..\XopUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\..\XOP Toolkit 6\IgorXOPs6\XOPSupport\XOPStandardHeaders.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\FP_Mc700Tg.c">

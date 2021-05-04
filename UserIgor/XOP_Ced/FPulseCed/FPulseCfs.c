@@ -404,12 +404,12 @@ int xCfsGetChanData( void *ptr) {
    short     Channel     = (short)p->Channel;
    WORD      DataSection = (WORD)p->DataSection;
    long      FirstElement= (long)p->FirstElement;
-   long      NumElements = (long)p->NumElements;
+   WORD      NumElements = (WORD)p->NumElements;
    long      AreaSize    = (long)p->AreaSize;
    int		 ErrMode     = (int)p->ErrMode; 
    char      errBuf[300]; 
    void		*Raw;
-   int		 pts;
+   long  	 pts;
 
 	// DebugPrintWaveProperties( "xCfsGetChanData", p->wDataADS ); 	// 050128
 
@@ -585,7 +585,7 @@ int xCfsSetVarVal( void *ptr) {
    }
    if ( VarType == RL4 )                           // 4 bytes real
    {
-      CVarFloat  = atof( *CVarAsString ); 
+      CVarFloat  = (float)atof( *CVarAsString );
       SetVarVal( hnd, VarNo, VarKind, DataSection, &CVarFloat );
    }
    if ( VarType == RL8 )                           // 8 bytes real

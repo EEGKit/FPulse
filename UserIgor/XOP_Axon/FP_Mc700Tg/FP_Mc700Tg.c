@@ -662,7 +662,7 @@ void	OnBroadcast( HWND hWnd )
 
    ASSERT(hWnd != NULL, "Window handle in OnBroadcast is NULL " );
 
-	if ( gnDebugMsg > 1 ) { sprintf( sMsg, "\tOnBroadcast  post.'Broadcast' msg\t%08X   \t\t\t\t\t\t-> wnd proc handles rest..(wait for ID msg..) \r", hWnd); XOPNotice( sMsg ); }
+	if ( gnDebugMsg > 1 ) { sprintf( sMsg, "\tOnBroadcast  post.'Broadcast' msg\t%08p   \t\t\t\t\t\t-> wnd proc handles rest..(wait for ID msg..) \r", hWnd); XOPNotice( sMsg ); }
    if( !PostMessage( HWND_BROADCAST, nGBroadcastMessage, (WPARAM) hWnd, (LPARAM)0 ) )
    {
       ASSERT(FALSE, "++Warning: Failed to broadcast to telegraph servers! ");

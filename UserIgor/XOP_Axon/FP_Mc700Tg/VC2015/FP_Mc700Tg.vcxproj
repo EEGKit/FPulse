@@ -64,7 +64,7 @@
       <Optimization>MaxSpeed</Optimization>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>..\..\XOPSupport;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\..\XOP Toolkit 6\IgorXOPs6\XOPSupport;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;_CRT_SECURE_NO_WARNINGS;FP_Mc700Tg_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AssemblerListingLocation>
       </AssemblerListingLocation>
@@ -157,6 +157,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\XOP Toolkit 6\IgorXOPs6\XOPSupport\XOPStandardHeaders.h" />
     <ClInclude Include="..\FP_MC700Tg.h" />
     <ClInclude Include="..\MCTelegraphs.h" />
     <ClInclude Include="..\XopMain.h" />
