@@ -1,0 +1,7 @@
+*.aps
+*.pdb
+Debug
+*.xop
+*~
+*.o
+*/.suo
