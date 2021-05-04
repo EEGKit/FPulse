@@ -1,6 +1,6 @@
 // XopMain.h 
 
-#pragma pack(4)				// All structures are 4-byte-aligned
+#pragma pack(2)
 
 typedef struct
 {
@@ -9,8 +9,7 @@ typedef struct
 
 FUNC sFunc[];
 
-
-#pragma pack()					// All structures were 4-byte-aligned.
+#pragma pack()
 
 Handle	IHC( Handle sIgorString );
 int		DisposeHandleIHC( Handle sCopy );

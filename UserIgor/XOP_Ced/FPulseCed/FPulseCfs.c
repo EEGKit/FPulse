@@ -71,6 +71,7 @@ int       PrintFileError( int ErrMode );
 
 #define FILEERR -1
 
+#pragma pack(2)
 
 int xCfsCreateFile( void *ptr) {
    struct { double ErrMode;   double maxFileVar; double maxDSVar; double Channels;
@@ -793,6 +794,8 @@ int xCfsSetDescriptor( void *ptr) {
 	p->res = 0;
 	return err;
 }
+
+#pragma pack()
 
 /////////////////////////////////////////////////////////////////////////////
 // TESTING CFS HELPERS
