@@ -37,7 +37,7 @@ This repository is setup mainly for documentation purpose, no active development
 * Prerequisites are
 	- MS Windows (7 or later)
 	- IgorPro 6.20+
-	- MultiClamp 700A or 700B
+	- MultiClamp 700A or 700B  or  Axopatch 200A or 200B
 	- CED 1401
 
 * Download and unzip [FPulse (latest)](https://git.ist.ac.at/jonasgroup/FPulse/-/archive/master/FPulse-master.zip) or use git
@@ -73,7 +73,7 @@ FPulse will be installed in C:\FPulse, which contains also the ```uninstall.bat`
 
 
 ### Compiler
-   MSVC2015 is known to work. Other compilers are not tested.
+   MSVC2015 is known to work. Other compilers have not been tested.
 
 
 Open these two sln files:
