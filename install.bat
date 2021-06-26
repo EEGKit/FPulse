@@ -12,7 +12,7 @@ REM https://developpaper.com/how-to-make-bat-batch-run-with-administrators-permi
 REM source directory of FPulse 
 set SRCDIR="%~dp0"
 REM installation directory of FPulse
-set DESTDIR=C:\FPulse
+set DESTDIR=C:\UserIgor\FPulse
 
 REM Directory to Igor Pro User files - here are some examples
 SET IPUF=%UserProfile%"\Documents\WaveMetrics\Igor Pro 6 User Files\"
