@@ -6,30 +6,24 @@
 
 static strconstant ksROOT_UF_	= "root:uf:" 
 
-// 2009-10-22 modify for Igor6  separate main menu items 
-
 Menu "FPulse", dynamic
-	FPU_Title(), /Q, Execute/P/Q/Z "INSERTINCLUDE \"FPulseMain\""; 	Execute/P/Q "COMPILEPROCEDURES ";	Execute/P/Q "FPulse()"	
-	" Quit " +  FPU_Title() ,   UnloadFPuls3()		
+	FPUL_Title(), /Q, Execute/P/Q/Z "INSERTINCLUDE \"FPulseMain\""; 	Execute/P/Q "COMPILEPROCEDURES ";	Execute/P/Q "FPulse()"
+	" Quit " +  FPUL_Title() ,   UnloadFPuls3()
 End
 
 Menu "FEval", dynamic
 	FE_Title(), /Q, Execute/P/Q/Z "INSERTINCLUDE \"FEvalMain\""; 	Execute/P/Q "COMPILEPROCEDURES ";	Execute/P/Q "FEvl()"	
-	" Quit " +  FE_Title() ,   UnloadFEval3()		
+	" Quit " +  FE_Title() ,   UnloadFEval3()
 End
 
-Function	/S	FPU_Title() 
+Function	/S	FPUL_Title()
 	variable	nItem
 	return  	"FPulse" + stFormatVersion()					// e.g. '300'  -> '3.00'  or  '302c'  ->  '3.02.c'
-// 2009-10-22 modify for Igor6    GANZ WEG
-//	return	SelectString( xUtilError( 2 ) == -1, "" , "(" ) + StringFromList( nItem, lstPrograms ) + sVersion
 End
 
 Function	/S	FE_Title() 
 	variable	nItem
 	return	"FEval" + stFormatVersion()						// e.g. '300'  -> '3.00'  or  '302c'  ->  '3.02.c'
-//// 2009-10-22 modify for Igor6    GANZ WEG
-////	return	SelectString( xUtilError( 2 ) == -1, "" , "(" ) + StringFromList( nItem, lstPrograms ) + sVersion
 End
  
 static Function	/S	stFormatVersion()	 
@@ -43,58 +37,6 @@ static Function	/S	stFormatVersion()
 End
 
 
-// 2021 old  'FPulse'  and  'FEval'  accessible from Analysis menu
-//Menu "Analysis", dynamic
-//	AnalysisMenuItem( 1 ), /Q, Execute/P/Q/Z "INSERTINCLUDE \"FPulseMain\""; 	Execute/P/Q "COMPILEPROCEDURES ";	Execute/P/Q "FPulse()"	
-//	AnalysisMenuItem( 2 ), /Q, Execute/P/Q/Z "INSERTINCLUDE \"FEvalMain\""; 	Execute/P/Q "COMPILEPROCEDURES ";	Execute/P/Q "FEvl()"	
-//	"Quit FPulse "+ksVERSION[0,0] + "." + ksVERSION[1,inf] ,  UnloadFPuls3()		
-//	"Quit FEval " + ksVERSION[0,0] + "." + ksVERSION[1,inf] ,  UnloadFEval3()		
-//End
-//
-//Function	/S	AnalysisMenuItem( nItem ) 
-//	variable	nItem
-//	string  	lstPrograms	= "empty;FPulse;FEval ;"			// numbering starts at 1
-//	string  	sVersion		= FormatVersion()				// e.g. '300'  -> '3.00'  or  '302c'  ->  '3.02.c'
-//	return									StringFromList( nItem, lstPrograms ) + sVersion
-//End
-//
-//static Function	/S	FormatVersion()	 
-//// formats version string  e.g. '300'  -> '3.00'  or  '1302c'  ->  '13.02.c'
-//	string  	sVersion, sVersionOrg	= ksVERSION				// e.g. '300'  or  '1302c'
-//	variable	nVersionNumber		= str2num( sVersionOrg )		// e.g. '300'  or  '1302'
-//	variable	len					= strlen( sVersionOrg )
-//	string  	sVersionLetter		= SelectString( len == strlen( num2str( nVersionNumber ) ) , "." + sVersionOrg[ len-1, len-1 ], "" )  
-//	sprintf  sVersion, " %.2lf%s %s" , nVersionNumber / 100 , sVersionLetter, SelectString( kbIS_RELEASE, "D", "" )	// D is reminder if we are still in the debug version
-//	return	sVersion
-//End
-
-
-// 2021-03-10 in 343 wieder weg
-//#include "UFCom_UnloadApplication"
-//
-//strconstant	ksFP3_MAINFILE	= "FPulseMain"	  	
-//
-//Menu 	ksFP3_APPNAME
-//	FP3_Title(), /Q ,		Execute/P/Q/Z "INSERTINCLUDE   \"" + ksFP3_MAINFILE + "\"";	Execute/P/Q "COMPILEPROCEDURES ";	Execute/P/Q  ksFP3_APPNAME+"()" 
-//	ksFP3_APPNAME + " - Quit ",							FP3_Unload()		
-//End
-//
-//Function	/S	FP3_Title() 						// must be 	'ksfFP3 + _Title()'  
-//	return	ksFP3_APPNAME +  UFCom_FormatVersion_(	ksfFP3,  ksFP3_APPNAME,  ksFP3_VERSION )	
-//End
-//
-//Function 		FP3_Unload() 
-//	UFCom_UnloadApplication( ksROOT_UF_,  ksfFP3,  ksfFP,  ksFP3_MAINFILE )	// in Franz  folder and panel names are the same  
-//End
-//
-//// Igor data folders and the main panel name
-//strconstant	ksfFP3 			= "fp3"			// The one-and-only application subfolder directly below 'root:uf' which wraps the entire application....
-//strconstant	ksfFP3_			= "fp3:"			// ....Do not change as action proc names rely on it.  At most 4 letters or else control action proc names will be too long
-//
-//strconstant	ksfFP			= "fp"			// The applications main panel name = the subsubfolder name = the main panels text wave name... 
-//strconstant	ksfFP_			= "fp:"			// ....Do not change as action proc names rely on it.  At most 4 letters or else control action proc names will be too long.
-
-
 //========================================================================================================================================================
 // HISTORY
 
@@ -102,12 +44,12 @@ static strconstant	ksfACO		= "aco"			// the one-and-only subfolder
 static strconstant	ksfEVO		= "evo"			// the one-and-only subfolder
  
 strconstant	ksFP3_APPNAME	= "FPulse"	  	
-strconstant	ksFP3_VERSION	= "343" 			// Use 3 or 4  digits (and optionally 1 letter) . CONVENTION: Increment AFTER releasing.....
+strconstant	ksFP3_VERSION	= "344" 			// Use 3 or 4  digits (and optionally 1 letter) . CONVENTION: Increment AFTER releasing.....
 constant		kbIS_RELEASE	=  1				// Set to 1 only temporarily  in a Release version.  Is normally set to 0 during  program development to facilitate debugging.
 
 
-// Late Patches as version 400 exists since 051208
-//	343		2021-03-10  'FPulse'  and  'FEval'  still  accessible in Main menu, but  new-style Unloading  (which did not work) reverted to old-style.
+//	344		2021-05-14  renamed function  FPU_Title()  to  FPUL_Title()  to avoid name conflict with FPulse5.   FPulse5 requires the name to be FPU_Title().
+//	343		2021-03-10  'FPulse'  and  'FEval'  still  accessible in Main menu, but  new-style Unloading reverted to old-style.
 //	342		2021-03-10  Panel  Test1401  converted to new-style (this was easy, but most other panels are beasts, so currently no attempt is made).   'FPulse'  and  'FEval'  still  accessible in Main menu, but  new-style Unloading reverted.
 //	341		2021-03-09  renamed all static functions  stXXX().  No intended real code changes.  Possibly without EVAL???
 //	340		2021-03-09  test to incorporate new framework: formatted panels with tabs (just for easier view of code).   'FPulse'  and  'FEval'  accessible in Main menu.  Unloading changed to new-style but is no good.

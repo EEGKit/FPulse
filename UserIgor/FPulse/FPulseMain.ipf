@@ -23,7 +23,7 @@
 // 050816  todo : possible convert  FPulse panel to  Panel3Main()  , the others e.g. preferences, data utilities to Panel2Sub()
 
 #pragma  rtGlobals 	= 1					// Use modern global access method. 	Do not use a tab after #pragma. Doing so will give compilation error in Igor 4.
-#pragma  IgorVersion = 5.02				// prevents the attempt to run this procedure under Igor4 or lower. Do not use a tab after #pragma. Doing so will make the version check ineffective in Igor 4.
+#pragma  IgorVersion = 6.20				// prevents the attempt to run this procedure under Igor4 or lower. Do not use a tab after #pragma. Doing so will make the version check ineffective in Igor 4.
 #pragma  ModuleName= FPPulseProc
 
 #define   dDEBUG						// Comment this line for a Release version (this automatically done in the Release process)
@@ -619,7 +619,9 @@ Function		root_uf_aco_dlg_gShrinkCedMemMB( ctrlName, varNum, varStr, varName ) :
 	print "root_uf_aco_dlg_gShrinkCedMemMB  ctrlName:", ctrlName
 	nvar		gShrinkCedMemMB	= root:uf:aco:dlg:gShrinkCedMemMB
 	nvar		gCedMemSize		= root:uf:aco:co:gCedMemSize
+	// printf "\t\tfShrinkCedMem a 2021-06-06  %s     %s    ->  %g   (CED mem: %s: %g) \r", ctrlName, "root:uf:aco:dlg:gShrinkCedMemMB", gShrinkCedMemMB, "root:uf:aco:co:gCedMemSize", gCedMemSize
 	gShrinkCedMemMB	= min( gCEDMemSize / MBYTE, gShrinkCedMemMB )
+	// printf "\t\tfShrinkCedMem b 2021-06-06  %s     %s    ->  %g   (CED mem: %s: %g) \r", ctrlName, "root:uf:aco:dlg:gShrinkCedMemMB", gShrinkCedMemMB, "root:uf:aco:co:gCedMemSize", gCedMemSize
 	ApplyScript_( kbKEEP_ACQ_DISP )							// necessary for the changed settings to be effective at the next 'Start'
 End
 
@@ -713,7 +715,8 @@ static Function	stInitPanelMiscellaneous1( sF, sPnOptions )
 	n += 1;	tPn[ n ] =	"SEP:  1:	0:	1:	0:	°:		,:		,:			dum10:		:							:	:				:		:			:			:		:	"		//	single separator needs ',' 
 	n += 1;	tPn[ n ] =	"BU:    1:	0:	1:	0:	°:		,:		1,°:			DisplayRaw:	Display raw data (after Acq):	:	fDisplayRaw_():	:		:			:			:		:	"		//	single button
 	n += 1;	tPn[ n ] =	"CB:	   1:	0:	1:	0:	°:		,:		1,°:			AcqCheck:	Quick check (after Acq/TG)   :	:	:				:		:			:			:		:	"		// 	
-	n += 1;	tPn[ n ] =	"CB:	   1:	0:	1:	0:	°:		,:		1,°:			TimeStats:		Show timing statistics:		:	:				:		:			:			:		:	"		// 	
+	// 2012-02-09 code commented out
+	//n += 1; tPn[ n ] =	"CB:	   1:	0:	1:	0:	°:		,:		1,°:			TimeStats:		Show timing statistics:		:	:				:		:			:			:		:	"		//
 	n += 1;	tPn[ n ] =	"CB:	   1:	0:	1:	0:	°:		,:		1,°:			ImprStimTi:	Search improved stim timing:	:	:				:		:			:			:		:	"		// 	
 	n += 1;	tPn[ n ] =	"CB:	   1:	0:	1:	0:	°:		,:		1,°:			RequireCed:	Require Ced1401 hardware:		:	:				:		:			fRequireCedInit_()::	:	"		// 	
 #ifdef dDEBUG	
