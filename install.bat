@@ -1,15 +1,23 @@
 ECHO OFF
 REM
 REM FPulse Installer
-REM    installs FPulse 3.43 on IgorPro 6 
-REM 
+REM    installs FPulse 3.45 on IgorPro 6
+REM
 
 REM Copyright (C) 2021 Alois Schlögl, IST Austria
 
 REM make install run as admin
 REM https://developpaper.com/how-to-make-bat-batch-run-with-administrators-permission/
+REM    4. Automatically run batch (BAT) files as Administrator
 
-REM source directory of FPulse 
+PUSHD %~DP0 & cd /d "%~dp0"
+%1 %2
+mshta vbscript:createobject("shell.application").shellexecute("%~s0","goto :runas","","runas",1)(window.close)&goto :eof
+:runas
+
+::
+
+REM source directory of FPulse
 set SRCDIR="%~dp0"
 REM installation directory of FPulse
 set DESTDIR=C:\UserIgor\FPulse
@@ -17,7 +25,7 @@ set DESTDIR=C:\UserIgor\FPulse
 REM Directory to Igor Pro User files - here are some examples
 SET IPUF=%UserProfile%"\Documents\WaveMetrics\Igor Pro 6 User Files\"
 SET IPUF="C:\Program Files (x86)\WaveMetrics\Igor Pro Folder\"
-if not exist %IPUF% ( 
+if not exist %IPUF% (
 	echo ERROR: Igor-pro-user-files-folder not found
 	exit /B
 )
@@ -30,10 +38,10 @@ GOTO INSTALL
 	cd \
 :UNINSTALL
 	ECHO === Uninstall Igor links %IPUF% ===
-	del /Q %IPUF%"Igor Extensions\"FP_Mc700Tg.xop 
-	del /Q %IPUF%"Igor Extensions\"FPulseCed.xop  
-	del /Q %IPUF%"Igor Help Files\"FPulse.ihf 
-	del /Q %IPUF%"Igor Procedures\"FPulse.ipf 
+	del /Q %IPUF%"Igor Extensions\"FP_Mc700Tg.xop
+	del /Q %IPUF%"Igor Extensions\"FPulseCed.xop
+	del /Q %IPUF%"Igor Help Files\"FPulse.ihf
+	del /Q %IPUF%"Igor Procedures\"FPulse.ipf
 	rmdir %IPUF%"User Procedures\"FPulse
 	ECHO === Remove DLL's from CED and MultiClamp (need elevated permissions) ===
 	del /Q C:\Windows\SysWOW64\Use1432.dll
@@ -65,5 +73,9 @@ GOTO INSTALL
 	GOTO END
 
 :END
-exit /B
+
+Echo execution completed, any key to exit
+
+pause >nul
+
 
