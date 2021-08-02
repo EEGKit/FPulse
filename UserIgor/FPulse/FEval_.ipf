@@ -2093,8 +2093,7 @@ End
 	wave	wCRegion	= root:uf:evo:evl:wCRegion
 // 2009-12-10
 	string  	sFo		= ksfEVO
-	wave	Red 		= $"root:uf:" + sFo + ":misc:Red", Green = $"oot:uf:" + sFo + ":misc:Green",   Blue = $"root:uf:" + sFo + ":misc:Blue"
-//	wave	Red = root:uf:aco:misc:Red, Green = root:uf:aco:misc:Green, Blue = root:uf:aco:misc:Blue
+	wave	Red 		= $"root:uf:" + sFo + ":misc:Red", Green = $"root:uf:" + sFo + ":misc:Green",   Blue = $"root:uf:" + sFo + ":misc:Blue" // 2021-08-01  correct typo
 
 	// Build a unique cursor wave name
 	variable	nCsr		= BegEnd - CN_BEG 

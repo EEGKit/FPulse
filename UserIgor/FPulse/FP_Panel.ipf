@@ -746,7 +746,8 @@ static Function	stPnSize( sF, sWin, wPn, width, height, lstCtrlBlkPosX, lstCtrlB
 	// printf "\t\t\tPnSize 1b lllstRowTi   \t\t%s \r",	lllstRowTi[0,220]
 	// printf "\t\t\tPnSize 1b lllstColTi     \t\t%s \r",	lllstColTi[0,220]
 	// printf "\t\t\tPnSize 1b lllstVisibility \t\t%s \r",	lllstVisibility
-	  printf "\t\t\tPnSize 1b sLongestControl: \t%s \r",	sLongestControl
+
+//	  printf "\t\t\tPnSize 1b sLongestControl: \t%s \r",	sLongestControl	   // 2021-09-29 removed.   Useful when panel width increases in an undesired fashion after new panel controls have been added
 
 	
 	// Pass 2 : Copy the final  blockheight (determined from the last control in blockgroup) to all previous controls in the same blockgroup.

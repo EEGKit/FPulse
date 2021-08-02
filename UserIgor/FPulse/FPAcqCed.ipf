@@ -1739,14 +1739,14 @@ Function 		SetPoints( sFolder, wG, CedMaxSmpPts, nPnts, nSmpInt , nDA, nAD, nTG,
 	variable	CedMaxSmpPts, nPnts, nSmpInt, nDA, nAD, nTG, nSlices, nErrorBad, nErrorFatal
 	nvar		gMaxReactnTime 	= $ksROOTUF_ + sFolder + ":dlg:gMaxReactnTime" 
 	nvar		gnProts			= $ksROOTUF_ + sFolder + ":keep:gnProts"
-	nvar		gnCompressTG		= root:uf:aco:co:gnCompressTG
+	nvar		gnCompressTG	= root:uf:aco:co:gnCompressTG
 	nvar		gMaxSmpPtspChan	= root:uf:aco:co:gMaxSmpPtspChan
 	nvar		gnReps			= root:uf:aco:co:gnReps
-	nvar 		gChnkPerRep		= root:uf:aco:co:gChnkPerRep
+	nvar 	gChnkPerRep		= root:uf:aco:co:gChnkPerRep
 	nvar		gPntPerChnk		= root:uf:aco:co:gPntPerChnk
 	nvar	 	gnOfsDA			= root:uf:aco:co:gnOfsDA
 	nvar		gSmpArOfsDA		= root:uf:aco:co:gSmpArOfsDA
-	nvar 		gnOfsAD			= root:uf:aco:co:gnOfsAD
+	nvar 	gnOfsAD			= root:uf:aco:co:gnOfsAD
 	nvar		gSmpArOfsAD		= root:uf:aco:co:gSmpArOfsAD
 	nvar		gnOfsDO			= root:uf:aco:co:gnOfsDO
 	variable	nDAMem, nADMem,  SmpArEndDA,  SmpArEndAD, nDigoutMem, nTrfAreaBytes, TAUsed = 0, MemUsed = 0, FoM = 0, BestFoM = 0, nChunkTimeMS
@@ -1754,7 +1754,7 @@ Function 		SetPoints( sFolder, wG, CedMaxSmpPts, nPnts, nSmpInt , nDA, nAD, nTG,
 	variable	bPrintIt	=   TRUE//FALSE
 	string		bf
 
-	gnCompressTG		= 255
+	gnCompressTG	= 255
 	gMaxSmpPtspChan	= 0
 	gnReps			= 0
 	gChnkPerRep		= 0
@@ -1762,7 +1762,7 @@ Function 		SetPoints( sFolder, wG, CedMaxSmpPts, nPnts, nSmpInt , nDA, nAD, nTG,
 
 	nDigOutMem		= nSlices  * BYTES_PER_SLICE 
 	gnOfsDO			= floor( ( CedMaxSmpPts * 2 - nDigOutMem ) / BYTES_PER_SLICE ) * BYTES_PER_SLICE	// 16 byte boundary is sufficient at the top end of the CED memory
-	CedMaxSmpPts		= gnOfsDO / 2								// decrease sampling area by memory occupied by digout slices (=above gnOfsDO)
+	CedMaxSmpPts	= gnOfsDO / 2								// decrease sampling area by memory occupied by digout slices (=above gnOfsDO)
 
 	string		lstCompressFct
 	string		lstPrimes	
@@ -1787,7 +1787,7 @@ Function 		SetPoints( sFolder, wG, CedMaxSmpPts, nPnts, nSmpInt , nDA, nAD, nTG,
 		EffChsM		= 2 * nDA + 2 * nAD + nTG + nTG / nCompress	// Determine the absolute minimum number of effective channels limited by the entire CED memory (= transfer area + sampling area )
 		PtpChkM		= trunc( CedMaxSmpPts / EffChsM / 2 )		// Determine the absolute maximum PtsPerChk considering the entire Ced memory,  2 reserves space for the 2 swinging buffers
 		EffChsTA		=  nDA + nAD + nTG / nCompress			// Determine the absolute minimum number of effective channels limited by the Transfer area
-		PtpChkTA		= trunc( cMAX_TAREA_PTS / EffChsTA / 2 )	// Determine the absolute maximum PtsPerChk considering only the Transfer area ,  2 reserves space for the 2 swinging buffers
+		PtpChkTA	= trunc( cMAX_TAREA_PTS / EffChsTA / 2 )	// Determine the absolute maximum PtsPerChk considering only the Transfer area ,  2 reserves space for the 2 swinging buffers
 		nPntPerChnk	= min( PtpChkTA, PtpChkM )				// the lowest value of both and of the passed value is the new upper limit  for  PtsPerChk
 
 		MinNrChunks	= ceil( nPnts / nPntPerChnk )				// e.g. maximum value for  1 DA, 2AD, 2TG/Compress: 1 MBYTE =   appr.  80000 POINTSPerChunk * 3.1 Channels *  2 swap halfs
@@ -1838,11 +1838,11 @@ Function 		SetPoints( sFolder, wG, CedMaxSmpPts, nPnts, nSmpInt , nDA, nAD, nTG,
 			endif
 
 
-			nPntPerChnk	= nPnts / nChunks
+			nPntPerChnk	= nPnts / nChunks  
 			// printf "\t\t\t\tCed SetPoints(4) \tnCompTG:%3d , \tSum:%.3lf \tCmpPts:\t%7d\tnChunks: %.3lf \t\t   -> %3d , \t==Quot:\t%6d\tReps:%3d/%d\tChnk/Reps:\t%4d\t  PtpChk:%6d \r", nCompress, EffChsTA, nCompPts, nPnts/ nPntPerChnk,  nChunks, nCompPts / nChunks, MinReps, nReps, nChunks / nReps, nPntPerChnk	 
 
-			nChunkTimeMS	= nPntPerChnk * nSmpInt / 1000
-			MemUsed		= stMemUse(  nChnkPerRep, nPntPerChnk, gMaxSmpPtspChan )
+			nChunkTimeMS= nPntPerChnk * nSmpInt / 1000
+			MemUsed	= stMemUse(  nChnkPerRep, nPntPerChnk, gMaxSmpPtspChan )
 			TAused		= stTAuse( nPntPerChnk, nDA, nAD, cMAX_TAREA_PTS ) 
 			// Even when optimizing the reaction time  the FigureOfMerit  depends only on the memory usage. The reaction time is introduced as an  'too long' - 'OK' condition
 			FoM			= stFigureOfMerit( nChnkPerRep, nPntPerChnk, gMaxSmpPtspChan, nDA, nAD, nTG,  nCompress, cMAX_TAREA_PTS ) 

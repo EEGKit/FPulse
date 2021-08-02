@@ -44,7 +44,7 @@ Function		InitPanelDSEvalDetails3( sF, sPnOptions )
 	string  	sF, sPnOptions
 	string		sPanelWvNm = sF + sPnOptions
 	variable	n = -1, nItems = 100
-	printf "\tInitPanelDSEvalDetails3( '%s',  '%s' ) \r", sF, sPnOptions 
+	//printf "\tInitPanelDSEvalDetails3( '%s',  '%s' ) \r", sF, sPnOptions 		   // 2021-09-29 removed
 	make /O /T /N=(nItems)	$sPanelWvNm
 	wave  /T	tPn	=		$sPanelWvNm
 	// Cave / Flaw :   No tabcontrol = empty  'Tabs'  must have   different number of spaces (no Tab, not the empty string )  to be recognised correctly
