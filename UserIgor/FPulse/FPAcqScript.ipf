@@ -284,6 +284,8 @@ Function		ConstructOrUpdateNotebook( bShow, sFolder, sSubFolder, sNoteBookWndNm,
 		Notebook	$sNoteBookWndNm , text = sText							// ...by the new file's extracted script text
 		Notebook 	$sNoteBookWndNm,  selection={ (0,0) , (0,0 ) }					// To set the cursor at the beginning of the text  we must select the position...
 		Notebook	$sNoteBookWndNm , text = ""								// ..in front of the first character and insert nothing (dummy operation)
+// 2021-08-01  reset old misleading script notebook window title (from last 'save') when a new scipt is loaded
+		DoWindow /T $sNoteBookWndNm  ""
 	endif	
 End
 

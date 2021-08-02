@@ -44,10 +44,11 @@ static strconstant	ksfACO		= "aco"			// the one-and-only subfolder
 static strconstant	ksfEVO		= "evo"			// the one-and-only subfolder
  
 strconstant	ksFP3_APPNAME	= "FPulse"	  	
-strconstant	ksFP3_VERSION	= "344" 			// Use 3 or 4  digits (and optionally 1 letter) . CONVENTION: Increment AFTER releasing.....
+strconstant	ksFP3_VERSION	= "345" 			// Use 3 or 4  digits (and optionally 1 letter) . CONVENTION: Increment AFTER releasing.....
 constant		kbIS_RELEASE	=  1				// Set to 1 only temporarily  in a Release version.  Is normally set to 0 during  program development to facilitate debugging.
+											// For releasing execute  'PnRelease()'
 
-
+//	345		2021-08-01  fixed bug reported by Peipeng. Bug occurred only for Protocols>1 and in this case for some combinations of script duration and sample interval, had nothing to do with number of DAC channels. Bug lead to scrambled/fragmented acquisition data.
 //	344		2021-05-14  renamed function  FPU_Title()  to  FPUL_Title()  to avoid name conflict with FPulse5.   FPulse5 requires the name to be FPU_Title().
 //	343		2021-03-10  'FPulse'  and  'FEval'  still  accessible in Main menu, but  new-style Unloading reverted to old-style.
 //	342		2021-03-10  Panel  Test1401  converted to new-style (this was easy, but most other panels are beasts, so currently no attempt is made).   'FPulse'  and  'FEval'  still  accessible in Main menu, but  new-style Unloading reverted.

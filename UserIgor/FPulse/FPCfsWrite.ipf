@@ -312,6 +312,8 @@ static Function	stCFSInitWrFile( sFolder, wIO, wFix, nChans )
 			if ( strlen( sChanName ) == 0 )											//  If channel name is missing...
 				sChanName	= ioTNm( nIO ) + num2str( iov( wIO, nIO, c, cIOCHAN) )		// ..supply a default channel name because ReadCFS needs one
 			endif
+			//print "xCFSSetFileChan() params:", CFShnd, c,  sChanName, ios( wIO, nIO, c, cIOUNIT ), gsXUnitsInCfs, INT2, kEQUALSPACED, 2, 0, ERRLINE
+			
 			xCFSSetFileChan( CFShnd, c,  sChanName, ios( wIO, nIO, c, cIOUNIT ), gsXUnitsInCfs, INT2, kEQUALSPACED, 2, 0, ERRLINE )
 		endfor
 
@@ -1129,7 +1131,9 @@ static Function	stComputePOverNCorrection( sFolder, wG, wIO, wFix, wE, wBFS, pr,
 				// print "ComputePOverNCorrection()   Blank / segment",  eTyp( wE, wBFS,  c, bl,  0 ), eTyp( wE, wBFS,  c, bl, 1 ) , mI( "Blank" ), mI( "Segment" ) 
 				// Use the first real segment for offset computation (one could also use a possible leading blank  OR  use a  leading  blank and the following segment) 
 				// If the first element is blank then use the second element. It is the user's responsibility to ensure that it is segment (whose value is constant by definition).
-				variable	nElement	=   eTyp( wE, wBFS,  c, bl, 0 )  == mI( "Blank" ) 	?  1  :  0
+// 2021-04-08
+//				variable	nElement	= ( eTyp( wE, wBFS,  c, bl, 0 )  == mI( "Blank" ) 	?  1  :  0	
+				variable	nElement	=   eTyp( wE, wBFS,  c, bl, 0 )  == mI( "Blank" ) 	?  1  :  0	
 				BAvgEndPt=  BegPt + ( eVL( wE, wBFS, c, bl, 0, sw, nElement, cDUR ) / nSmpInt) 						// in points
 				//BaseSubtractOfs	= mean( wPoN, BAvgBegPt ,  BAvgEndPt )  							// !!! in this special case pnt2x has been omitted as the wave has x scaling = 1 : x = points (mean and faverage yield same result)
 				BaseSubtractOfs	= faverage( wPoN, pnt2x(  wPoN, BAvgBegPt ),  pnt2x(  wPoN, BAvgEndPt ) )  	// !!! in this special case pnt2x  could be omitted as the wave has x scaling = 1 : x = points (mean and faverage yield same result)

@@ -258,7 +258,7 @@ Function 		fDsDlgHook( s )
 // Detects and reacts on resizing the data sections panel
 	struct	WMWinHookStruct &s 			
 	if ( s.eventCode	!= kWHK_mousemoved )
-		 printf "\t\t\tfDsDlgHook()\t\tEvntCode:%2d\t%s\tmod:%2d\t'%s'\t ", s.eventCode, pd( s.eventName, 8 ), s.eventMod, s.winName	// no CR here
+		 //printf "\t\t\tfDsDlgHook()\t\tEvntCode:%2d\t%s\tmod:%2d\t'%s'\t ", s.eventCode, pd( s.eventName, 8 ), s.eventMod, s.winName	// no CR here       // 2021-09-29 removed
 	endif
 	if ( s.eventCode	== kWHK_resize )
 		variable	xWinWSize, xWinPixSize, yWinPixSize
@@ -267,12 +267,12 @@ Function 		fDsDlgHook( s )
 		GetWindow $s.winName, wSizeDC
 		xWinPixSize		=  V_right - V_left
 		yWinPixSize		=  V_bottom - V_top
-		 printf "\twidth( wSize):%4d\twidth( wSizeDC/pixel):%4d\theight:%4d\t ",  xWinWSize, xWinPixSize, yWinPixSize				// no CR here
+		// printf "\twidth( wSize):%4d\twidth( wSizeDC/pixel):%4d\theight:%4d\t ",  xWinWSize, xWinPixSize, yWinPixSize				// no CR here        // 2021-09-29 removed
 		ListBox 	  lbDataSections, 	win = $s.winName, 	size = { xWinPixSize, yWinPixSize - kLB_ADDY }
 		// ListBox 	  lbDataSections, 	win = $sDSPanelNm, 	widths	= { 16, 13, 13, 13, 13, 14 }								// one could additionally adjust different column widths...
 	endif
 	if ( s.eventCode	!= kWHK_mousemoved )
-		 printf "\t\t \r"																						// the final CR (2 tabs for print elimination in Release)
+		// printf "\t\t \r"																						// the final CR (2 tabs for print elimination in Release)   // 2021-09-29 removed
 	endif
 End
 
