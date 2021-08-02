@@ -46,20 +46,20 @@ This repository is setup mainly for documentation purpose, no active development
    git clone https://git.ist.ac.at/jonasgroup/FPulse
 ```
 
-If you have an old version of FPulse installed, it is strongly recommended to uninstall it. (e.g. the uninstaller of 3.3.3 can be found on  C:\UserIgor\FPulse ).
+If you have an old version of FPulse installed, it is strongly recommended to uninstall it. (e.g. the uninstaller of 3.3.3 can be found on C:\UserIgor\FPulse or C:\FPulse ).
 
 * The recommended way to install FPulse is by opening a CMD prompt with admin permission ("Run as administrator) and running
 
 ```
    install.bat
 ```
-FPulse will be installed in C:\FPulse, which contains also the ```uninstall.bat``` script (it needs also admin permissions).
+FPulse will be installed in C:\UserIgor\FPulse, which contains also the ```uninstall.bat``` script (it needs also admin permissions).
 
 
 * Fpulse example scripts for controlling the experiment will be available under
 
 ```
-   C:\FPulse\SomeDemoScripts\
+   C:\UserIgor\FPulse\SomeDemoScripts\
 ```
 
 
