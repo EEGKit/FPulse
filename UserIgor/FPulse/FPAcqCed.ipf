@@ -1750,7 +1750,7 @@ Function 		SetPoints( sFolder, wG, CedMaxSmpPts, nPnts, nSmpInt , nDA, nAD, nTG,
 	nvar		gSmpArOfsAD		= root:uf:aco:co:gSmpArOfsAD
 	nvar		gnOfsDO			= root:uf:aco:co:gnOfsDO
 	variable	nDAMem, nADMem,  SmpArEndDA,  SmpArEndAD, nDigoutMem, nTrfAreaBytes, TAUsed = 0, MemUsed = 0, FoM = 0, BestFoM = 0, nChunkTimeMS
-	variable	nReps, MinReps, nChnkPerRep, nPntPerChnk, nChunks, MinNrChunks, nSumChs, EffChsM, EffChsTA, PtpChkM, PtpChkTA,  c, nCompress, nCompPts, HasPoints
+	variable	nReps, MinReps, nChnkPerRep, nPntPerChnk, nChunks, MinNrChunks, nSumChs, EffChsM, EffChsTA, PtpChkM, PtpChkTA,  c, nCompress, nCompPts, HasPoints, Quot, bOK
 	variable	bPrintIt	=   TRUE//FALSE
 	string		bf
 
@@ -1772,7 +1772,9 @@ Function 		SetPoints( sFolder, wG, CedMaxSmpPts, nPnts, nSmpInt , nDA, nAD, nTG,
 	lstCompressFct	= stCompressionFactors( nPnts, nAD, nTG )			// list containing all allowed compression factors
 
 	//sprintf  bf, "\t\t\t\t\tCed SetPoints( ProtAw:%d)\tMxPts\t\tnPts\tSlc\t DA AD TG Cmp\tSum  MxPtpChan\t MinChk\tChunks\tMinRep\tREPS CHKpREP PTpCHK\t ChkTim\tTA%% M%% FoM \r", cPROT_AWARE
-	sprintf  bf, "\t\t\tCed SetPoints( ProtAw:%d)\t\t\tMxPts\t\tnPts\tSlc\t DA AD TG Cmp\tSum  MxPtpChan\t MinChk\tChunks\tMinRep\tREPS CHKpREP PTpCHK\t ChkTim\tTA%% M%% FoM \r", cPROT_AWARE
+// 2021-08-01 reformated to better align columns.  Must be adjusted depending on screen resolution, font and font size
+//	sprintf  bf, "\t\t\tCed SetPoints( ProtAw:%d)\t\t\tMxPts\t\tnPts\tSlc\t DA AD TG Cmp\tSum  MxPtpChan\t MinChk\tChunks\tMinRep\tREPS CHKpREP PTpCHK\t ChkTim\tTA%% M%% FoM \r", cPROT_AWARE
+	sprintf  bf, "\t\t\tCed SetPoints( ProtAw:%d)\t\t\tMxPts\t\tnPts\tSlc\t DA AD TG Cmp  Sum  MxPtpChan\t MinChk  Chks  MinRp  REPS  CHKpREP  PTpCHK  ChkTim     TA%%     M%%     FoM   Prots    Quot   OK\r", cPROT_AWARE
 	Out1( bf, bPrintIt )
 
 	// Loop1(Compress): Divide  'nPnts'  by all possible compression factors to find those which leave no remainder
@@ -1825,7 +1827,18 @@ Function 		SetPoints( sFolder, wG, CedMaxSmpPts, nPnts, nSmpInt , nDA, nAD, nTG,
 				continue								// Restart the loop
 			endif
 			nChnkPerRep	= nChunks / nReps				// we found a combination of  nReps and  ChnkPerRep which fits nChunks without remainder
-			nPntPerChnk	= nPnts/ nChunks  
+
+
+			// 2021-08-01  Peipeng.  Prevent possible scrambling of data sometimes occurring with certain combinations of script duration and sample interval when Protocols>1
+			Quot		= nChnkPerRep / gnProts
+			bOK			= ( Quot == trunc( Quot ) )
+			if ( ! bOK )
+				MinNrChunks	= nChunks+1
+				continue								// Restart the loop
+			endif
+
+
+			nPntPerChnk	= nPnts / nChunks
 			// printf "\t\t\t\tCed SetPoints(4) \tnCompTG:%3d , \tSum:%.3lf \tCmpPts:\t%7d\tnChunks: %.3lf \t\t   -> %3d , \t==Quot:\t%6d\tReps:%3d/%d\tChnk/Reps:\t%4d\t  PtpChk:%6d \r", nCompress, EffChsTA, nCompPts, nPnts/ nPntPerChnk,  nChunks, nCompPts / nChunks, MinReps, nReps, nChunks / nReps, nPntPerChnk	 
 
 			nChunkTimeMS	= nPntPerChnk * nSmpInt / 1000
@@ -1834,12 +1847,15 @@ Function 		SetPoints( sFolder, wG, CedMaxSmpPts, nPnts, nSmpInt , nDA, nAD, nTG,
 			// Even when optimizing the reaction time  the FigureOfMerit  depends only on the memory usage. The reaction time is introduced as an  'too long' - 'OK' condition
 			FoM			= stFigureOfMerit( nChnkPerRep, nPntPerChnk, gMaxSmpPtspChan, nDA, nAD, nTG,  nCompress, cMAX_TAREA_PTS ) 
 		
-			sprintf  bf, "\t\t\t\t\tCed SetPoints(candi.)\t%10d\t%10d  %4d\t%4d%4d%5d%5d\t%5.3lf %10d\t%6d\t%6d\t%6d\t%6d\t%6d\t%6d\t%6d\t%3d\t%3d\t%6.1lf  \r", CedMaxSmpPts, nPnts, nSlices, nDA, nAD, nTG, nCompress, nDA+ nAD+nTG/nCompress,  gMaxSmpPtspChan, MinNrChunks, nReps * nChnkPerRep, MinReps, nReps, nChnkPerRep, nPntPerChnk, nChunkTimeMS, TAUsed, MemUsed, FoM
-			Out( bf )
+			// 2021-08-01  Peipeng
+			//sprintf  bf, "\t\t\t\t\tCed SetPoints(candi.)\t%10d\t%10d  %4d\t%4d%4d%5d%5d\t%5.3lf %10d\t%6d\t%6d\t%6d\t%6d\t%6d\t%6d\t%6d\t%3d\t%3d\t%6.1lf  \r", CedMaxSmpPts, nPnts, nSlices, nDA, nAD, nTG, nCompress, nDA+ nAD+nTG/nCompress,  gMaxSmpPtspChan, MinNrChunks, nReps * nChnkPerRep, MinReps, nReps, nChnkPerRep, nPntPerChnk, nChunkTimeMS, TAUsed, MemUsed, FoM
+			//Out( bf )
+			sprintf  bf, "\t\t\t\t\tCed SetPoints(candi.)\t%10d\t%10d  %4d\t%4d%4d%5d%5d\t%5.3lf %10d\t%6d\t%6d\t\t%6d\t%6d\t\t%6d\t\t%6d\t %6d\t%3d\t%3d\t%5.1f\t%8d\t%4.1f\t %2d\r", CedMaxSmpPts, nPnts, nSlices, nDA, nAD, nTG, nCompress, nDA+ nAD+nTG/nCompress,  gMaxSmpPtspChan, MinNrChunks, nReps * nChnkPerRep, MinReps, nReps, nChnkPerRep, nPntPerChnk, nChunkTimeMS, TAUsed, MemUsed, FoM, gnProts, Quot, bOK
+			Out1( bf, 0 )
 
 			MinNrChunks	= nChunks + 1					// When optimizing ONLY for high data rates: Comment out this line 
 
-			if ( nChunkTimeMS <= gMaxReactnTime * 1000 )	// When optimizing ONLY for high data rates: Always true
+			if ( nChunkTimeMS <= gMaxReactnTime * 1000 )	// When optimizing ONLY for high data rates: Skip condiition = set always to true
 				if ( FoM > BestFoM )
 					gnCompressTG	= nCompress
 					gnReps		= nReps	
@@ -1856,9 +1872,11 @@ Function 		SetPoints( sFolder, wG, CedMaxSmpPts, nPnts, nSmpInt , nDA, nAD, nTG,
 
 	nChunkTimeMS	= gPntPerChnk * nSmpInt / 1000
 	MemUsed		= stMemUse(  gChnkPerRep, gPntPerChnk, gMaxSmpPtspChan )
-	TAused		= stTAuse( gPntPerChnk, nDA, nAD, cMAX_TAREA_PTS ) 
-	FoM			= stFigureOfMerit( gChnkPerRep, gPntPerChnk, gMaxSmpPtspChan, nDA, nAD, nTG,  gnCompressTG, cMAX_TAREA_PTS ) 
-	sprintf  bf, "\t\t\tCed SetPoints(final)\t\t\t%10d\t%10d  %4d\t%4d%4d%5d%5d\t%5.3lf %10d\t%6d\t%6d\t%6d\t%6d\t%6d\t%6d\t%6d\t%3d\t%3d\t%6.1lf ( incl. %d nProts)  \r", CedMaxSmpPts, nPnts, nSlices, nDA, nAD, nTG, gnCompressTG, nDA+ nAD+nTG/gnCompressTG,  gMaxSmpPtspChan, MinNrChunks, gnReps * gChnkPerRep, MinReps, gnReps, gChnkPerRep, gPntPerChnk, nChunkTimeMS, TAUsed, MemUsed, FoM, gnProts
+	TAused			= stTAuse( gPntPerChnk, nDA, nAD, cMAX_TAREA_PTS ) 
+	FoM				= stFigureOfMerit( gChnkPerRep, gPntPerChnk, gMaxSmpPtspChan, nDA, nAD, nTG,  gnCompressTG, cMAX_TAREA_PTS ) 
+	Quot			= gChnkPerRep / gnProts
+	bOK				= ( Quot == trunc( Quot ) )
+	sprintf  bf, "\t\t\tCed SetPoints( final )\t\t\t%10d\t%10d  %4d\t%4d%4d%5d%5d\t%5.3lf %10d\t%6d\t%6d\t\t%6d\t%6d\t\t%6d\t\t%6d\t %6d\t%3d\t%3d\t%5.1f\t%8d\t%4.1f\t %2d\r", CedMaxSmpPts, nPnts, nSlices, nDA, nAD, nTG, gnCompressTG, nDA+ nAD+nTG/gnCompressTG,  gMaxSmpPtspChan, MinNrChunks, gnReps * gChnkPerRep, MinReps, gnReps, gChnkPerRep, gPntPerChnk, nChunkTimeMS, TAUsed, MemUsed, FoM, gnProts, Quot, bOK
 	Out1( bf, bPrintIt )
 
 	// The following warning sorts out bad combinations which result from the 'Minimum chunk time' condition (> 1000 ms)
