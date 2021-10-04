@@ -59,9 +59,9 @@ GOTO INSTALL
 	copy  %SRCDIR%\UserIgor\XOP_Axon\FP_Mc700Tg\VC2015\FP_Mc700Tg.xop  %DESTDIR%\XOPs\
 	copy  %SRCDIR%\UserIgor\XOP_Ced\FPulseCed\VC2015\FPulseCed.xop     %DESTDIR%\XOPs\
 
-	ECHO === Install DLLs (need elevated permissions) ===
+	ECHO === Install DLLs and remove CFS32.dll, (need elevated permissions) ===
+	del /Q C:\Windows\SysWOW64\CFS32.dll
 	copy  %SRCDIR%UserIgor\XOP_Dll\Use1432.dll 	C:\Windows\SysWOW64\
-	copy  %SRCDIR%UserIgor\XOP_Dll\CFS32.dll 	C:\Windows\SysWOW64\
 	copy  %SRCDIR%UserIgor\XOP_Dll\AxMultiClampMsg.dll 	C:\Windows\SysWOW64\
 
 	ECHO === Create Links for Igor ===

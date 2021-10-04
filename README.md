@@ -20,9 +20,7 @@ The Copyright does not apply to these files (instructions for downloading these 
 
 	.\UserIgor\XOP_Dll\AxMultiClampMsg.dll
 	.\UserIgor\XOP_Dll\Use1432.dll
-	.\UserIgor\XOP_Dll\CFS32.dll
 
-	.\UserIgor\XOP_Ced\FPulseCed\CFS32.lib
 	.\UserIgor\XOP_Ced\FPulseCed\Use1432.lib
 	.\UserIgor\XOP_Ced\FPulseCed\Cfs.h
 	.\UserIgor\XOP_Ced\FPulseCed\Cfs.c
@@ -120,9 +118,7 @@ These files are currently also in the [repository](https://git.ist.ac.at/jonasgr
 
 	.\UserIgor\XOP_Dll\AxMultiClampMsg.dll
 	.\UserIgor\XOP_Dll\Use1432.dll
-	.\UserIgor\XOP_Dll\CFS32.dll
 
-	.\UserIgor\XOP_Ced\FPulseCed\CFS32.lib
 	.\UserIgor\XOP_Ced\FPulseCed\Use1432.lib
 	.\UserIgor\XOP_Ced\FPulseCed\Cfs.h
 	.\UserIgor\XOP_Ced\FPulseCed\Cfs.c
@@ -133,8 +129,6 @@ These files are currently also in the [repository](https://git.ist.ac.at/jonasgr
 So from a technical reason you might not need them. But you might need them for legal reasons, or in case we are now allowed to redistribute them.
 
 * Download, and install [1401 Windows Installer](http://ced.co.uk/files/winsupp.exe) in the default location (C:\1401\), and extract C:\1401\utils\Use1432.dll these files
-
-* Download, and install  [CFS library](http://ced.co.uk/files/MS54.exe) in the default location (C:\CFS library\), and extract C:\CFS Library\CPP\CFS32.dll
 
 * Download and install [Installer of MC700B](http://axograph.com/installers/MultiClamp_2_1_0_16.exe), in the default location (C:\Program Files (x86)\Molecular Devices\MultiClamp 700B Commander), and extract AxMultiClampMsg.dll from
 

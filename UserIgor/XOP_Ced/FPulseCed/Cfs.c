@@ -3887,9 +3887,9 @@ CFSAPI(WORD) GetChanData(short  handle,              /* program file handle */
     short   Proc = 14;                                   /* function number */
     WORD    elementSize,dataOffset,numSecs;
     WORD    retval;
-    WORD    bufferSize,spacing,pointsPerBuffer,buffersNeeded,
+    WORD    spacing,pointsPerBuffer,buffersNeeded,
             bufferLoop,residueElements;
-    long    filePos,totalPoints,numElements,longSpace;
+    long    bufferSize,filePos,totalPoints,numElements,longSpace;
     TpStr   dBufferP;
 //    THandle dummy;
     TFileInfo _near *pfileInfo;

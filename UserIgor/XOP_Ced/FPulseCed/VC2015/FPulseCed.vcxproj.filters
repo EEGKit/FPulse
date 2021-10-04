@@ -45,11 +45,13 @@
     <ClCompile Include="..\FPulseCfs.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\Cfs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\..\..\..\..\XOP Toolkit 6\IgorXOPs6\XOPSupport\IGOR.lib" />
     <Library Include="..\..\..\..\..\XOP Toolkit 6\IgorXOPs6\XOPSupport\VC2015\XOPSupport.lib" />
-    <Library Include="..\CFS32.lib" />
     <Library Include="..\Use1432.lib" />
   </ItemGroup>
 </Project>
