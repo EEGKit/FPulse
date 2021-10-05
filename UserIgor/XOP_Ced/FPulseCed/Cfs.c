@@ -471,7 +471,7 @@ static short RecoverTable(short handle,TpLong relSize,TpLong tPos,
                                                  TpUShort dSecs,TpLong fSize);
 static short TransferTable(WORD sects, fDef rdHdl, fDef wrHdl);
 static short GetMemTable(short handle);
-static TpStr AllocateSpace(TpUShort sizeP, WORD steps);
+static TpStr AllocateSpace(size_t *sizeP, WORD steps);
 static void  ExtractBytes(TpStr destP,WORD dataOffset,
              TpStr srcP,WORD points,WORD spacing,WORD ptSz);
 static short FileUpdate(short handle,TpFHead fileHP);
@@ -3889,7 +3889,8 @@ CFSAPI(WORD) GetChanData(short  handle,              /* program file handle */
     WORD    retval;
     WORD    spacing,pointsPerBuffer,buffersNeeded,
             bufferLoop,residueElements;
-    long    bufferSize,filePos,totalPoints,numElements,longSpace;
+    long    filePos,totalPoints,numElements,longSpace;
+    size_t  bufferSize;
     TpStr   dBufferP;
 //    THandle dummy;
     TFileInfo _near *pfileInfo;
@@ -3993,7 +3994,7 @@ CFSAPI(WORD) GetChanData(short  handle,              /* program file handle */
 //#ifndef WIN32
                                                      /* get as much as poss */
         if ((numElements*spacing) > MAXMEMALLOC)
-            bufferSize = (WORD)(MAXMEMALLOC - (MAXMEMALLOC % spacing));
+            bufferSize = (MAXMEMALLOC - (MAXMEMALLOC % spacing));
         else
 //#endif
             bufferSize = numElements * spacing;
@@ -5240,9 +5241,9 @@ short GetMemTable(short handle)
 **
 *****************************************************************************/
 
-TpStr AllocateSpace(TpUShort sizeP, WORD steps)
+TpStr AllocateSpace(size_t *sizeP, WORD steps)
 {
-    WORD     buffSize;
+    size_t   buffSize;
     TpStr    buffP;
 
     buffSize = *sizeP;                              /* required buffer size */
