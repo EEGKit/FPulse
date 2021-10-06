@@ -214,7 +214,8 @@ int xCfsGetGenInfo( void *ptr) {
 
    char      errbuf[300]; 
    char      tmp[300];							// CFS uses not more than 50 characters..
-   int       len, err = 0;
+   size_t    len;
+   int       err = 0;
    Handle    str1 = NIL;
 
    GetGenInfo( hnd, time, date, comment );
@@ -249,7 +250,8 @@ int xCfsGetFileInfo( void *ptr ) {
 
    char      errbuf[300]; 
    char      tmp[300];							// CFS uses not more than 20 characters..
-   int       len, err = 0;
+   size_t    len;
+   int       err = 0;
    Handle    str1 = NIL;
 
    GetFileInfo( hnd, &channels, &fileVars, &DSVars, &dataSections );
@@ -290,7 +292,8 @@ int xCfsGetFileChan( void *ptr) {
 
    char      errbuf[300]; 
    char      tmp[300];     // CFS uses not more than 50 characters..
-   int       len, err = 0;
+   size_t    len;
+   int       err = 0;
    Handle    str1 = NIL;
 
    GetFileChan( hnd, Channel, ChannelName, yUnits, xUnits, &DataType, &DataKind, &Spacing, &Other );
@@ -372,7 +375,8 @@ int xCfsGetDSChan( void *ptr) {
 
    char      errbuf[300]; 
    char      tmp[300];					// CFS uses not more than 20 characters..
-   int       len, err = 0;
+   size_t    len;
+   int       err = 0;
    Handle    str1 = NIL;
 
    GetDSChan( hnd, Channel, DataSection, &StartOffset, &Points, &yScale, &yOffset, &xScale, &xOffset );
@@ -550,8 +554,8 @@ int xCfsSetVarVal( void *ptr) {
    WORD      DataSection  = (WORD)p->DataSection;
    int		 ErrMode      = (int)p->ErrMode; 
    TDataType VarType      = GetVarType( hnd, VarNo, VarKind, (int)p->ErrMode );
-   int       VarSize      = GetVarSize( hnd, VarNo, VarKind, (int)p->ErrMode );
-   int       PassedSize   = GetHandleSize( p->VarAsString );
+   size_t    VarSize      = GetVarSize( hnd, VarNo, VarKind, (int)p->ErrMode );
+   size_t    PassedSize   = GetHandleSize( p->VarAsString );
 
    Handle    CVarAsString = IHC( p->VarAsString );  // below we need a C style string
 
@@ -598,14 +602,14 @@ int xCfsSetVarVal( void *ptr) {
 		if ( PassedSize >= VarSize )
 		{
 	      (*CVarAsString)[ VarSize-1 ]= '\0';          // same length or shorter than original string
-	      sprintf_s( errbuf, 10000, "++++Error: xCfsSetVarVal() String too long, truncated from %d to %d chars: '%s'\r", PassedSize, VarSize-1, *CVarAsString );   
+	      sprintf_s( errbuf, 10000, "++++Error: xCfsSetVarVal() String too long, truncated from %d to %d chars: '%s'\r", (int)PassedSize, VarSize-1, *CVarAsString );
 			XOPNotice( errbuf );
       } 
       SetVarVal( hnd, VarNo, VarKind, DataSection, *CVarAsString );
 
       if ( ErrMode & MSGLINE )
    	{
-         sprintf_s( errbuf, 10000, "\t\t\txCfsSetVarVal(string) \t type:%d  len:%2d (max:%d)  string:'%s' \r", VarType, PassedSize, VarSize, *CVarAsString );   
+         sprintf_s( errbuf, 10000, "\t\t\txCfsSetVarVal(string) \t type:%d  len:%2d (max:%d)  string:'%s' \r", VarType, (int)PassedSize, VarSize, *CVarAsString );
          XOPNotice( errbuf );
       }
    }
@@ -630,7 +634,7 @@ int xCfsGetVarVal( void *ptr) {
    TCFSKind  VarKind      = (TCFSKind)p->VarKind;   // FILEVAR or DS VAR
    WORD      DataSection  = (WORD)p->DataSection;
    TDataType VarType      = GetVarType( hnd, VarNo, VarKind, (int)p->ErrMode );
-   int       VarSize      = GetVarSize( hnd, VarNo, VarKind, (int)p->ErrMode );
+   size_t    VarSize      = GetVarSize( hnd, VarNo, VarKind, (int)p->ErrMode );
    char      CVarChar;
    short     CVarShort;
    long      CVarLong;
@@ -689,7 +693,7 @@ int xCfsGetVarVal( void *ptr) {
 		memcpy( *str1, sValOrTxt, VarSize);          // copy local temporary buffer to persistent Igor output string
 
    if ( (int)p->ErrMode & MSGLINE ) {
-      sprintf_s( errbuf, 1000, "\t\t\t\t\txCfsGetVarVal(  any  )\t type:%d  len:%2d  varsize:%d  string:'%s'\r", VarType, strlen(sValOrTxt), VarSize, sValOrTxt ); 
+      sprintf_s( errbuf, 1000, "\t\t\t\t\txCfsGetVarVal(  any  )\t type:%d  len:%2d  varsize:%d  string:'%s'\r", VarType, (int)strlen(sValOrTxt), (int)VarSize, sValOrTxt ); 
       XOPNotice( errbuf );
 	}
 	err = 0;
@@ -755,7 +759,8 @@ int xCfsGetVarDesc( void *ptr) {
    TDesc     Description;
    char      errbuf[300]; 
    char      tmp[300];     // CFS uses not more than 50 characters..
-   int       len, err = 0;
+   size_t    len;
+   int       err = 0;
    Handle    str1 = NIL;
  
 
@@ -861,7 +866,7 @@ char *StringFromList( int index, char *sString, char *sSep )
    int   posBeg=-1, posEnd=-1, nSeps=-1;
    // char buf[100];
 
-   int   len = strlen( sString );
+   int   len = (int)strlen( sString );
    if ( len == 0 || len > MAXSTRING - 3 || strlen( sSep ) == 0 )
       return sExtracted;
 
@@ -885,7 +890,7 @@ char *StringFromList( int index, char *sString, char *sSep )
  
 int CountSepsInList( char *sString, char *sSep )
 {
-   int cnt = 0, i, len = strlen( sString );
+   int cnt = 0, i, len = (int)strlen( sString );
    for ( i = 0; i < len; i += 1 )
       if ( sString[ i ] == sSep[ 0 ] )
          cnt += 1;
@@ -894,7 +899,7 @@ int CountSepsInList( char *sString, char *sSep )
 
 int GetSepPosInList( int index, char *sString, char *sSep )
 {
-   int cnt = 0, i, len = strlen( sString );
+   int cnt = 0, i, len = (int)strlen( sString );
    for ( i = 0; i < len; i += 1 ) {
       if ( sString[ i ] == sSep[ 0 ] ) {
          if ( cnt == index )

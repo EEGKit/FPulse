@@ -69,6 +69,9 @@
         #include <types.h>        /* Needed for various types               */
         #include <memory.h>       /* for NewHandle etc                      */
         #include <string.h>       /* for string manipulations               */
+    #elif defined(__MINGW32__)
+        #include <sys/types.h>    /* Needed for various types               */
+        #include <sys/stat.h>                            /*    ditto        */
     #else
         #include <sys\types.h>    /* Needed for various types               */
         #include <sys\stat.h>                            /*    ditto        */
