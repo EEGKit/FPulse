@@ -254,7 +254,7 @@ static int iAttached = 0;                       // counts process attaches so ca
 /****************************************************************************
 ** Windows NT Specific Variables and internal types
 ****************************************************************************/
-size_t aHand1401[MAX1401 + 1] = { 0 };    // handles for 1401s
+void* aHand1401[MAX1401 + 1] = { 0 };    // handles for 1401s
 #if defined(__WINE__)
 static uint32_t aXferEvent[MAX1401+1] = {0};        // transfer events for the 1401s
 static uint32_t apAreas[MAX1401][MAX_TRANSAREAS]; // Locked areas

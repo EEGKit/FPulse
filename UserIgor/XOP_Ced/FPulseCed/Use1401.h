@@ -13,7 +13,7 @@
 
 #define MAX1401         8       // The number of 1401s that can be supported
 extern short asType1401[MAX1401+1];         // The type of the 1401
-extern size_t aHand1401[MAX1401+1];
+extern void* aHand1401[MAX1401+1];
 extern short asDriverType[MAX1401+1];
 extern int lLastDriverType;
 extern int alDriverVersion[MAX1401+1];            // version/type of each driver

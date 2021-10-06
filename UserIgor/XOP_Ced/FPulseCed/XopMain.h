@@ -4,7 +4,7 @@
 
 typedef struct
 {
-	int    (*fnc)();
+	XOPIORecParam (*fnc)();
 } FUNC;
 
 FUNC sFunc[];

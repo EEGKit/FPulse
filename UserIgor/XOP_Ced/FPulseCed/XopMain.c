@@ -14,9 +14,9 @@
 ///////////////////////////////////////////////////////////////////////////////////
 // Fnction-ROUTINEN
 
-int IndexOfLastFunction()
+XOPIORecParam IndexOfLastFunction()
 {
-   int fCnt = 0;
+	XOPIORecParam fCnt = 0;
    while ( sFunc[fCnt].fnc )
       fCnt++;
    return fCnt-1;
@@ -37,16 +37,16 @@ static int  DoFunction()
 }
 
 
-static long RegisterFunction()
+XOPIORecParam RegisterFunction()
 {
 // 0409 using 'Direct method' only
-	int funcIndex;
+	XOPIORecParam funcIndex;
 
 	funcIndex = GetXOPItem(0);						// which function invoked ?
 
    if ( funcIndex > IndexOfLastFunction() )	// more functions in xxx.RC
       return NIL;										//  than in sFunc array
-   return (long)sFunc[funcIndex].fnc;			// the function adress is returned
+   return sFunc[funcIndex].fnc;			// the function adress is returned
 }
 
 
@@ -54,7 +54,7 @@ static long RegisterFunction()
 static void  XOPEntry( void )
 //	This is the entry point from the host application to the XOP for all messages after the INIT message.
 {	
- 	long result = 0;
+	int result = 0;
 	int  type	= GetXOPMessage();
  
    switch( type ) 
@@ -145,8 +145,8 @@ Handle	IHC( Handle sIgorString )
 //  returns C string or 0 in case of error meaning NO_INPUT_STRING or NOMEM 
 //! after being finished with the C string you MUST REMOVE it with  DisposeHandle( Cstring ); 
 { 
-	int		len;
-   Handle	pCStr;
+	size_t  len;
+	Handle	pCStr;
 	
 	if ( !sIgorString )								// error:  input string does not exist
 	{
