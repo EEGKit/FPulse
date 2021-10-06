@@ -61,7 +61,8 @@ GOTO INSTALL
 
 	ECHO === Install DLLs and remove CFS32.dll, (need elevated permissions) ===
 	del /Q C:\Windows\SysWOW64\CFS32.dll
-	copy  %SRCDIR%UserIgor\XOP_Dll\Use1432.dll 	C:\Windows\SysWOW64\
+	del /Q C:\Windows\SysWOW64\Use1432.dll
+	REM copy  %SRCDIR%UserIgor\XOP_Dll\Use1432.dll 	C:\Windows\SysWOW64\
 	copy  %SRCDIR%UserIgor\XOP_Dll\AxMultiClampMsg.dll 	C:\Windows\SysWOW64\
 
 	ECHO === Create Links for Igor ===
