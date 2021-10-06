@@ -179,6 +179,7 @@
     <ClInclude Include="..\Cfs.h" />
     <ClInclude Include="..\Machine.h" />
     <ClInclude Include="..\Use1401.h" />
+    <ClInclude Include="..\use14_ioc.h" />
     <ClInclude Include="FPulseCed.h" />
     <ClInclude Include="XopMain.h" />
   </ItemGroup>
@@ -186,12 +187,12 @@
     <ClCompile Include="..\Cfs.c" />
     <ClCompile Include="..\FPulseCed.c" />
     <ClCompile Include="..\FPulseCfs.c" />
+    <ClCompile Include="..\use1401.c" />
     <ClCompile Include="..\XopMain.c" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\..\..\..\..\XOP Toolkit 6\IgorXOPs6\XOPSupport\IGOR.lib" />
     <Library Include="..\..\..\..\..\XOP Toolkit 6\IgorXOPs6\XOPSupport\VC2015\XOPSupport.lib" />
-    <Library Include="..\Use1432.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

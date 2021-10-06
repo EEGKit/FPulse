@@ -11,10 +11,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="FPulseCed.rc">
+    <ResourceCompile Include="..\FPulseCedWinCustom.rc">
       <Filter>Source Files</Filter>
     </ResourceCompile>
-    <ResourceCompile Include="..\FPulseCedWinCustom.rc">
+    <ResourceCompile Include="FPulseCed.rc">
       <Filter>Source Files</Filter>
     </ResourceCompile>
   </ItemGroup>
@@ -34,6 +34,9 @@
     <ClInclude Include="..\Cfs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\use14_ioc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\FPulseCed.c">
@@ -48,10 +51,12 @@
     <ClCompile Include="..\Cfs.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\use1401.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\..\..\..\..\XOP Toolkit 6\IgorXOPs6\XOPSupport\IGOR.lib" />
     <Library Include="..\..\..\..\..\XOP Toolkit 6\IgorXOPs6\XOPSupport\VC2015\XOPSupport.lib" />
-    <Library Include="..\Use1432.lib" />
   </ItemGroup>
 </Project>

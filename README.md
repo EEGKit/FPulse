@@ -10,28 +10,20 @@ If not stated otherwise, all copyrights are with:
   Copyright (C) 2011-2021 Peter Jonas, Institute of Science and Technology, Austria
 ```
 
-This code is provided under the GPLv3 license (see COPYING).
-
-The Copyright does not apply to these files (instructions for downloading these from the vendor are shown further below):
+This code is provided under the GPLv3 license (see COPYING). The GPL license does not apply to these files:
 
 ```
 	.\UserIgor\XOP_Axon\FP_Mc700Tg\MultiClampBroadcastMsg.hpp
 	.\UserIgor\XOP_Axon\FP_Mc700Tg\MCTelegraphs.h
-
 	.\UserIgor\XOP_Dll\AxMultiClampMsg.dll
-	.\UserIgor\XOP_Dll\Use1432.dll
-
-	.\UserIgor\XOP_Ced\FPulseCed\Use1432.lib
-	.\UserIgor\XOP_Ced\FPulseCed\Cfs.h
-	.\UserIgor\XOP_Ced\FPulseCed\Cfs.c
-	.\UserIgor\XOP_Ced\FPulseCed\Use1401.h
-	.\UserIgor\XOP_Ced\FPulseCed\MACHINE.H
 ```
+
+These files can be also obtained by installing [Installer of MC700B](http://axograph.com/installers/MultiClamp_2_1_0_16.exe). These files are then located at (C:\Program Files (x86)\Molecular Devices\MultiClamp 700B Commander).
 
 This repository is setup mainly for documentation purpose, no active development or support is provided.
 
 
-# Installing FPulse
+## Installing FPulse
 * Prerequisites are
 	- MS Windows (7 or later)
 	- IgorPro 6.20+
@@ -61,7 +53,7 @@ FPulse will be installed in C:\UserIgor\FPulse, which contains also the ```unins
 ```
 
 
-# Build requirements
+## Build requirements
 
 ### Igor XOP toolkit
 
@@ -107,31 +99,6 @@ According to [this documentation](https://docs.microsoft.com/en-us/cpp/build/ref
 ```
 
 You might also need to adapt the path in the "*.rc" files. (When you rebuild the project, the compiler will point you to the line). 
-
-### Files from _Axon Instruments_ and _Cambridge Electronic Devices (CED)_
-
-These files are currently also in the [repository](https://git.ist.ac.at/jonasgroup/FPulse/-/tree/master):
-
-```
-	.\UserIgor\XOP_Axon\FP_Mc700Tg\MultiClampBroadcastMsg.hpp
-	.\UserIgor\XOP_Axon\FP_Mc700Tg\MCTelegraphs.h
-
-	.\UserIgor\XOP_Dll\AxMultiClampMsg.dll
-	.\UserIgor\XOP_Dll\Use1432.dll
-
-	.\UserIgor\XOP_Ced\FPulseCed\Use1432.lib
-	.\UserIgor\XOP_Ced\FPulseCed\Cfs.h
-	.\UserIgor\XOP_Ced\FPulseCed\Cfs.c
-	.\UserIgor\XOP_Ced\FPulseCed\Use1401.h
-	.\UserIgor\XOP_Ced\FPulseCed\MACHINE.H
-```
-
-So from a technical reason you might not need them. But you might need them for legal reasons, or in case we are now allowed to redistribute them.
-
-* Download, and install [1401 Windows Installer](http://ced.co.uk/files/winsupp.exe) in the default location (C:\1401\), and extract C:\1401\utils\Use1432.dll these files
-
-* Download and install [Installer of MC700B](http://axograph.com/installers/MultiClamp_2_1_0_16.exe), in the default location (C:\Program Files (x86)\Molecular Devices\MultiClamp 700B Commander), and extract AxMultiClampMsg.dll from
-
 
 
 # Contact
