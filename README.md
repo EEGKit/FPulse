@@ -30,7 +30,12 @@ This repository is setup mainly for documentation purpose, no active development
 	- MultiClamp 700A or 700B  or  Axopatch 200A or 200B
 	- CED 1401
 
-* Download and unzip [FPulse (latest)](https://git.ist.ac.at/jonasgroup/FPulse/-/archive/master/FPulse-master.zip) or use git
+* Download and unzip [FPulse v3.45 (stable)](https://git.ist.ac.at/jonasgroup/FPulse/-/archive/v3.45/FPulse-v3.45.zip). This is recommended for production use, i.e. when you want to use FPulse for your data recordings.
+
+* If you want to test and tweak FPulse, use the latest development version which is available from here:
+[FPulse (latest)](https://git.ist.ac.at/jonasgroup/FPulse/-/archive/master/FPulse-master.zip)
+
+* or use git
 
 ```
    git clone https://git.ist.ac.at/jonasgroup/FPulse
