@@ -321,7 +321,7 @@ static short CheckHandle(short h)
 ** U14Status1401    Used for functions which do not pass any data in but
 **                  get data back
 ****************************************************************************/
-static short U14Status1401(short sHand, LONG lCode, TCSBLOCK* pBlk)
+short U14Status1401(short sHand, LONG lCode, TCSBLOCK* pBlk)
 {
     if (VERBOSE) fprintf(stderr,"%s(%i,%i,..)\n",__func__,sHand,lCode);
 
@@ -357,7 +357,7 @@ static short U14Status1401(short sHand, LONG lCode, TCSBLOCK* pBlk)
 ** U14Control1401   Used for functions which pass data in and only expect
 **                  an error code back
 ****************************************************************************/
-static short U14Control1401(short sHand, LONG lCode, TCSBLOCK* pBlk)
+short U14Control1401(short sHand, LONG lCode, TCSBLOCK* pBlk)
 {
 
     if (VERBOSE) fprintf(stderr,"%s(%i,%i,..)\n",__func__,sHand,lCode);

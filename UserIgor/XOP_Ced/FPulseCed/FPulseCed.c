@@ -17,7 +17,7 @@
 
 #include "FPulseCed.h"
 #include "XopMain.h"
-#include "Use1401.h"				// for the CED1401
+#include "use1401.h"				// for the CED1401
 
 
 #pragma pack(2)					// All structures are 4-byte-aligned. // for MCTG 4 instead of 2

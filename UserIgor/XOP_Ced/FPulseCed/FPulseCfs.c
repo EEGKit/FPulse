@@ -43,7 +43,7 @@
 
 #include <XOPStandardHeaders.h>
 
-#include "Cfs.h"
+#include "cfs.h"
 #include "FPulseCed.h"
 
 #include "XopMain.h"
