@@ -9,11 +9,11 @@
 
 /////////////////////////////////////////////////////////////////////////////
 
-int	ItemsInList( char *sString, char *sSep )
+size_t	ItemsInList( char *sString, char *sSep )
 {
 // Returns number of items in list, last separator may be missing or not
 	BOOL	bLastSepIsMissing = 0;
-	int	len = strlen( sString ), nItems;
+	size_t	len = strlen( sString ), nItems;
    if ( len == 0 || len > kMAXSTRING - 3 || strlen( sSep ) != 1 ) 
       return -1;		// error
 
@@ -31,7 +31,8 @@ void	StringFromList( int index, char *sString, char *sSep, char *sItem )
 // Extracts sItem  and  returns number of items in list
 // STRING LENGTH is LIMITED TO 'kMAXSTRING'
    char  sStringCopy[ kMAXSTRING ] = "";
-   int   posBeg=-1, posEnd=-1, nSeps=-1, len;
+   int   posBeg = -1, posEnd = -1, nSeps = -1;
+   size_t len;
    // char buf[100];
 
 	strcpy( sItem, "" );
@@ -96,7 +97,8 @@ char *StringFromList( int index, char *sString, char *sSep )
  
 int CountSepsInList( char *sString, char *sSep )
 {
-   int cnt = 0, i, len = strlen( sString );
+	int cnt = 0, i;
+	size_t len = strlen(sString);
    for ( i = 0; i < len; i += 1 )
       if ( sString[ i ] == sSep[ 0 ] )
          cnt += 1;

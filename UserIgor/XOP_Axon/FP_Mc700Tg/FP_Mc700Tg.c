@@ -377,12 +377,12 @@ BOOL   MCTG_Match700BSignalIDs( UINT uSerialNum, UINT uChannelID, LPARAM lparamS
 //---------------------------------------------------------------------------------
 // TIMERNUMBER <--> Channel, AXOBUS, COM PORT
 
-void	Timer2Chans( UINT TimerId, UINT TimerBase, UINT* nMC )
+void	Timer2Chans( size_t TimerId, size_t TimerBase, size_t* nMC )
 {
 	*nMC	= ( TimerId - TimerBase );
 }
 
-UINT	Chans2Timer( UINT TimerBase, UINT nMC )
+UINT	Chans2Timer(size_t TimerBase, size_t nMC )
 {
 	return TimerBase + nMC;
 }
@@ -532,7 +532,7 @@ void	OnConnect( HWND hWnd, UINT nMC )
 {
 	char		sMsg[2000], sMsg1[200];
 	LPARAM	lparamSignalIDs;
-	UINT		uRetVal;
+	size_t	uRetVal;
 	int		tp, sn, ab, ch, po;
 
    ASSERT(hWnd != NULL, "Window handle in OnConnect() is NULL");
@@ -620,9 +620,9 @@ void	OnClose( HWND hWnd, UINT nMC )			// UNTESTED
 void	OnRequest( HWND hWnd, UINT nMC )
 {
 	char		sMsg[2000], sMsg1[1000];
-	LPARAM	SignalID;
-   UINT		tp, sn, po, ab, ch;
-	UINT		uRetVal;
+	LPARAM		SignalID;
+	UINT		tp, sn, po, ab, ch;
+	size_t		uRetVal;
 
 
 	ASSERT( hWnd != NULL, "Window handle in OnRequest() is NULL" );
@@ -658,7 +658,7 @@ void	OnBroadcast( HWND hWnd )
 {
 	char		sMsg[2000];
 //	LPARAM		lparamSignalIDs;
-	UINT		uRetVal;
+	size_t		uRetVal;
 
    ASSERT(hWnd != NULL, "Window handle in OnBroadcast is NULL " );
 
@@ -942,12 +942,12 @@ int		ProcessTimerMsg( HWND hwnd, WPARAM TimerId )	//todo return TRUE,FALSE or br
 
 int	ProcessCopydataMsg( HWND hwnd, LPARAM ptrCopydataStruct )	//todo return TRUE,FALSE or break????
 {
-   int		po = 0;
+	int 		po = 0;
 	char		sMsg[2000], sMsg1[200];
-	UINT		uRetVal;
+	size_t		uRetVal;
 	char		sSerialNumber[64];
-	int		nSerialNumber;
-	int		nMC;	
+	int 		nSerialNumber;
+	int 		nMC;
 	BOOL		bIs700B;
 	MC_TELEGRAPH_DATA* pmctdReceived;
 	COPYDATASTRUCT*	 pcpds			= (COPYDATASTRUCT*) ptrCopydataStruct;
@@ -1280,7 +1280,7 @@ int	xMCTgPickupInfo( struct { Handle sRes;	}*p )
 	extern char gsAllChan[];
    Handle		str1 = NIL;
    char			errbuf[4000]; 
-   int			len = strlen( gsAllChan );
+   size_t		len = strlen( gsAllChan );
    int			err = 0;
    if (( str1 = NewHandle( len )) == NIL )   // get output handle , do not provide space for '\0' 
    {
