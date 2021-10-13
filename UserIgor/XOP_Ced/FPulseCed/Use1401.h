@@ -10,6 +10,7 @@
 #ifndef __USE1401_H__
 #define __USE1401_H__
 #include "machine.h"
+#include "use14_ioc.h"          // links to device driver stuff
 
 #define MAX1401         8       // The number of 1401s that can be supported
 extern short asType1401[MAX1401+1];         // The type of the 1401
@@ -243,6 +244,10 @@ U14API(int)   U14TestTransferEvent(short hand, WORD wArea);
 U14API(int)   U14WaitTransferEvent(short hand, WORD wArea, int msTimeOut);
 U14API(short) U14GetTransfer(short hand, TGET_TX_BLOCK *pTransBlock);
 
+U14API(short) U14WorkingSet(DWORD dwMinKb, DWORD dwMaxKb);
+U14API(short) U14Status1401(short sHand, LONG lCode, TCSBLOCK* pBlk);
+U14API(short) U14Control1401(short sHand, LONG lCode, TCSBLOCK* pBlk);
+
 U14API(short) U14ToHost(short hand, char* pAddrHost,DWORD dwSize,DWORD dw1401,
                                                             short eSz);
 U14API(short) U14To1401(short hand, const char* pAddrHost,DWORD dwSize,DWORD dw1401,
@@ -293,5 +298,43 @@ U14API(int)   U14InitLib(void);
 #ifdef __cplusplus
 }
 #endif
+
+
+/****************************************************************************/
+/*                                                                          */
+/* Windows NT Specifics                                                     */
+/*                                                                          */
+/****************************************************************************/
+#if defined(WIN32)
+		/* if we are in NT/Win95/Win32s we have extra bits       */
+#define  MINDRIVERMAJREV   1    /* minimum driver revision level we need    */
+
+#else
+
+#define  MINDRIVERMAJREV   2     /* minimum driver revision level we need   */
+
+#endif
+
+/****************************************************************************/
+/*                                                                          */
+/* Macintosh Specifics                                                      */
+/*                                                                          */
+/****************************************************************************/
+#if defined(macintosh) || defined(_MAC)
+
+/* The basic resource ID, modified by 1401 type (plus is '1402 etc.) */
+#define U14_RES1401COMMAND     '1401'      /* We should calculate these ... */
+#define U14_RESPLUSCOMMAND     '1402'
+#define U14_RESU1401COMMAND    '1403'
+#define U14_RESPOWERCOMMAND    '1404'
+#define U14_RESU14012COMMAND   '1405'
+
+#define k1401CommandFile    "\p1401Commands"
+#define k1401DriverName     "\p.Driver1401"
+
+#define  MAXAREAS   8   /* The number of transfer areas supported by driver */
+
+#endif
+
 
 #endif /* End of ifndef __USE1401_H__ */

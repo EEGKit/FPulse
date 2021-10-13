@@ -178,12 +178,10 @@
 #else
 #define VERBOSE 1
 #endif
-#define STUB 1
 
 #if defined(_IS_WINDOWS_) && !defined(__WINE__)
 #include <io.h>
 #include <windows.h>
-#pragma warning(disable: 4100) /* Disable "Unused formal parameter" warning */
 #include <assert.h>
 #include "process.h"
 
@@ -195,8 +193,9 @@
 #define MINDRIVERMAJREV 1       // minimum driver revision level we need
 #define __packed                // does nothing in Windows
 
-#include "use14_ioc.h"          // links to device driver stuff
 #endif
+// TODO: test whether this is important for _WIN64
+// #undef _WIN64
 
 #if defined(LINUX) || defined(__WINE__)
 #include <fcntl.h>
@@ -331,8 +330,6 @@ static short U14Status1401(short sHand, LONG lCode, TCSBLOCK* pBlk)
     if ((sHand < 0) || (sHand >= MAX1401))  /* Check parameters */
         return U14ERR_BADHAND;
 
-#if !defined(STUB)
-
 #ifndef _WIN64
     if (!USE_NT_DIOC(sHand)) 
     {   /* Windows 9x DIOC methods? */
@@ -353,9 +350,6 @@ static short U14Status1401(short sHand, LONG lCode, TCSBLOCK* pBlk)
             return rWork.sState;
         }
     }
-
-#endif  // STUB
-
     return U14ERR_DRIVCOMMS;
 }
 
@@ -372,8 +366,6 @@ static short U14Control1401(short sHand, LONG lCode, TCSBLOCK* pBlk)
 
     if ((sHand < 0) || (sHand >= MAX1401))              /* Check parameters */
         return U14ERR_BADHAND;
-
-#if !defined(STUB)
 
 #ifndef _WIN64
     if (!USE_NT_DIOC(sHand))                    
@@ -392,9 +384,6 @@ static short U14Control1401(short sHand, LONG lCode, TCSBLOCK* pBlk)
             (dwBytes >= sizeof(PARAMBLK)))
             return rWork.sState;
     }
-
-#endif // STUB
-
     return U14ERR_DRIVCOMMS;
 }
 
@@ -3178,7 +3167,7 @@ INT APIENTRY DllMain(HANDLE hInst, DWORD ul_reason_being_called, LPVOID lpReserv
     int iRetVal = 1;
 
     //if (VERBOSE) 
-    fprintf(stderr,"%s line %i: %s(%i,%i...)\n",__FILE__,__LINE__,__func__,hInst,ul_reason_being_called);
+    fprintf(stderr,"%s line %i: %s(%p,%i...)\n",__FILE__,__LINE__,__func__,hInst,ul_reason_being_called);
 
     switch (ul_reason_being_called)
     {
