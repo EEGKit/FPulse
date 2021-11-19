@@ -40,6 +40,7 @@ GOTO INSTALL
 	ECHO === Uninstall Igor links %IPUF% ===
 	del /Q %IPUF%"Igor Extensions\"FP_Mc700Tg.xop
 	del /Q %IPUF%"Igor Extensions\"FPulseCed.xop
+	del /Q %IPUF%"Igor Extensions\"AxonTelegraph.xop 
 	del /Q %IPUF%"Igor Help Files\"FPulse.ihf
 	del /Q %IPUF%"Igor Procedures\"FPulse.ipf
 	rmdir %IPUF%"User Procedures\"FPulse
@@ -62,11 +63,12 @@ GOTO INSTALL
 	ECHO === Install DLLs and remove CFS32.dll, (need elevated permissions) ===
 	del /Q C:\Windows\SysWOW64\CFS32.dll
 	del /Q C:\Windows\SysWOW64\Use1432.dll
-	REM copy  %SRCDIR%UserIgor\XOP_Dll\Use1432.dll 	C:\Windows\SysWOW64\
 	copy  %SRCDIR%UserIgor\XOP_Dll\AxMultiClampMsg.dll 	C:\Windows\SysWOW64\
 
 	ECHO === Create Links for Igor ===
+	REM Syntax: mklink [[/d] | [/h] | [/j]] <link> <target>
 	mklink %IPUF%"Igor Extensions\"FP_Mc700Tg.xop %DESTDIR%\XOPs\FP_Mc700Tg.xop
+	mklink %IPUF%"Igor Extensions\"AxonTelegraph.xop %IPUF%"More Extensions\Data Acquisition\AxonTelegraph.xop"
 	mklink %IPUF%"Igor Extensions\"FPulseCed.xop  %DESTDIR%\XOPs\FPulseCed.xop
 	mklink %IPUF%"Igor Help Files\"FPulse.ihf     %DESTDIR%\FPulse.ihf
 	mklink %IPUF%"Igor Procedures\"FPulse.ipf     %DESTDIR%\FPulse.ipf
@@ -78,5 +80,3 @@ GOTO INSTALL
 Echo execution completed, any key to exit
 
 pause >nul
-
-
