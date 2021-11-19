@@ -34,6 +34,8 @@
 // No special  'Includes'  for FPulse in addition to 'FPulseMain' , unfortunately all files contain functions needed also in Eval
 static  strconstant	lst_SPECIAL_FILES	= "FPulsMain"
 
+#include "FP_AxonTelegraphMonitor"
+
 // General  'Includes'
 #include "FP_Constants"
 #include "FP_FPulseConstants"
@@ -118,6 +120,11 @@ static   Function		stCreateGlobals( sFo )
 	nvar		gRadDebgSel	=  root:uf:dlg:gRadDebgSel		// Turn 'Nothing' sel radio button on, all others OFF....	
 	gRadDebgSel	= 0 								// ...we cannot use  RadioCheckUncheck( "root_uf_dlg_gRadDebgSel_0_5", 1 )  as this requires the panel to exist which is not true right now..
 	ChkboxUnderlyingVariablesSetAll( "root:uf:dlg:Debg" , FALSE )	// Start all options set to 'No printing'    (= ShowIO, ShowEle, Expand, CFS...)  .  We cannot use DebugPrintDeselectAll() as this requires the panel to exist which is not true right now..
+
+// 2021-11-17
+	NewDataFolder  /O   root:uf:aco:AxTg
+	FP_TG_InitMyPanelVariables()	// oder am Anfang  ...(nServers)		// construct all required telegraph globals for my Axon Telegraph Panel
+//	Dlg_AxonTgGain( kPN_INIT )		 			 // 2021-11-10  Axon Telegraph Panel is created and will start monizoring the telegraphs. Is here created invisibly, but user can later display or delete it.
 
 	SetDataFolder sDFSave							// restore CDF from the string value
 
@@ -303,12 +310,11 @@ Function		InitPanelFPulse( sFolder, sPnOptions )
 	n += 1;	tPn[ n ] =	"PN_BUTTON;	buAcqWindowsDlg	;Acq windows;	| PN_BUTTON;	buDisplayStimDlg	;Stimulus"
 	n += 1;	tPn[ n ] =	"PN_BUTTON;	buOLAnalysisDlg	;OLA analysis;  	| PN_BUTTON;	buDataUtilitiesDlg	;Data utilities"		
 
-	n += 1;	tPn[ n ] =	"PN_BUTTON;	buPreferencesDlg	;Preferences;		| PN_BUTTON;	buMiscellaneousDlg	;Miscellaneous"		
+// 2021-11-10
+//	n += 1;	tPn[ n ] =	"PN_BUTTON;	buPreferencesDlg	;Preferences;		| PN_BUTTON;	buMiscellaneousDlg	;Miscellaneous"
+	n += 1;	tPn[ n ] =	"PN_BUTTON;	buPreferencesDlg	;Preferences;		| PN_BUTTON;	buMiscellaneousDlg	;Miscellaneous		| PN_BUTTON;	buAxonTgGn		;Axon TG Gain"
 
-	//n += 1; tPn[ n ] =	"PN_BUTTON;	buComment1		;Comment1;"												// example for text input  with DoPrompt( string ). 
-// 060511e
-//	n += 1;	tPn[ n ] =	"PN_BUTTON;	buComment		;Comments		| PN_BUTTON;	buGainDlg			;Gain Axogain" 
-	n += 1;	tPn[ n ] =	"PN_BUTTON;	buComment		;Comments		| PN_BUTTON;	buGainDlg			;Gain AxoPa	| PN_BUTTON;	buAcqHelp	;Help" 
+	n += 1;	tPn[ n ] =	"PN_BUTTON;	buComment		;Comments		| PN_BUTTON;	buGainDlg		;Gain AxoPa		| PN_BUTTON;	buAcqHelp	;Help"
 
 	redimension  /N = (n+1)	tPn
 End
@@ -468,6 +474,15 @@ End
 // ................... 060511f   Append mode comments  and renaming
 
 
+//------------------------------------------------------------------------------------------------
+
+Function		buAxonTgGn( ctrlName ) : ButtonControl
+	string		ctrlName
+	Dlg_AxonTgGain( kPN_DRAW )		  // 2021-1110  Recreate and display panel.  The retrieval of telegraph data continues  working even if the user destroys this panel.
+End
+
+//------------------------------------------------------------------------------------------------
+
 
 Function		buAcqWindowsDlg( ctrlName ) : ButtonControl
 	string	ctrlName		
@@ -490,7 +505,6 @@ Function		buGainDlg( ctrlName ) : ButtonControl
 End
 
 
-// 060511e
 strconstant		ksfACO_HELP_WND	= "FPulse Acq Help"   
 strconstant		ksfACO_HELP_PATH	= "FPulseHelp.txt"
 
@@ -708,7 +722,7 @@ static Function	stInitPanelMiscellaneous1( sF, sPnOptions )
 	// Cave / Flaw :   For each item in  'Tabs'   there must be a  corresponding  'Blks'  entry  even if empty
 	// Cave / Flaw :	   Only tabulators can be used  for aligning the following columns, do not use spaces.... (maybe they are allowed...)
 	
-	//					Type  NxL Pos MxPo OvS  Tabs	Blks		Mode		Name		RowTi				ColTi		ActionProc		XBodySz	FormatEntry	Initvalue		Visibility	SubHelp
+	//					Type  NxL Pos MxPo OvS  Tabs	Blks		Mode		Name		RowTi						ColTi  ActionProc		XBodySz	FormatEntry	Initvalue		Visibility	SubHelp
 	n += 1;	tPn[ n ] =	"BU:    1:	0:	1:	0:	°:		,:		1,°:			ShowKeysDe:	Keywords and defaults:			:	fShowKeysDef_():	:		:			:			:		:	"		//	single button
 	n += 1;	tPn[ n ] =	"BU:    1:	0:	1:	0:	°:		,:		1,°:			Test1401Dl:	Test CED1401:				:	fTest1401Dlg_():	:		:			:			:		:	"		//	single button
 	n += 1;	tPn[ n ] =	"BU:    1:	0:	1:	0:	°:		,:		1,°:			KillGraphs:		Kill all graphs:				:	fKillAllGraphs_():	:		:			:			:		:	"		//	single button

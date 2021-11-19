@@ -1034,7 +1034,9 @@ static Function	stPnDraw( sF, sWin, wPn, xPnSz, ySize, lstPosX, lstPosY, lstTabG
 //							stPanelChkbx3(	bDisable, bVisib, xPos + xOs,  yPos + yOs, sWin, sTitle, sActProc, sF+sWin+":", sFoCNmIdx, sCNmIdx, lstTabTi, lstBlkTi, lstRowTi, lstColTi, sHelpTopic )
 							stPanelChkbx3(	bDisable, bVisib, xPos + xOs,  yPos + yOs, sTitle, sActProc, sF, sWin, sFoCNmIdx, sCNmIdx, lstTabTi, lstBlkTi, lstRowTi, lstColTi, sHelpTopic )
 						elseif ( nType == kRAD )
-							xOs		= nCol * xPnSz / nCiL + 2
+// 2021-11-11
+//							xOs		= nCol * xPnSz / nCiL + 2
+							xOs		= nCol * xPnSz / ( nCiL * max( 1, ItemsInList( lstColTi, ksSEP_STD ) ) ) + 2
 							yOs		= nRow
 // 060515
 //							stPanelRadio3(	bDisable, bVisib, xPos + xOs, yPos + yOs, sWin, sTitle, sActProc, sF+sWin+":", sFoCNmIdx, sCNmIdx, lstTabTi, lstBlkTi, lstRowTi, lstColTi, sHelpTopic )
@@ -1711,7 +1713,7 @@ CheckBox	$sFCNm, win = $sWin,	userdata( sFo ) 	= sFo
 	CheckBox $sFCNm, win = $sWin,	userdata( sProcNm )	= ReplaceString( "()", sProc, "" )		// can also be empty. If the PRC field is not empty then call this proc in addition to and from 'fRadio_struct3' 
 	CheckBox $sFCNm, win = $sWin,	userdata( sHelpTopic)= sHelpTopic
 	CheckBox $sFCNm, win = $sWin,	userdata( bVisib )	= num2str( bVisib )
-	 // printf "\tRadio3-Checkbox  %s\tFolder:%s\tProc:%s\t%s\tHelpTp:'%s[%s]' \r", pd(sFo_Name,28), pd(sF,10), pd( sProcNm, 26), sPnTi, sTitleLists, sHelpSubTopic	
+	//  printf "\tRadio3-Checkbox  %s\tFolder:%s\tProc:%s\tRowTi:%s\tColTi:%s\tx:%d  y:%d \r", pd(sName,28), pd(sFo,10), pd( sProc, 26), pd(lstRowTi,20), pd(lstColTi,20), xPos, yPos * kYLINEHEIGHT
 End
 
 

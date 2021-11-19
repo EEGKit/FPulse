@@ -589,10 +589,17 @@ static Function	stTelegraphGainMC( wIO, nIO, c )
 	variable	ch				= iov( wIO, nIO, c, cIOCHAN )						// ch is true channel number in script
 	variable	Gain				= 0
 	variable	nCode
-	variable	MCTgChan 
-string		sMCTgChannelInfo	= xMCTgPickupInfo()
-	variable	MCTgChansAvailable	= ItemsInList( sMCTgChannelInfo )
-	// printf "\t\tstTelegraphGainMC  ioch:%d = Adc%d ) \tPickupInfo returns Chans avail: %d   '%s' \r", ioch, ch, MCTgChansAvailable, sMCTgChannelInfo
+	variable	MCTgChan, MCTgChansAvailable
+	string	sMCTgChannelInfo, sInfo	
+
+	// 2021-11-10
+	if ( TelegraphSource_fp() == 0 ) // first radio button selected
+	sMCTgChannelInfo  = FP_ScanAxonTelegraphs();	sInfo = "Axon Telegraph Scan"	// Get telegraph data from new AxonTelegraph XOP
+	else
+	sMCTgChannelInfo  = xMCTgPickupInfo();			sInfo = "FP_MC700TG  Pickup"	// Get telegraph data from  FP_MC700TG XOP (for comparison, in order to allow making FP_MC700TG XOP obsolete)
+	endif
+	MCTgChansAvailable = ItemsInList( sMCTgChannelInfo )
+	 printf "\t\tstTelegraphGainMC  c (or ioch?):%d = Adc%d ) \tPickupInfo returns Chans avail: %d   '%s' \r", c, ch, MCTgChansAvailable, sMCTgChannelInfo
 
 	string		sOneChannelInfo, s700AB, bf
 	variable	rTyp, rSerNum, rComPort, rAxoBus, rChan, rMode, rMCGain, rSclFactor					// the specifiers which the MC700 has transmitted, extracted from  'PickUpInfo'
@@ -626,7 +633,7 @@ string		sMCTgChannelInfo	= xMCTgPickupInfo()
 					sprintf s700AB, "SN:%15d", rSerNum
 				endif
 				sprintf bf, "\t\tstTelegraphGainMC  nIO:%d, c:%d = Adc%d, sTGChan:\t%s\t)  %s \t%s\tTGCh:%2d\t'%s'\t   Gn:\t%7.2lf\tSc: %.1lf %s\t -> Gain: %5.1lf\t... \r", nIO, c, ch, pd( sTGChan, 22), StringFromList( rTyp, kMC700_MODELS),  s700AB, rChan, StringFromList( rMode,kMC700_MODES), rMCGain, rSclFactor, rsSclFactorUnits, Gain
-				Out1( bf, 0 )
+				Out1( bf, 1)// 2021-11-10  ,0 )
 			endif	
 		endfor
 
@@ -650,7 +657,7 @@ string		sMCTgChannelInfo	= xMCTgPickupInfo()
 					nFound	+= 1
 					Gain		= rMCGain * rSclFactor
 					sprintf bf, "\t\tstTelegraphGainMC  nIO:%d, c:%d = Adc%d, sTGChan:\t%s\t)  %s \t%s\tTGCh:%2d\t'%s'\t   Gn:\t%7.2lf\tSc: %.1lf %s\t -> Gain: %5.1lf\t... \r", nIO, c, ch, pd( sTGChan, 22), StringFromList( rTyp, kMC700_MODELS),  s700AB, rChan, StringFromList( rMode,kMC700_MODES), rMCGain, rSclFactor, rsSclFactorUnits, Gain
-					Out1( bf, 0 )
+					Out1( bf, 1)// 2021-11-10  ,0 )
 				endif	
 			endfor
 			if ( nFound  != 1 )  
@@ -674,7 +681,6 @@ string		sMCTgChannelInfo	= xMCTgPickupInfo()
 End
 			
 
-//
 //static Function	IsConnectedTGChannel( sOneChannelInfo ) 
 //	string  	sOneChannelInfo
 //	return	strlen( StringFromList( 0, sOneChannelInfo, "," )  )								// Check the first entry which should be 0 or 1 (for type 700A or B). No spaces or letters are allowed
@@ -765,51 +771,93 @@ static Function	stBreakExtendedSpec( sTGChan, rScrTyp, rnSerNum, rnComPort, rnAx
 End
 
 
-static Function	stBreakInfo( sOneChannelInfo, rHWTyp, rSerNum, rComPort, rAxoBus, rChan, rMode, rMCGain, rSclFct, rsSclFctUnits )
+static Function	stBreakInfo( sOneChannelInfo, rTyp, rSerNum, rComPort, rAxoBus, rChan, rMode, rMCGain, rSclFactor, rsSclFactorUnits )
 // breaks MultiClamp telegraph 1-channel info string as given by XOP  'xMCTgPickupInfo()'   into its components.
 // ASSUMPTION: Same separators ' , ; ' and same entries 'HWTyp, SerNum, Port, AxoBus, Chan, Mode, Alpha, ScaleFct, Units' as in    'xMCTgPickupInfo()/UpdateDisplay()'  
-	string		sOneChannelInfo
-	variable	&rHWTyp, &rSerNum, &rComPort, &rAxoBus, &rChan, &rMode, &rMCGain, &rSclFct
-	string		&rsSclFctUnits
+	string	sOneChannelInfo
+	variable	&rTyp, &rSerNum, &rComPort, &rAxoBus, &rChan, &rMode, &rMCGain, &rSclFactor
+	string	&rsSclFactorUnits
 	variable	nEntries	= ItemsInList( sOneChannelInfo, "," )
-	rHWTyp		= str2num( StringFromList( 0, sOneChannelInfo, "," ) ) 
+	rTyp			= str2num( StringFromList( 0, sOneChannelInfo, "," ) ) 
 	rSerNum		= str2num( StringFromList( 1, sOneChannelInfo, "," ) )		
 	rComPort		= str2num( StringFromList( 2, sOneChannelInfo, "," ) ) + 1	// one-based : 1,2,3...
 	rAxoBus		= str2num( StringFromList( 3, sOneChannelInfo, "," ) )		
 	rChan		= str2num( StringFromList( 4, sOneChannelInfo, "," ) ) + 1	// one-based : 1,2
 	rMode		= str2num( StringFromList( 5, sOneChannelInfo, "," ) )
 	rMCGain		= str2num( StringFromList( 6, sOneChannelInfo, "," ) )
-	rSclFct		= str2num( StringFromList( 7, sOneChannelInfo, "," ) )
-	rsSclFctUnits	= StringFromList( 8, sOneChannelInfo, "," )
-	// print "\t\tBreakInfo():", rComPort, rAxoBus, rChan, "Mode:", rMode, "\tGain:\t", rMCGain, "\tSclFactor:\t", rSclFct, "\t", rsSclFctUnits
+	rSclFactor	= str2num( StringFromList( 7, sOneChannelInfo, "," ) )
+	rsSclFactorUnits= StringFromList( 8, sOneChannelInfo, "," )
+	// 2021-11-10
+	// printf "\t\t\tBreakInfo() \t \t \t \t \t \t \t \t \t \t \t%s\t typ:%3d\tpo+1:%d\tab:%3d\tch+1:%d\tsn:%16d\tGn:\t%7.1lf\tScl:\t%3.1lf\t%s\tMode:%2d  '%s' \r",  SelectString( rTyp==0, "700B", "700A"), rTyp, rComPort, rAxoBus, rChan,  rSerNum, rMCGain, rSclFactor, pd(rsSclFactorUnits,6), rMode, StringFromList( rMode, kMC700_MODES )
 	return	nEntries
 End
 
 
-Function		DisplayAvailMCTgChans_()
-	string		sOneChannelInfo
-	string		rsSclFactorUnits
-	variable	rTyp, rSerNum, rComPort, rAxoBus, rChan, rMode, rMCGain, rSclFactor					// the specifiers which the MC700 has transmitted, extracted from  'PickUpInfo'
+
+Function	/S	FP_ScanAxonTelegraphs()
+	// 2021-11-10  Request telegraph data from new AxonTelegraph XOP.  Construct  a telegraph data string identical to that which  'xMCTgPickupInfo()'  would have returned
+	string  	sOneChannelInfo = "",  llstTgChannelInfo = ""
+	string	rsSclFactorUnits
+	variable	rTyp, rSerNum, rComPort, rAxoBus, rChan, rMode, rMCGain, rSclFactor				// the specifiers which the MC700 has transmitted, extracted from  'ScanForServers'
 	variable	MCTGChan
 
-	string  	sMCTgChannelInfo	= xMCTgPickupInfo()
+	FP_TG_Initialize()
+	string 	lstServer	= FP_TG_ScanForServers()
+	FP_TG_StartMonitoring()
+	FP_TG_GetAxonDataUsingStruct()
 
-	variable	MCTgChansAvailable	=  ItemsInList( sMCTgChannelInfo )
+	printf "\r\t\tFP_ScanAxonTelegraphs()  \t \tAxonTeleGraph Scan \tfinds   %d  MCC700 servers.  '%s' \r", ItemsInList( lstServer ), lstServer
+	for ( MCTGChan = 0;  MCTGChan < ItemsInList( lstServer );  MCTgChan += 1 )
+		nvar	svTyp	 = $"root:uf:aco:AxTg:svTyp0"		+ num2str( MCTGChan ) + "00";   rTyp			= svTyp
+		nvar	svSerNum = $"root:uf:aco:AxTg:svSerNum0"	+ num2str( MCTGChan ) + "00";	  rSerNum		= svSerNum
+		nvar	svComPrt = $"root:uf:aco:AxTg:svComPrt0"	+ num2str( MCTGChan ) + "00";	  rComPort		= svComPrt   - 1 	//  subtract 1  to be compatible with  'stBreakInfo' (though nothing is added there)
+		nvar	svAxoBus = $"root:uf:aco:AxTg:svAxoBus0"	+ num2str( MCTGChan ) + "00";	  rAxoBus		= svAxoBus
+		nvar	svChanID	 = $"root:uf:aco:AxTg:svChanID0"	+ num2str( MCTGChan ) + "00";	  rChan			= svChanID   - 1	//  subtract 1  to be compatible with  'stBreakInfo' which adds 1
+		nvar	svOpMode= $"root:uf:aco:AxTg:svOpMode0"	+ num2str( MCTGChan ) + "00";	  rMode			= svOpMode
+		nvar	svPriScl	 = $"root:uf:aco:AxTg:svPriScl0"		+ num2str( MCTGChan ) + "00";	  rSclFactor		= svPriScl
+		svar	strPriSclU	 = $"root:uf:aco:AxTg:strPriSclU0"	+ num2str( MCTGChan ) + "00";	  rsSclFactorUnits	= strPriSclU
+		nvar	svPriGn	 = $"root:uf:aco:AxTg:svPriGn0"		+ num2str( MCTGChan ) + "00";	  rMCGain			= svPriGn
+		nvar	svPriFi	 = $"root:uf:aco:AxTg:svPriFil0" 		+ num2str( MCTGChan ) + "00"
+		nvar	svSecGn	 = $"root:uf:aco:AxTg:svSecGn0"	+ num2str(MCTGChan ) + "00"
+		printf "\t\t\tFP_ScanAxonTelegraphs() \tAxon Telegraph  Scan \tMC:%d\t\t%s\t typ:%3d\tpo:%4s<-%1s\tab:%3s\tch:%4d<-%d\tsn:%16d\tGn:\t%7.1lf\tScl:\t%3.1lf\t%s\tMode:%2d  '%s' \r", MCTGChan, SelectString( rTyp==0, "700B", "700A"), rTyp, SelectString( rTyp==0, "   - ", num2str(rComPort+1)), SelectString( rTyp==0, "-", num2str(rComPort)), SelectString( rTyp==0, "  -  ", num2str(rAxoBus)), rChan+1, rChan,  rSerNum, rMCGain, rSclFactor, pd(rsSclFactorUnits,6), rMode, StringFromList( rMode, kMC700_MODES )
 
-	printf "\r\t\tDisplayAvailMCTgChans()  finds  %d   MCC700 channels. '%s' \r", MCTgChansAvailable, sMCTgChannelInfo
-	for ( MCTGChan = 0;  MCTGChan < MCTgChansAvailable;  MCTgChan += 1 )
-		sOneChannelInfo	= StringFromList( MCTGChan, sMCTgChannelInfo )
-
-//		if (  IsConnectedTGChannel( sOneChannelInfo ) )
-
-			if ( stBreakInfo( sOneChannelInfo, rTyp, rSerNum, rComPort, rAxoBus, rChan, rMode, rMCGain, rSclFactor, rsSclFactorUnits )  !=  9 )
-				DeveloperError( "Expected 9 entries in  MCTG info string '" + sOneChannelInfo + "' .  AllChans: " + sMCTgChannelInfo ) 
-			endif	
-			printf "\t\t\tDisplayAvailMCTgChans() \tMC:%d\t%s\ttp:%3d\tpo:%3d\tab:%3d\tch:%2d\tsn:%16d\tGn:\t%7.1lf\tScl:\t%3.1lf\t  U: %s\tMode: '%s' \r", MCTGChan, SelectString( rTyp==0, "700B", "700A"), rTyp, rComPort, rAxoBus, rChan,  rSerNum, rMCGain, rSclFactor, pd(rsSclFactorUnits,6), StringFromList( rMode, kMC700_MODES )
-//		endif
+		// For as much compatibility to   FP_MC700TG XOP  as possible construct  a telegraph data string identical to that which  'xMCTgPickupInfo()'  would have returned
+		sprintf sOneChannelInfo, "%d,%d,%d,%d,%d,%d,%f,%f,%s," , rTyp, rSerNum, rComPort,    rAxoBus, rChan,    rMode, rMCGain, rSclFactor, rsSclFactorUnits
+		llstTgChannelInfo  += sOneChannelInfo + ";"
 	endfor
+	return 	llstTgChannelInfo
 End
 
+
+Function		FP_DisplayAvailMCTgChans()
+	// 2021-11-10  Get AxonTelegraph data from  FP_MC700TG XOP  and also  from AxonTelegraph XOP (for comparison, in order to make FP_MC700TG obsolete)
+	string  	llstTgInfo
+	// Get telegraph data from new AxonTelegraph XOP
+	llstTgInfo		= FP_ScanAxonTelegraphs()
+	st_DisplayMCTgChans( "Axon Telegraph Scan  ", llstTgInfo )
+	// Get telegraph data from  FP_MC700TG XOP (for comparison, in order to allow making FP_MC700TG XOP obsolete)
+	llstTgInfo		= xMCTgPickupInfo()
+	st_DisplayMCTgChans( "FP_MC700TG  Pickup", llstTgInfo )
+End
+
+
+static Function	st_DisplayMCTgChans( sInfo, llstTgChannelInfo )
+	string  	sInfo, llstTgChannelInfo
+	string  	sOneChannelInfo, rsSclFactorUnits
+	variable	rTyp, rSerNum, rComPort, rAxoBus, rChan, rMode, rMCGain, rSclFactor				// the specifiers which the MC700 has transmitted, extracted from  'FP_MC700TG Xop PickUpInfo'  or from  'AxonTelegraph Xop'
+	variable	ch, MCTgChansAvailable	= ItemsInList( llstTgChannelInfo )
+	printf "\r\t\tFP_DisplayAvailMCTgChans() \t \t%-20s\tfound  %d   MCC700 channels.  '%s' \r", sInfo, MCTgChansAvailable, llstTgChannelInfo
+	for ( ch = 0;  ch < MCTgChansAvailable;  ch += 1 )
+		sOneChannelInfo	= StringFromList( ch, llstTgChannelInfo )
+		// if (  IsConnectedTGChannel( sOneChannelInfo ) )
+			if ( stBreakInfo( sOneChannelInfo, rTyp, rSerNum, rComPort, rAxoBus, rChan, rMode, rMCGain, rSclFactor, rsSclFactorUnits )  !=  9 )
+				DeveloperError( "Expected 9 entries in  MCTG info string '" + sOneChannelInfo + "' .  AllChans: " + llstTgChannelInfo ) 
+			endif	
+//			printf "\t\t\tFP_DisplayAvailMCTgChans() \t%-20s\tMC:%d\t\t%s\t typ:%3d\tpo:%5d\tab:%3d\tch:%5d\tsn:%16d\tGn:\t%7.1lf\tScl:\t%3.1lf\t%s\tMode:%2d  '%s' \r", sInfo, ch, SelectString( rTyp==0, "700B", "700A"), rTyp, rComPort, rAxoBus, rChan,  rSerNum, rMCGain, rSclFactor, pd(rsSclFactorUnits,6), rMode, StringFromList( rMode, kMC700_MODES )
+			printf "\t\t\tFP_DisplayAvailMCTgChans() \t%-20s\tMC:%d\t\t%s\t typ:%3d\tpo:%5s\tab:%3s\tch:%5d\tsn:%16d\tGn:\t%7.1lf\tScl:\t%3.1lf\t%s\tMode:%2d  '%s' \r", sInfo, ch, SelectString( rTyp==0, "700B", "700A"), rTyp, SelectString( rTyp==0, "    -  ", num2str(rComPort)), SelectString( rTyp==0, "  -  ", num2str(rAxoBus)), rChan,  rSerNum, rMCGain, rSclFactor, pd(rsSclFactorUnits,6), rMode, StringFromList( rMode, kMC700_MODES )
+		 // endif
+	endfor
+End
 			
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //	DIALOG PANEL  FOR  GAINS
