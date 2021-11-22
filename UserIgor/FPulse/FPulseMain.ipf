@@ -122,6 +122,8 @@ static   Function		stCreateGlobals( sFo )
 	ChkboxUnderlyingVariablesSetAll( "root:uf:dlg:Debg" , FALSE )	// Start all options set to 'No printing'    (= ShowIO, ShowEle, Expand, CFS...)  .  We cannot use DebugPrintDeselectAll() as this requires the panel to exist which is not true right now..
 
 // 2021-11-17
+	NewDataFolder  /O   $kAxonTelegraphPanelDF
+	FP_TG_Initialize()
 	NewDataFolder  /O   root:uf:aco:AxTg
 	FP_TG_InitMyPanelVariables()	// oder am Anfang  ...(nServers)		// construct all required telegraph globals for my Axon Telegraph Panel
 //	Dlg_AxonTgGain( kPN_INIT )		 			 // 2021-11-10  Axon Telegraph Panel is created and will start monizoring the telegraphs. Is here created invisibly, but user can later display or delete it.
