@@ -593,11 +593,7 @@ static Function	stTelegraphGainMC( wIO, nIO, c )
 	string	sMCTgChannelInfo, sInfo	
 
 	// 2021-11-10
-	if ( TelegraphSource_fp() == 0 ) // first radio button selected
 	sMCTgChannelInfo  = FP_ScanAxonTelegraphs();	sInfo = "Axon Telegraph Scan"	// Get telegraph data from new AxonTelegraph XOP
-	else
-	sMCTgChannelInfo  = xMCTgPickupInfo();			sInfo = "FP_MC700TG  Pickup"	// Get telegraph data from  FP_MC700TG XOP (for comparison, in order to allow making FP_MC700TG XOP obsolete)
-	endif
 	MCTgChansAvailable = ItemsInList( sMCTgChannelInfo )
 	 printf "\t\tstTelegraphGainMC  c (or ioch?):%d = Adc%d ) \tPickupInfo returns Chans avail: %d   '%s' \r", c, ch, MCTgChansAvailable, sMCTgChannelInfo
 
@@ -835,9 +831,6 @@ Function		FP_DisplayAvailMCTgChans()
 	// Get telegraph data from new AxonTelegraph XOP
 	llstTgInfo		= FP_ScanAxonTelegraphs()
 	st_DisplayMCTgChans( "Axon Telegraph Scan  ", llstTgInfo )
-	// Get telegraph data from  FP_MC700TG XOP (for comparison, in order to allow making FP_MC700TG XOP obsolete)
-	llstTgInfo		= xMCTgPickupInfo()
-	st_DisplayMCTgChans( "FP_MC700TG  Pickup", llstTgInfo )
 End
 
 

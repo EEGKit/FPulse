@@ -14,9 +14,6 @@
     <ResourceCompile Include="..\FPulseCedWinCustom.rc">
       <Filter>Source Files</Filter>
     </ResourceCompile>
-    <ResourceCompile Include="FPulseCed.rc">
-      <Filter>Source Files</Filter>
-    </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FPulseCed.h">
@@ -56,7 +53,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Library Include="..\..\..\..\..\XOP Toolkit 6\IgorXOPs6\XOPSupport\IGOR.lib" />
-    <Library Include="..\..\..\..\..\XOP Toolkit 6\IgorXOPs6\XOPSupport\VC2015\XOPSupport.lib" />
+    <Library Include="..\..\..\..\..\XOP Toolkit 6\IgorXOPs6\XOPSupport\IGOR64.lib" />
+    <Library Include="..\..\..\..\..\XOP Toolkit 6\IgorXOPs6\XOPSupport\VC2015\XOPSupport64.lib" />
   </ItemGroup>
 </Project>

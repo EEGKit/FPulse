@@ -50,7 +50,7 @@ BEGIN
             VALUE "FileVersion", "1, 0, 0, 1\0"
             VALUE "InternalName", "FPulseCed\0"
             VALUE "LegalCopyright", "Copyright © 2001-2004\0"
-            VALUE "OriginalFilename", "FPulseCed.xop\0"
+            VALUE "OriginalFilename", "FPulseCed64.xop\0"
             VALUE "ProductName", "Igor Pro FPulseCed\0"
             VALUE "ProductVersion", "3, 10, 0, 1\0"
         END

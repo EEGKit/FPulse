@@ -26,7 +26,7 @@ XOPIORecParam IndexOfLastFunction()
 
 static int  DoFunction()
 {
-	int   funcIndex;
+	XOPIORecParam   funcIndex;
 	int   err = 0;										// error code returned by function
 
 	funcIndex = GetXOPItem(0);						// which function invoked ?
